@@ -1,0 +1,376 @@
+/*以下是小米手机栏目左边的xiaomiMixAlpha的样式*/
+.xiaomishoujilanmu1_img1{
+    height: 614px;
+    width: 234px;
+    margin-top: 0;
+    margin-left: -48px;
+}
+.xiaomishoujilanmu1_img2{
+    height: 160px;
+    width: 160px;
+    margin-left: 38px;
+    margin-top: 0;
+}
+/*以上是小米手机栏目左边的xiaomiMixAlpha的样式*/
+/*以下是小米手机栏目右边的小米10至尊版的样式*/
+.xiaomishoujilanmu1_img2_div{
+    height: 300px;
+    width: 234px;
+    background-color: rgb(255,255,255);
+    margin-left: 303px;
+    margin-top: -618px;
+}
+.xiaomishoujilanmu1_img2_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img2_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img2_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+
+    top: 1210px;
+    left: 340px;
+}
+.xiaomishoujilanmu1_img2_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    text-align: center;
+}
+/*以上是小米手机栏目右边的小米10至尊版的样式*/
+/*以下是小米手机栏目右边的RedmiK30至尊版的样式*/
+.xiaomishoujilanmu1_img3{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img3_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img3_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 550px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img3_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img3_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1210px;
+    left: 564px;
+}
+.xiaomishoujilanmu1_img3_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    text-align: center;
+}
+/*以上是小米手机栏目右边的RedmiK30至尊版的样式*/
+/*以下是小米手机栏目右边的腾讯黑鲨3s的样式*/
+.xiaomishoujilanmu1_img4{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img4_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img4_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 800px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img4_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img4_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1210px;
+    left: 839px;
+}
+.xiaomishoujilanmu1_img4_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    text-align: center;
+}
+/*以上是小米手机栏目右边的腾讯黑鲨3s的样式*/
+/*以下是小米手机栏目右边的Redmi9A的样式*/
+.xiaomishoujilanmu1_img5{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img5_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img5_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 1046px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img5_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img5_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1210px;
+    left: 1067px;
+}
+.xiaomishoujilanmu1_img5_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    text-align: center;
+}
+/*以上是小米手机栏目右边的Redmi9A的样式*/
+/*以下是小米手机栏目右边的小米10青春版5G的样式*/
+.xiaomishoujilanmu1_img6{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img6_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img6_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 303px;
+    margin-top: 72px;
+}
+.xiaomishoujilanmu1_img6_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img6_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1548px;
+    left: 340px;
+}
+.xiaomishoujilanmu1_img6_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    text-align: center;
+}
+/*以上是小米手机栏目右边的小米10青春版5G的样式*/
+/*以下是小米手机栏目右边的小米10青春版5G的样式*/
+.xiaomishoujilanmu1_img6{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img6_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img6_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 303px;
+    margin-top: 14px;
+}
+.xiaomishoujilanmu1_img6_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img6_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1524px;
+    left: 324px;
+}
+.xiaomishoujilanmu1_img6_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    padding-top: -2px;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img6_div_p2 s{
+    color: #b0b0b0;
+    padding-left: 10px;
+}
+/*以上是小米手机栏目右边的小米10青春版5G的样式*/
+/*以下是小米手机栏目右边的小米10的样式*/
+.xiaomishoujilanmu1_img7{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img7_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img7_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 550px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img7_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img7_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1522px;
+    left: 611px;
+}
+.xiaomishoujilanmu1_img7_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    padding-top: -2px;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img7_div_p2 s{
+    color: #b0b0b0;
+    padding-left: 10px;
+}
+/*以上是小米手机栏目右边的小米10的样式*/
+/*以下是小米手机栏目右边的RedmiK30Pro的样式*/
+.xiaomishoujilanmu1_img8{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img8_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img8_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 798px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img8_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img8_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1522px;
+    left: 839px;
+}
+.xiaomishoujilanmu1_img8_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    padding-top: -2px;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img8_div_p2 s{
+    color: #b0b0b0;
+    padding-left: 10px;
+}
+/*以上是小米手机栏目右边的RedmiK30Pro的样式*/
+/*以下是小米手机栏目右边的RedmiK30Pro变焦版的样式*/
+.xiaomishoujilanmu1_img9{
+    height: 160px;
+    width: 160px;
+    margin-left: 37px;
+    margin-top: 0;
+}
+.xiaomishoujilanmu1_img9_div:hover{
+    box-shadow: 0 0 10px #b0b0b0;
+}
+.xiaomishoujilanmu1_img9_div{
+    background-color: rgb(255,255,255);
+    height: 300px;
+    width: 234px;
+    margin-left: 1046px;
+    margin-top: -300px;
+}
+.xiaomishoujilanmu1_img9_div_h3{
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img9_div_p1{
+    position: absolute;
+    font-size: 12px;
+    color: #b0b0b0;
+    top: 1522px;
+    left: 1087px;
+}
+.xiaomishoujilanmu1_img9_div_p2{
+    font-size: 14px;
+    color: rgb(252,80,9);
+    padding-top: -2px;
+    text-align: center;
+}
+.xiaomishoujilanmu1_img9_div_p2 s{
+    color: #b0b0b0;
+    padding-left: 10px;
+}
+/*以上是小米手机栏目右边的RedmiK30Pro变焦版的样式*/
+/*以下这段代码主要是用来改变小米手机那个栏目的背景色的*/
+.xiaomishoujilanmu1_div_parent{
+    background-color: rgb(242,242,242);
+    height: 650px;
+    margin-left: -6px;
+    margin-right: -6px;
+}
+/*以上这段代码主要是用来改变小米手机那个栏目的背景色的*/
+/*以下是关于智能电视的头条的样式*/
+.SmartTv_title{
+    width: 1306px;
+    height: 120px;
+    margin-left: 54px;
+    margin-top: 7px;
+}
+.SmartTv_title_div{
+    background-color: rgb(242,242,242);
+    height: 150px;
+    width: 1436px;
+    margin-top: -6px;
+    margin-left: -6px;
+}
+/*以上是关于智能电视的头条的样式*/
