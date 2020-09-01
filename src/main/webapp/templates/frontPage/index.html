@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+    <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/head.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/head2.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/indexbody.css" type="text/css">
+        <link rel="stylesheet" href="../../../resources/static/frontPage/indexbody2.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/swiper/swiper-3.4.2.min.css">
+    <script type="text/javascript" src="../../../resources/static/swiper/swiper-3.4.2.min.js"></script>
+    <style>
+        /*以下三段关于轮播图的代码不能动，动了轮播图的界面就乱了*/
+        .swiper-container {
+            z-index:-1;
+            position: absolute;
+            top: 16px;
+            left: 50px;
+            width: 1306px;
+            height: 474px;
+
+        }
+        .swiper-button-position-left{
+            position: absolute;
+            z-index: 10;
+            top:237px;
+            left: 198px;
+        }
+        .swiper_lunbo{
+            width: 1306px;
+            height: 474px;
+        }
+        /*以上三段关于轮播图的代码不能动，动了轮播图的界面就乱了*/
+        /*以下这些代码主要是用来设置维修服务，7天无理由退换货，15天免费换货，满99元包邮，520余家售后网点*/
+        .popular_div_parent{
+            background-color: rgb(242,242,242);
+            height: 642px;
+            margin-top: -16px;
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+        .footer_headline_ul1 li{
+            font-weight: 400;
+            color: rgb(108,108,108);
+            margin-right: 46px;
+            margin-left: 76px;
+        }
+        .footer_headline_div{
+            width: 1440px;
+            height: 78px;
+            background-color: rgb(255,255,255);
+            margin-left: -8px;
+            margin-top: -16px;
+            border-bottom: 1px rgb(217,217,217) solid;
+        }
+        .footer_headline_ul1 li:hover{
+            color: rgb(252,80,9);
+        }
+        .footer_headline_ul1>li img{
+            height: 24px;
+            width: 24px;
+            margin-right: 10px;
+            padding-top: -40px;
+        }
+        .footer_headline_ul1_li_img{
+            position: absolute;
+            margin-top: -50px;
+            left: 106px;
+        }
+        .footer_headline_ul1_li_img1{
+            position: absolute;
+            margin-top: -50px;
+            left: 344px;
+        }
+        .footer_headline_ul1_li_img2{
+            position: absolute;
+            margin-top: -50px;
+            left: 606px;
+        }
+        .footer_headline_ul1_li_img3{
+            position: absolute;
+            margin-top: -50px;
+            left: 844px;
+        }
+        .footer_headline_ul1_li_img4{
+            position: absolute;
+            margin-top: -50px;
+            left: 1070px;
+        }
+        .footer_headline_left{
+            position: absolute;
+            z-index: 1;
+            width: 106px;
+            height: 3px;
+            margin-top: -1px;
+            margin-left: -8px;
+            background-color: rgb(255,255,255);
+        }
+        .footer_headline_right{
+            position: absolute;
+            z-index: 1;
+            width: 208px;
+            height: 3px;
+            margin-top: -1px;
+            margin-left: 1224px;
+            margin-right: -8px;
+            background-color: rgb(255,255,255);
+        }
+        /*以上这些代码主要是用来设置维修服务，7天无理由退换货，15天免费换货，满99元包邮，520余家售后网点*/
+        .links{
+            margin-left: 100px;
+        }
+        .links>p{
+            font-size: 14px;
+            color: rgb(94,94,94);
+        }
+        .links>a{
+            font-size: 14px;
+            color: rgb(94,94,94);
+            padding-left: 15px;
+        }
+        .links>a:hover{
+            color: rgb(252,80,9);
+        }
+    </style>
+</head>
+<body>
+    <div class="shouye_div_bg" th:fragment="head">
+        <ul  class="shouye_left">
+            <li id="shouye_left_a_1">小米商城</li>
+            <li>MIUI</li>
+            <li>IoT</li>
+            <li>云服务</li>
+            <li>金融</li>
+            <li>有品</li>
+            <li>小爱开放平台</li>
+            <li>企业团购</li>
+            <li>资质证照</li>
+            <li>协议规则</li>
+            <li>下载app</li>
+            <li>智能生活</li>
+            <li>Select Location</li>
+            <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
+            <li id="shouye_right_child_a_2">登陆</li>
+            <li>注册</li>
+            <li>消息通知</li>
+            <div >
+                <li>
+                    <img src="../../../resources/upload/iconfont-cart.jpg">
+                </li>
+                <li id="iconfont-cart">购物车</li>
+            </div>
+        </ul>
+    </div>
+<div class = "shouye_div_bg_1">
+</div>
+<!--以上是头条的前端代码-->
+<div class="hidden1">
+    <ul id="title_left_right_scoroll" class="title_left">
+        <li >
+            <img id="xiaomi_title" class="xiaomi_title_left" src="../../../resources/upload/xiaomi_title_left.jpg">
+        </li>
+        <li>
+            <img  class="xiaomi_title1" src="../../../resources/upload/title.gif">
+        </li>
+    </ul>
+    <ul id="web-liubai" class="liubai">
+        <li class="xiaomishouji" id="xiaomishouji_bigest">小米手机
+        </li>
+        <li>Redmi&nbsp;红米</li>
+        <li>电视</li>
+        <li>笔记本</li>
+        <li>家电</li>
+        <li>路由器</li>
+        <li>智能硬件</li>
+        <li>服务</li>
+        <li>社区</li>
+    </ul>
+    <ul>
+        <li class="search_position">
+            <input class="search" placeholder="搜索您想要的" style="outline: none">
+        </li>
+        <li>
+            <img id="search_img_js" class="search_img" src="../../../resources/upload/search.png">
+        </li>
+    </ul>
+</div>
+    <div class="body_div">
+        <ul>
+            <li class="body_liebiao_ul_li_headAndFoot">
+                &nbsp;
+            </li>
+        </ul>
+        <ul class="body_liebiao_ul">
+            <li class="body_liebiao_ul_li1">
+                手机&nbsp;电话
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+                <table class="second">
+                    <tr class="second_tr" >
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_1.png">
+                            <a class="second_tr_a1">小米10&nbsp;Pro</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_7.jpg">
+                            <a class="second_tr_a18">Redmi&nbsp;K30&nbsp;Pro&nbsp;变焦版</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_13.png">
+                            <a class="second_tr_a11">Redmi&nbsp;10X&nbsp;5G</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_19.jpg">
+                            <a class="second_tr_a1">Redmi&nbsp;9A</a>
+                        </td>
+                    </tr>
+                    <tr class="second_tr">
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_2.png">
+                            <a class="second_tr_a2">小米&nbsp;10</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_8.jpg">
+                            <a class="second_tr_a7">Redmi&nbsp;K30&nbsp;Pro</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_14.jpeg">
+                            <a class="second_tr_a11">Redmi&nbsp;10X&nbsp;4G</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_20.png">
+                            <a class="second_tr_a16">Redmi&nbsp;8</a>
+                        </td>
+                    </tr>
+                    <tr class="second_tr">
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_3.png">
+                            <a class="second_tr_a4">小米10&nbsp;青春版</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_9.jpg">
+                            <a class="second_tr_a8">Redmi&nbsp;K30&nbsp;5G</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_15.png">
+                            <a class="second_tr_a13">Redmi&nbsp;Note&nbsp;8&nbsp;Pro</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_21.png">
+                            <a class="second_tr_a1">Redmi&nbsp;8A</a>
+                        </td>
+                    </tr>
+                    <tr class="second_tr">
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_4.png">
+                            <a class="second_tr_a5">腾讯黑鲨游戏手机</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_10.jpg">
+                            <a class="second_tr_a8">Redmi&nbsp;K30&nbsp;4G</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_16.png">
+                            <a class="second_tr_a12">Redmi&nbsp;Note&nbsp;8</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_22.jpg">
+                            <a class="second_tr_a1">Redmi&nbsp;7A</a>
+                        </td>
+                    </tr>
+                    <tr class="second_tr">
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_5.jpg">
+                            <a class="second_tr_a6">小米云服务</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_11.png">
+                            <a class="second_tr_a9">手机上门维修</a>
+                        </td>
+                        <td >
+                            <img src="../../../resources/upload/xiaomishouji_17.jpg">
+                            <a class="second_tr_a15">中国电信</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_23.jpg">
+                            <a class="second_tr_a17">米粉卡&nbsp;日租卡</a>
+                        </td>
+                    </tr>
+                    <tr class="second_tr">
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_6.jpg">
+                            <a>Redmi&nbsp;K30&nbsp;尊享纪念版</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_12.png">
+                            <a class="second_tr_a10">Redmi&nbsp;10X&nbsp;Pro</a>
+                        </td>
+                        <td>
+                            <img src="../../../resources/upload/xiaomishouji_18.png">
+                            <a class="second_tr_a14">Redmi&nbsp;9</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </li>
+            <li class="body_liebiao_ul_li2">
+                电视&nbsp;盒子
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                笔记本&nbsp;显示器
+                <img class="body_liebiao_ul_li_img3" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                家电&nbsp;插线板
+                <img class="body_liebiao_ul_li_img2" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                出行&nbsp;穿戴
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                智能&nbsp;路由器
+                <img class="body_liebiao_ul_li_img2" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                电源&nbsp;配件
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                健康&nbsp;儿童
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                耳机&nbsp;音箱
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+            <li class="body_liebiao_ul_li2">
+                生活&nbsp;箱包
+                <img class="body_liebiao_ul_li_img1" src="../../upload/arrow_right.png">
+            </li>
+        </ul>
+        <ul>
+            <li class="body_liebiao_ul_li_headAndFoot">
+                &nbsp;
+            </li>
+        </ul>
+
+    <!--小米商城首页的轮播图-->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img class="swiper_lunbo" src="../../../resources/upload/xiaomi_lunbo_1.jpg">
+            </div>
+            <div class="swiper-slide">
+                <img class="swiper_lunbo" src="../../../resources/upload/xiaomi_lunbo_2.jpg">
+            </div>
+            <div class="swiper-slide">
+                <img class="swiper_lunbo" src="../../../resources/upload/xiaomi_lunbo_3.jpg">
+            </div>
+            <div class="swiper-slide">
+                <img class="swiper_lunbo" src="../../../resources/upload/xiaomi_lunbo_4.jpg">
+            </div>
+            <div class="swiper-slide">
+                <img class="swiper_lunbo" src="../../../resources/upload/xiaomi_lunbo_5.jpg">
+            </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <!-- 如果需要导航按钮 -->
+        <div  class="swiper-button-prev swiper-button-white swiper-button-position-left"></div>
+        <div  class="swiper-button-next swiper-button-white swiper-button-position-right"></div>
+    </div>
+    </div>
+    <!--以上的头条内容终于做完了，光头条的制作我就敲了接近600行html代码
+        太难了！！！！！
+        对于我来说是这样🐭
+        不怕千人万人阻挡只怕自己👮投降---2020年8月20日周四下午7：00记
+    -->
+    <div></div>
+    <!--以上是头条的前端代码-->
+    <!--开始做主体部分🔥-->
+    <div class="zhuti1">
+        <ul class="zhuti1_ul1">
+            <li >
+                <table>
+                <tr class="zhuti1_ul1_tr1">
+                <td><img src="../../../resources/upload/xiaomi_miaosha.png">
+                    <a>小米秒杀</a>
+                </td>
+                <td><img src="../../../resources/upload/qiye_tuangou.png">
+                    <a class="qiye_tuangou_a">企业团购</a>
+                </td>
+                 <td>
+                <img src="../../../resources/upload/Fma_tongdao.png">
+                     <a class="Fma">F码通道</a>
+                 </td>
+                 </tr>
+                </table>
+            </li>
+        </ul>
+    </div>
+    <div class="zhuti2">
+            <ul>
+            <li>
+                <table class="zhuti1_ul2_table2">
+                    <tr class="zhuti1_ul2_tr2">
+                        <td>
+                <img class="mifenka" src="../../../resources/upload/mifen_ka.png">
+                <a class="mifenka_a">米粉卡</a>
+                        </td>
+                        <td class="yijiu_huanxin_td">
+                <img class="yijiu_huanxin" src="../../../resources/upload/yijiu_huanxin.png">
+                <a class="yijiu_huanxin_a">以旧换新</a>
+                        </td>
+                        <td>
+                <img class="huafei_chongzhi" src="../../../resources/upload/huafei_chongzhi.png">
+                <a class="huafei_chongzhi_a">话费充值</a>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            </ul>
+    </div>
+    <!--现在开始制作话费通道旁边的那三张图片-->
+    <div class="zhuti2_right_pic">
+        <ul class="zhuti2_right_pic_ul">
+            <li><img src="../../../resources/upload/Redmi_ad.jpg"></li>
+            <li><img src="../../../resources/upload/Redmi_k30i.jpg"></li>
+            <li><img src="../../../resources/upload/xiaomi_shouhuan.jpg"></li>
+        </ul>
+    </div>
+    <!--熟练度逐渐提升---奥利给！！！！-->
+    <!--以下是小米手机专栏的html代码-->
+    <div class="xiaomishouji_title">
+        <img src="../../../resources/upload/xiaomishouji_title.jpg">
+    </div>
+    <div class="xiaomishouji_text">
+        <ul>
+            <li class="xiaomishouji_text_li1">手机
+            </li>
+            <li id="xiaomishouji_text_li2" class="xiaomishouji_text_li2">
+                查看全部
+                <img id="xiaomishouji_arrow_right_next1"
+                     class="xiaomishouji_arrow_right_next"
+                     src="../../../resources/upload/arrow_right_next.png">
+            </li>
+        </ul>
+    </div>
+    <div class="xiaomishoujilanmu1_div_parent">
+    <div>
+        <img class="xiaomishoujilanmu1_img1" src="../../../resources/upload/xiaomiMixAlpha.jpg">
+    </div>
+    <div class="xiaomishoujilanmu1_img2_div">
+                <img class="xiaomishoujilanmu1_img2" src="../../../resources/upload/xiaomi10_zhizunban.jpg">
+                <h3 class="xiaomishoujilanmu1_img2_div_h3">小米10&nbsp;至尊版</h3>
+                <p class="xiaomishoujilanmu1_img2_div_p1">120X&nbsp;变焦/120W秒充/120Hz屏幕</p>
+                <p class="xiaomishoujilanmu1_img2_div_p2">5299元起</p>
+    </div>
+    <div class="xiaomishoujilanmu1_img3_div">
+        <img class="xiaomishoujilanmu1_img3" src="../../../resources/upload/RedmiK30_zhizunban.jpg">
+        <h3 class="xiaomishoujilanmu1_img3_div_h3">Redmi&nbsp;K30&nbsp;至尊版</h3>
+        <p class="xiaomishoujilanmu1_img3_div_p1">120Hz弹出全面屏，天玑1000+旗舰处...</p>
+        <p class="xiaomishoujilanmu1_img3_div_p2">1999元起</p>
+    </div>
+    <div class="xiaomishoujilanmu1_img4_div">
+        <img class="xiaomishoujilanmu1_img4" src="../../../resources/upload/tengxun_heisha_3s.jpg">
+        <h3 class="xiaomishoujilanmu1_img4_div_h3">腾讯黑鲨3S</h3>
+        <p class="xiaomishoujilanmu1_img4_div_p1">晓龙865处理器，120Hz刷新率</p>
+        <p class="xiaomishoujilanmu1_img4_div_p2">3999元起</p>
+    </div>
+    <div class="xiaomishoujilanmu1_img5_div">
+        <img class="xiaomishoujilanmu1_img5" src="../../../resources/upload/Redmi_9A.jpg">
+        <h3 class="xiaomishoujilanmu1_img5_div_h3">Redmi&nbsp;9A</h3>
+        <p class="xiaomishoujilanmu1_img5_div_p1">5000mAh长循环大电量,6.53"超大护...</p>
+        <p class="xiaomishoujilanmu1_img5_div_p2">499元起</p>
+    </div>
+    <div class="xiaomishoujilanmu1_img6_div">
+        <img class="xiaomishoujilanmu1_img6" src="../../../resources/upload/xiaomi10_qingchunban.jpg">
+        <h3 class="xiaomishoujilanmu1_img6_div_h3">小米10&nbsp;青春版&nbsp;5G</h3>
+        <p class="xiaomishoujilanmu1_img6_div_p1">5000mAh长循环大电量,6.53"超大护...</p>
+        <p class="xiaomishoujilanmu1_img6_div_p2">1899元起<s>2099元</s></p>
+    </div>
+    <div class="xiaomishoujilanmu1_img7_div">
+        <img class="xiaomishoujilanmu1_img7" src="../../../resources/upload/xiaomi_10.jpg">
+        <h3 class="xiaomishoujilanmu1_img7_div_h3">小米10</h3>
+        <p class="xiaomishoujilanmu1_img7_div_p1">晓龙865/1亿像素相机</p>
+        <p class="xiaomishoujilanmu1_img7_div_p2">3799元起<s>3999元</s></p>
+    </div>
+    <div class="xiaomishoujilanmu1_img8_div">
+        <img class="xiaomishoujilanmu1_img8" src="../../../resources/upload/RedmiK30_pro.jpg">
+        <h3 class="xiaomishoujilanmu1_img8_div_h3">Redmi&nbsp;K30&nbsp;Pro</h3>
+        <p class="xiaomishoujilanmu1_img8_div_p1">双模5G,&nbsp;晓龙865,&nbsp;弹出全面屏</p>
+        <p class="xiaomishoujilanmu1_img8_div_p2">2699元起</p>
+    </div>
+    <div class="xiaomishoujilanmu1_img9_div">
+        <img class="xiaomishoujilanmu1_img9" src="../../../resources/upload/RedmiK30Pro_bianjiaoban.jpg">
+        <h3 class="xiaomishoujilanmu1_img9_div_h3">Redmi&nbsp;K30&nbsp;Pro&nbsp;变焦版</h3>
+        <p class="xiaomishoujilanmu1_img9_div_p1">双模5G,&nbsp;晓龙865,&nbsp;弹出全面屏</p>
+        <p class="xiaomishoujilanmu1_img9_div_p2">3799元起</p>
+    </div>
+    </div>
+    <div class="SmartTv_title_div">
+        <img class="SmartTv_title" src="../../../resources/upload/Redmi_SmartTV.jpg">
+    </div>
+    <div class="homeAppliances_div">
+        <a class="homeAppliances">家电</a>
+    </div>
+    <div class="popular_div_parent">
+        <ul>
+            <li id="popular_id" class="popular">热门
+                <img class="homeAppliances_pic"src="../../../resources/upload/arrow_right_next.png">
+
+            </li>
+        </ul>
+        <div><img id="popular_ul_li1"
+                  class="popular_ul_li1"
+                  src="../../../resources/upload/RedmiTV_65.jpg">
+        </div>
+        <div class="popular_div2"><img class="popular_ul_li2"
+                  src="../../../resources/upload/xiaomiTV_1.jpg">
+            <h3 class="popular_div2_h1">Redmi&nbsp;红米电视&nbsp;70英寸</h3>
+            <p class="popular_div2_p1">70英寸震撼剧幕，4K画质，细腻如真</p>
+            <p class="popular_div2_p2">2729元<s>3799元</s></p>
+        </div>
+        <div class="popular_div3">
+            <img class="popular_ul_li3"
+                 src="../../../resources/upload/xiaomiTV_2.jpg">
+            <h3 class="popular_div3_h1">小米全面屏电视E32C</h3>
+            <p class="popular_div3_p1">全面屏设计，人工智能系统</p>
+            <p class="popular_div3_p2">699元<s>899元</s></p>
+        </div>
+        <div class="popular_div4">
+            <img class="popular_ul_li4"
+                 src="../../../resources/upload/xiaomiTV_3.jpg">
+            <h3 class="popular_div4_h1">小米全面屏电视E55A</h3>
+            <p class="popular_div4_p1">全面屏设计，人工智能系统</p>
+            <p class="popular_div4_p2">1799元<s>1999元</s></p>
+        </div>
+        <div class="popular_div5">
+            <img class="popular_ul_li5"
+                 src="../../../resources/upload/xiaomiTV_4.jpg">
+            <h3 class="popular_div5_h1">米家空调</h3>
+            <p class="popular_div5_p1">出众静音，快速制冷热</p>
+            <p class="popular_div5_p2">1499元<s>1799元</s></p>
+        </div>
+        <div><img id="popular_ul_li6"
+                  class="popular_ul_li6"
+                  src="../../../resources/upload/xioamiTV_5.jpg">
+        </div>
+        <div class="popular_div7">
+            <img class="popular_ul_li7"
+                 src="../../../resources/upload/xiaomiTV_6.jpg">
+            <h3 class="popular_div7_h1">米家互联网洗烘一体机&nbsp;Pro&nbsp;10kg</h3>
+            <p class="popular_div7_p1">智能洗烘，省心省力</p>
+            <p class="popular_div7_p2">2999元</s></p>
+        </div>
+        <div class="popular_div8">
+            <img class="popular_ul_li8"
+                 src="../../../resources/upload/xiaomiTV_7.jpg">
+            <h3 class="popular_div8_h1">Redmi全自动波轮洗衣机1A&nbsp;8kg</h3>
+            <p class="popular_div8_p1">一键操作父母都爱用</p>
+            <p class="popular_div8_p2">799元<s>899元</s></p>
+        </div>
+        <div class="popular_div9">
+            <img class="popular_ul_li9"
+                 src="../../../resources/upload/xiaomiTV_8.jpg">
+            <h3 class="popular_div9_h1">15.6"四核i7&nbsp;16G&nbsp;独显&nbsp;512G</h3>
+            <p class="popular_div9_p1">全面轻薄的国民轻薄本</p>
+            <p class="popular_div9_p2">4899元</p>
+        </div>
+        <div class="popular_div10">
+            <img class="popular_ul_li10"
+                 src="../../../resources/upload/xiaomiTV_9.jpg">
+            <h3 class="popular_div10_h1">Air&nbsp;13.3"&nbsp;2019款</h3>
+            <p class="popular_div10_p2">5699元起</p>
+        </div>
+        <div class="popular_div11">
+            <img class="popular_ul_li11"
+                 src="../../../resources/upload/circle-arrow-right.png">
+            <h3 class="popular_div11_h1">浏览更多</h3>
+            <p class="popular_div11_p1">热门</p>
+        </div>
+    </div>
+    <div class="footer_headline_div">
+        <ul class="footer_headline_ul1">
+            <li>预约维修服务</li>
+            <li>7天无理由退换货</li>
+            <li>15天免费换货</li>
+            <li>满99元包邮</li>
+            <li>520余家售后网店点</li>
+        </ul>
+    </div>
+    <div class="footer_headline_ul1_li_img">
+        <img src="../../../resources/upload/banshou.png">
+    </div>
+    <div class="footer_headline_ul1_li_img1">
+        <img src="../../../resources/upload/7days.png">
+    </div>
+    <div class="footer_headline_ul1_li_img2">
+        <img src="../../../resources/upload/15day.png">
+    </div>
+    <div class="footer_headline_ul1_li_img3">
+        <img src="../../../resources/upload/free_shipping.png">
+    </div>
+    <div class="footer_headline_ul1_li_img4">
+        <img src="../../../resources/upload/outlets.png">
+    </div>
+    <div class="footer_headline_left">
+    </div>
+    <div class="footer_headline_right">
+    </div>
+    <dl class="help_center">
+        <dt>帮助中心</dt>
+        <dd>账户管理</dd>
+        <dd>购物指南</dd>
+        <dd>订单操作</dd>
+    </dl>
+    <dl class="service_support">
+        <dt>服务支持</dt>
+        <dd>售后政策</dd>
+        <dd>自助服务</dd>
+        <dd>相关下载</dd>
+    </dl>
+    <dl class="offline_store">
+        <dt>线下门店</dt>
+        <dd>小米之家</dd>
+        <dd>服务网点</dd>
+        <dd>授权体验店</dd>
+    </dl>
+    <dl class="about_xiaomi">
+        <dt>关注我们</dt>
+        <dd>新浪微博</dd>
+        <dd>官方微信</dd>
+        <dd>联系我们</dd>
+        <dd>公益基金会</dd>
+    </dl>
+    <dl class="special_service">
+        <dt>特色服务</dt>
+        <dd>F码通道</dd>
+        <dd>礼物码</dd>
+        <dd>防伪查询</dd>
+    </dl>
+    <div class="vertical_line">
+    </div>
+    <div>
+        <p class="service_support_phone">400-100-5678</p>
+        <p class="service_hours">8:00-18:00(仅收市话费)</p>
+        <a class="human_service">
+            <img class="human_service_img" src="../../../resources/upload/human_service.png">
+            人工服务
+        </a>
+    </div>
+    <div class="contact_information">
+        <a>我的微信：sutao893
+        <br><mark>(特此声名)此网站主<br>要用于学习技术而模<br>仿小米官网搭建的</mark></a>
+
+    </div>
+    <div class="underscore1">
+    </div>
+    <div class="links">
+        <p>友情链接:</p>
+        <a>GitHub&nbsp;地址</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        <a>后期拓展栏位</a>
+        
+    </div>
+    <script type="text/javascript" src="../../../resources/static/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        /*$(document).ready---当文档激活完成之后函数*/
+        $(document).ready(function(){
+            $('#search_img_js').on({
+                mouseover : function (){
+                    $(this).attr('src','../../resources/upload/search1.png')
+                },
+                mouseout :function (){
+                    $(this).attr('src','../../resources/upload/search.png')
+                }
+            });
+        });
+        $(document).ready(function(){
+            $('#xiaomi_title').on({
+                mouseover : function(){
+                    $(this).attr('src','../../resources/upload/xiaomi_home.jpg');
+                },
+                mouseout :function (){
+                    $(this).attr('src','../../resources/upload/xiaomi_title_left.jpg');
+                }
+            });
+        });
+    </script>
+    <script>
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'vertical',
+            fade:true,
+            effect:'fade',
+            loop: true,
+            autoplay:2000,
+            // 如果需要分页器
+            pagination: '.swiper-pagination',paginationClickable:true,
+            // 如果需要前进后退按钮
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            // 如果需要滚动条
+        })
+    </script>
+<!--以上是头条的相关js代码-->
+</body>
+</html>
