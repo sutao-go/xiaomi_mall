@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .xiaomi_mall{
+            height: 98px;
+            width: 202px;
+            margin-left: 155px;
+        }
+        .xiaomi_10_qingchunban{
+            margin-top: -14px;
+            height: 588px;
+            width: 1440px;
+        }
+        .login{
+            position: absolute;
+            z-index: 1;
+            width: 416px;
+            height: 566px;
+            background-color: rgb(255,255,255);
+            margin-left: 874px;
+            margin-top: -571px;
+        }
+        .sign_in{
+            font-size: 24px;
+            color: rgb(252,80,9);
+            margin-left: 159px;
+            margin-top: 34px;
+        }
+        .account_number{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            font-size: 14px;
+            color: black;
+            outline: none;
+        }
+        .password{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            font-size: 14px;
+            outline: none;
+            color: black;
+        }
+        .Welcome_to_my_website{
+            width: 354px;
+            height: 50px;
+            background-color: rgb(252,80,9);
+            border-radius: 0;
+            margin-left: 31px;
+            border: 0 ;
+            outline: none;
+            color: white;
+            cursor:pointer ;
+        }
+        .Welcome_to_my_website:hover{
+        color: black;
+        }
+        .registered{
+            font-size: 14px;
+            color: rgb(217,217,217);
+            margin-left: 180px;
+            cursor: pointer;
+        }
+        .registered:hover{
+            color: rgb(252,80,9);
+        }
+        .kaptcha{
+            margin-left: 100px;
+        }
+        .kaptcha_img{
+            margin-left: 54px;
+            margin-top: 5px;
+
+        }
+        .j_captcha{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img class="xiaomi_mall"src="../../../resources/upload/xiaomi_mall.png">
+</div>
+<div>
+    <img class="xiaomi_10_qingchunban" src="../../../resources/upload/xiaomi_10_qingchunban.png">
+</div>
+<div >
+    <form class="login" id="login">
+        <br>
+        <br>
+        <a class="sign_in">账号登陆</a>
+        <br>
+        <br>
+        <input id="account_number" class="account_number" placeholder="邮箱/手机号码/小米ID"
+               onfocus="this.placeholder=''"
+               onblur="this.placeholder='邮箱/手机号码/小米ID'"
+               maxlength="20"
+                >
+        <!--1.没有点击那么表单为空
+        2.点击了但是onblur没有值为空-->
+        <br>
+        <br>
+        <input id="password" class="password" placeholder="密码"
+                onfocus="this.placeholder=''"
+               onblur="this.placeholder='密码'"
+               maxlength="20"
+
+        >
+        <br>
+        <br>
+        <div class="item-content">
+            <div class="item-media">
+                <i class="icon icon-form-email"></i>
+            </div>
+            <div class="kaptcha">
+                <label for="j_captcha" class="item-title label" >验证码</label>
+                <input
+                    id="j_captcha" name="j_captcha" type="text"
+                    class="j_captcha" placeholder="验证码" maxlength="4"/>
+                <div >
+                    <img class="kaptcha_img"  id="#kaptcha_img"
+                         onclick="this.src='/kaptcha/index'" th:src="@{/kaptcha/index}"/>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button id="Welcome_to_my_website" type="button" class="Welcome_to_my_website" value="登录">登录</button>
+        <br>
+        <br>
+        <a class="registered">立即注册</a>
+    </form>
+</div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    setTimeout(function(){
+        if (document.all){
+            document.getElementById("#kaptcha_img").click();
+        }else {
+            var e = document.createEvent("MouseEvent");
+            e.initEvent("click",true,true);
+            document.getElementById("#kaptcha_img").dispatchEvent(e);
+        }
+    },1);
+</script>
+<script type="text/javascript">
+    $(function (){
+        $("#Welcome_to_my_website").click(function (){
+            var data ={};
+            data.accountnumber = $("#account_number").val();
+            data.password = $("#password").val();
+            data.kaptcha =  $("#j_captcha").val();
+            $.ajax(
+                {
+                    url:"/admin/login",
+                    /*向后端传输数据的方法*/
+                    type:"post",
+                    /*向后端传输数据的类型*/
+                    dataType:"json",
+                    /*向后端传输的数据*/
+                    data: {
+                        /*用k-v键值对*/
+                        accountnumber:data.accountnumber,
+                        password:data.password,
+                        kaptcha:data.kaptcha
+                    },
+                    success:function (result) {
+                        if (result.resultCode == 200){
+                            window.location.href = '/admin/index';
+                        }
+                    },
+                    error:function (){
+                        console.log("false");
+                        alter("账号");
+                    },
+            })
+        })
+    })
+</script>
+</body>
+</html>

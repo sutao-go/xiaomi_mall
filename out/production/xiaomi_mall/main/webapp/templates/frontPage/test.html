@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>自动点击例子</title>
+</head>
+<body>
+<body>
+<input id="username" value="admin">
+<input id="password" value="123456">
+<button id="add">添加</button>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        $("#add").click(function() {
+            var list = [];
+            var data = {};
+            data.username=$("#username").val();
+            data.password=$("#password").val();
+            list.push(data);
+            $.ajax(
+                {
+                    url:"/admin/login",
+                    type:"get",
+                    data : {
+                        "data" : JSON.stringify(list)
+                    },
+                    success: function(d){
+                        alert("保存成功");
+                    },
+                    error : function (d){
+                        alert("保存失败");
+                    }
+                })
+        })
+    })
+
+</script>
+</body>
+</body>
+
+</html>
