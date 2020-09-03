@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+<link type="text/css" href="../../resources/static/bootstrap/css/bootstrap-theme.min.css">
+<link type="text/css" href="../../resources/static/bootstrap/js/bootstrap.min.js">
 <head>
     <meta charset="UTF-8">
     <style type="text/css">
@@ -83,6 +86,30 @@
         .j_captcha{
             outline: none;
         }
+        .account_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 911px;
+            margin-top: -418px;
+            z-index: 2;
+            font-size: 12px;
+        }
+        .passWord_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 911px;
+            margin-top: -346px;
+            z-index: 3;
+            font-size: 12px;
+        }
+        .verifyCode_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 1030px;
+            margin-top: -250px;
+            z-index: 3;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +130,7 @@
                onfocus="this.placeholder=''"
                onblur="this.placeholder='邮箱/手机号码/小米ID'"
                maxlength="20"
+
                 >
         <!--1.没有点击那么表单为空
         2.点击了但是onblur没有值为空-->
@@ -111,8 +139,8 @@
         <input id="password" class="password" placeholder="密码"
                 onfocus="this.placeholder=''"
                onblur="this.placeholder='密码'"
+               type="text"
                maxlength="20"
-
         >
         <br>
         <br>
@@ -138,6 +166,15 @@
         <br>
         <a class="registered">立即注册</a>
     </form>
+    <div>
+        <a id="account_prompt" class="account_prompt">请输入账号</a>
+    </div>
+    <div >
+        <a id="passWord_prompt" class="passWord_prompt">请输入密码</a>
+    </div>
+    <div >
+        <a id="verifyCode_prompt" class="verifyCode_prompt">请输入验证码</a>
+    </div>
 </div>
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script type="text/javascript">
@@ -151,7 +188,7 @@
         }
     },1);
 </script>
-
+<!--以下的代码用于做前后端账号密码数据的传递-->
 <script type="text/javascript">
     $(function (){
         $("#Welcome_to_my_website").click(function (){
@@ -159,6 +196,7 @@
             data.accountnumber = $("#account_number").val();
             data.password = $("#password").val();
             data.kaptcha =  $("#j_captcha").val();
+            console.log(data.password);
             $.ajax(
                 {
                     url:"/admin/login",
@@ -179,6 +217,7 @@
                         }
                     },
                     error:function (){
+                        document.getElementById("passWord_prompt").style.color ="black";
                         console.log("false");
                         alter("账号");
                     },
@@ -186,6 +225,44 @@
         })
     })
 </script>
+<script type="text/javascript">
+    $(function(){
 
+        $("#Welcome_to_my_website").mousedown(function(){
+            var far ={};
+            far.password = $("#password").val();
+            var s = far.password.toString();
+            console.log("点击"+s);
+            if (s.length == 0){
+                document.getElementById("passWord_prompt").style.color ="black";
+            }
+        });
+        $("#Welcome_to_my_website").mousedown(function(){
+            var far ={};
+            far.accountnumber = $("#account_number").val();
+            far.password = $("#password").val();
+            far.kaptcha =  $("#j_captcha").val();
+            var s = far.kaptcha.toString();
+            console.log("点击"+s);
+            if (s.length == 0){
+                document.getElementById("verifyCode_prompt").style.color ="black";
+            }
+        });
+        $("#Welcome_to_my_website").mousedown(function(){
+            var far ={};
+            far.accountnumber = $("#account_number").val();
+            var s = far.accountnumber.toString();
+            console.log("点击"+s);
+            if (s.length == 0){
+                document.getElementById("account_prompt").style.color ="black";
+            }
+        });
+        $("#Welcome_to_my_website").mouseup(function(){
+                document.getElementById("passWord_prompt").style.color ="rgb(255,255,255)";
+            document.getElementById("verifyCode_prompt").style.color ="rgb(255,255,255)";
+            document.getElementById("account_prompt").style.color ="rgb(255,255,255)";
+        });
+    })
+</script>
 </body>
 </html>
