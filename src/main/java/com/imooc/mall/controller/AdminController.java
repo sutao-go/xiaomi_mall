@@ -1,10 +1,8 @@
 package com.imooc.mall.controller;
 
-import com.google.code.kaptcha.Producer;
-import com.imooc.mall.entity.adminUser;
-import com.imooc.mall.service.adminUserService;
+import com.imooc.mall.entity.AdminUser;
+import com.imooc.mall.service.AdminUserService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +17,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
-    private adminUserService AdminUserService;
-    @Autowired
-    private Producer kaptchaProducer;
+    @Resource
+    private AdminUserService adminUserService;
     @RequestMapping(method = RequestMethod.GET,value = "/index")
     public String index(){
         return "templates/frontPage/index";
@@ -53,7 +49,7 @@ public class AdminController {
             info.put("resultCode","100");
         }
         if(accountnumber.length() != 0 && password.length() != 0 && kaptcha.length() != 0){
-            adminUser user = AdminUserService.login(accountnumber,password);
+            AdminUser user = adminUserService.login(accountnumber,password);
             if (user != null){
                 info.put("resultCode","200");
             }

@@ -20,6 +20,7 @@
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/javax.servlet-api-4.0.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/jboss-common-jdbc-wrapper.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/jboss-logging-3.3.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/jboss-logging-3.3.3.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/jcl-over-slf4j-1.7.16.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/jul-to-slf4j-1.7.16.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/kaptcha-2.3.2.jar!/" />
@@ -30,17 +31,14 @@
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/logback-classic-1.1.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/logback-core-1.1.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-3.4.6.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-3.5.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-ehcache-1.0.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-spring-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-spring-1.3.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mysql-connector-java-commercial-5.1.7-bin.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/ognl-3.2.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/org.apache.commons.lang3.StringUtils.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/protobuf-java-2.6.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/servlet-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/slf4j-api-1.6.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/slf4j-api-1.7.16.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/slf4j-api-1.7.26.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/snakeyaml-1.16.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/spring-aop-4.2.5.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/spring-beans-4.2.5.RELEASE.jar!/" />
@@ -56,7 +54,6 @@
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/tomcat-embed-logging-juli-8.0.32.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/tomcat-embed-websocket-8.0.32.jar!/" />
       <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/validation-api-1.1.0.Final.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../SpringBoot需要包/mybatis-spring-boot-starter-2.1.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,6 +1,6 @@
 package com.imooc.mall.entity;
 
-public class adminUser {
+public class AdminUser {
     //用户名
     private String userName;
     //登陆账户
