@@ -6,6 +6,9 @@
         <fileset id="fileset" name="SpringMVC" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/springMVC.xml</file>
         </fileset>
+        <fileset id="fileset2" name="application" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/application.xml</file>
+        </fileset>
       </configuration>
     </facet>
     <facet type="web" name="Webapp">
@@ -16,6 +19,11 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
     </facet>
   </component>
@@ -25,6 +33,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -38,6 +48,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="ant-1.10.3" level="project" />
+    <orderEntry type="library" name="aopalliance-1.0" level="project" />
   </component>
 </module>
