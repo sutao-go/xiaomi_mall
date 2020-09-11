@@ -6,9 +6,9 @@
         <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
     </resultMap>
     <sql id="BaseResult_list">
-        userName,passWord
+        user_name,pass_word
     </sql>
-    <select id="login" resultMap="BaseResultMap">
+    <select id="login" resultMap="BaseResultMap" >
         select
         <include refid="BaseResult_list"/>
         from adminUser

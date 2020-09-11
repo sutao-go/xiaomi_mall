@@ -46,7 +46,6 @@ public class AdminController {
         }
         if(userName.length() != 0 && passWord.length() != 0 && kaptcha.length() != 0){
             AdminUser user = adminUserService.login(userName,passWord);
-            System.out.println(user);
             if (user != null){
                 info.put("resultCode","200");
             }

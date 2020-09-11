@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author sutao
  */
 @SpringBootApplication
-@MapperScan(basePackages = {"com.imooc.mapper"})
+@MapperScan(basePackages = {"com.imooc.mapper","resources.mapper.AdminUserMapper.xml"})
 public class XiaomiApplication {
     public static void main(String[] args){
         SpringApplication.run(XiaomiApplication.class,args);
