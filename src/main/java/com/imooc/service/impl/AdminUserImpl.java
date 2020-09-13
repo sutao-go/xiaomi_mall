@@ -20,4 +20,8 @@ public class AdminUserImpl implements AdminUserService {
 
         return adminUserMapper.login(userName,passWord);
     }
+    @Override
+    public AdminUser registered(String userName,String passWord){
+        return adminUserMapper.insert(userName,passWord);
+    }
 }

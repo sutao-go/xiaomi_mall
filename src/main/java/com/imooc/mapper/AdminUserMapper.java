@@ -13,4 +13,5 @@ public interface AdminUserMapper {
 
     AdminUser login(@Param("userName") String userName,@Param("passWord") String passWord);
 
+    AdminUser insert(@Param("userName") String userName,@Param("passWord") String passWord);
 }

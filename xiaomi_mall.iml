@@ -49,5 +49,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" name="sweetalert" level="application" />
   </component>
 </module>

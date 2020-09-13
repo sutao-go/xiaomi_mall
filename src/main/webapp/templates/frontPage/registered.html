@@ -64,15 +64,16 @@
             cursor:pointer ;
         }
         .Welcome_to_my_website:hover{
-        color: black;
+            color: black;
         }
-        .registered{
+        .login_a{
             font-size: 14px;
             color: rgb(217,217,217);
             margin-left: 180px;
             cursor: pointer;
+            text-decoration: none;
         }
-        .registered:hover{
+        .login_a:hover{
             color: rgb(252,80,9);
         }
         .kaptcha{
@@ -114,7 +115,7 @@
 </head>
 <body>
 <div>
-    <img class="xiaomi_mall"src="../../../resources/upload/xiaomi_mall.png">
+    <img class="xiaomi_mall" src="../../resources/upload/xiaomi_mall.png">
 </div>
 <div>
     <img class="xiaomi_10_qingchunban" src="../../resources/upload/xiaomi_10_qingchunban.png">
@@ -123,47 +124,32 @@
     <form class="login" id="login">
         <br>
         <br>
-        <a class="sign_in">账号登陆</a>
+        <a class="sign_in">账号注册</a>
         <br>
         <br>
         <input id="account_number" class="account_number" placeholder="邮箱/手机号码/小米ID"
                onfocus="this.placeholder=''"
                onblur="this.placeholder='邮箱/手机号码/小米ID'"
                maxlength="20"
-                >
+        >
         <!--1.没有点击那么表单为空
         2.点击了但是onblur没有值为空-->
         <br>
         <br>
         <input id="password" class="password" placeholder="密码"
-                onfocus="this.placeholder=''"
+               onfocus="this.placeholder=''"
                onblur="this.placeholder='密码'"
                type="text"
                maxlength="20"
         >
         <br>
         <br>
-        <div class="item-content">
-            <div class="item-media">
-                <i class="icon icon-form-email"></i>
-            </div>
-            <div class="kaptcha">
-                <label for="j_captcha" class="item-title label" >验证码</label>
-                <input
-                    id="j_captcha" name="j_captcha" type="text"
-                    class="j_captcha" placeholder="验证码" maxlength="4"/>
-                <div >
-                    <img class="kaptcha_img"  id="#kaptcha_img"
-                         onclick="this.src='/admin/kaptcha'" th:src="@{/admin/kaptcha}"/>
-                </div>
-            </div>
-        </div>
         <br>
         <br>
-        <button id="Welcome_to_my_website" type="button" class="Welcome_to_my_website" value="登录">登录</button>
+        <button id="Welcome_to_regiser" type="button" class="Welcome_to_my_website" value="注册">注册</button>
         <br>
         <br>
-        <a class="registered" id="registered">立即注册</a>
+        <a class="login_a" id="login_a">立即登录</a>
     </form>
     <div>
         <a id="account_prompt" class="account_prompt">请输入账号</a>
@@ -171,41 +157,20 @@
     <div >
         <a id="passWord_prompt" class="passWord_prompt">请输入密码</a>
     </div>
-    <div >
-        <a id="verifyCode_prompt" class="verifyCode_prompt">请输入验证码</a>
-    </div>
 </div>
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-    setTimeout(function(){
-        if (document.all){
-            document.getElementById("#kaptcha_img").click();
-        }else {
-            var e = document.createEvent("MouseEvent");
-            e.initEvent("click",true,true);
-            document.getElementById("#kaptcha_img").dispatchEvent(e);
-        }
-    },1);
-</script>
-<script type="text/javascript">
-    $(function(){
-        $("#registered").click(function(){
-            window.location.href='/admin/registered';
-        })
-    })
-</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--以下的代码用于做前后端账号密码数据的传递-->
 <script type="text/javascript">
     $(function (){
-        $("#Welcome_to_my_website").click(function (){
+        $("#Welcome_to_regiser").click(function (){
             var data ={};
             data.accountnumber = $("#account_number").val();
             data.password = $("#password").val();
-            data.kaptcha =  $("#j_captcha").val();
             console.log(data.password);
             $.ajax(
                 {
-                    url:"/admin/login",
+                    url:"/admin/registered",
                     /*向后端传输数据的方法*/
                     type:"post",
                     /*向后端传输数据的类型*/
@@ -214,64 +179,52 @@
                     data: {
                         /*用k-v键值对*/
                         accountnumber:data.accountnumber,
-                        password:data.password,
-                        kaptcha:data.kaptcha
+                        password:data.password
                     },
                     success:function (result) {
-                        if (result.resultCode == 200){
-                            window.location.href = '/admin/index';
+                        if(result.resultCode == 206){
+                            swal("恭喜您注册成功");
                         }
-                        if(result.resultCode == 204){
-                            swal("验证码错误");
-                        }
-                        if(result.resultCode == 202){
-                            swal("账号密码错误");
-                        }
-
                     },
                     error:function (){
-                        document.getElementById("passWord_prompt").style.color ="black";
-                        console.log("false");
-                        alter("账号");
+                            swal("很遗憾您注册失败了");
                     },
-            })
+                })
         })
     })
 </script>
 <script type="text/javascript">
     $(function(){
-        $("#Welcome_to_my_website").mousedown(function(){
-            var far ={};
-            far.accountnumber = $("#account_number").val();
-            far.password = $("#password").val();
-            far.kaptcha =  $("#j_captcha").val();
-            var s = far.kaptcha.toString();
-            console.log("点击"+s);
-            if (s.length == 0){
-                swal("请输入验证码");
-            }
-        });
-        $("#Welcome_to_my_website").mousedown(function(){
-            var far ={};
-            far.password = $("#password").val();
-            var s = far.password.toString();
-            console.log("点击"+s);
-            if (s.length == 0){
-                swal("请输入密码");
-            }
-        });
-        $("#Welcome_to_my_website").mousedown(function(){
-            var far ={};
-            far.accountnumber = $("#account_number").val();
-            var s = far.accountnumber.toString();
-            console.log("点击"+s);
-            if (s.length == 0){
-                swal("请输入账号");
-            }
-        });
-
+        $("#login_a").click(function(){
+            window.location.href= '/admin/login';
+        })
     })
 </script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+        $(function(){
+            $("#Welcome_to_regiser").mousedown(function(){
+                var far ={};
+                far.password = $("#password").val();
+                var s = far.password.toString();
+                console.log("点击"+s);
+                if (s.length == 0){
+                    swal("请输入密码");
+                }
+            });
+            $("#Welcome_to_regiser").mousedown(function(){
+                var far ={};
+                far.accountnumber = $("#account_number").val();
+                var s = far.accountnumber.toString();
+                console.log("点击"+s);
+                if (s.length == 0){
+                    swal("请输入账号");
+                }
+            });
+            $("#Welcome_to_regiser").mouseup(function(){
+                document.getElementById("passWord_prompt").style.color ="rgb(255,255,255)";
+                document.getElementById("account_prompt").style.color ="rgb(255,255,255)";
+            });
+        })
+</script>
 </body>
 </html>

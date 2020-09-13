@@ -15,4 +15,9 @@
         where user_name = #{userName,jdbcType=VARCHAR}
         and pass_word = #{passWord,jdbcType=VARCHAR}
     </select>
+
+    <select id="insert" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
+    insert into adminUser(user_name,pass_word)
+    values (#{userName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR})
+    </select>
 </mapper>
