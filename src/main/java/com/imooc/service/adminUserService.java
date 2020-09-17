@@ -19,5 +19,7 @@ public interface AdminUserService {
      * @return
      */
     AdminUser registered(String userName,String passWord);
+
+    AdminUser find(String userName);
 }
 

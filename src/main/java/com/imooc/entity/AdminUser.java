@@ -3,8 +3,6 @@ package com.imooc.entity;
 public class AdminUser {
     //用户名
     private String userName;
-    //登陆账户
-    private String loginName;
     //用户密码
     private String passWord;
     public String getUserName() {
@@ -12,12 +10,6 @@ public class AdminUser {
     }
     public void setUserId(String userName) {
         this.userName = userName;
-    }
-    public String getLoginName() {
-        return loginName;
-    }
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
     }
     public String getPassWord() {
         return passWord;
@@ -27,9 +19,8 @@ public class AdminUser {
     }
     @Override
     public String toString() {
-        return "adminUser{" +
-                "userId='" + userName + '\'' +
-                ", loginName='" + loginName + '\'' +
+        return "{" +
+                "userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
                 '}';
     }

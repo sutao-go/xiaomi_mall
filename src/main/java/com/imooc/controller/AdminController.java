@@ -2,14 +2,14 @@ package com.imooc.controller;
 import com.google.code.kaptcha.Producer;
 import com.imooc.entity.AdminUser;
 import com.imooc.service.AdminUserService;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import net.sf.json.JSONObject;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,6 +43,7 @@ public class AdminController {
     public Map<String,String> login1(
             @RequestParam Map<String,String> info,
             HttpServletResponse response,
+            HttpServletRequest request,
             HttpSession session
             ) throws Exception {
         Object name =info.get("accountnumber");
@@ -65,7 +66,14 @@ public class AdminController {
                 if (kaptcha.equals(verifyCode)){
                     AdminUser user = adminUserService.login(userName,passWord);
                     if (user != null){
-                        info.put("resultCode","200");
+                        String a = adminUserService.find(userName).toString();
+                        JSONObject b = JSONObject.fromObject(a);
+                        String name3 = b.getString("userName").toString();
+                        Cookie cookie = new Cookie("userName",name3);
+                        cookie.setMaxAge(60*60*24);
+                        request.getSession().setAttribute("userName",name3);
+                        Object attribute = request.getSession().getAttribute("userName");
+
                     }else{
                         info.put("resultCode","202");
                     }

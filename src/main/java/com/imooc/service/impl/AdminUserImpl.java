@@ -8,6 +8,8 @@ import com.imooc.entity.AdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author sutao
  */
@@ -23,5 +25,9 @@ public class AdminUserImpl implements AdminUserService {
     @Override
     public AdminUser registered(String userName,String passWord){
         return adminUserMapper.insert(userName,passWord);
+    }
+    @Override
+    public AdminUser find(String userName){
+        return adminUserMapper.find(userName);
     }
 }

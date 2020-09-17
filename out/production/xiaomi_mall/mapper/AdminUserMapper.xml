@@ -20,4 +20,8 @@
     insert into adminUser(user_name,pass_word)
     values (#{userName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR})
     </select>
+
+    <select id="find" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
+        select * from adminUser where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

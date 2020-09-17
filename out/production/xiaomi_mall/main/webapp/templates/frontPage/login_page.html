@@ -220,6 +220,7 @@
                     success:function (result) {
                         if (result.resultCode == 200){
                             window.location.href = '/admin/index';
+                            console.log("恭喜你取出来了，账号是"+result.accountnumber);
                         }
                         if(result.resultCode == 204){
                             swal("验证码错误");
