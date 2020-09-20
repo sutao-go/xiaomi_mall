@@ -2,6 +2,8 @@ package com.imooc.controller;
 import com.google.code.kaptcha.Producer;
 import com.imooc.entity.AdminUser;
 import com.imooc.service.AdminUserService;
+import com.sun.deploy.net.HttpRequest;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Map;
 /**
  * @author sutao
@@ -23,6 +26,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController {
     String verifyCode;
+    String sessionData;
     @Autowired
     private AdminUserService adminUserService;
     @Autowired
@@ -68,12 +72,16 @@ public class AdminController {
                     if (user != null){
                         String a = adminUserService.find(userName).toString();
                         JSONObject b = JSONObject.fromObject(a);
-                        String name3 = b.getString("userName").toString();
+                        String name3 = b.getString("userName");
+                        String password = b.getString("passWord");
                         Cookie cookie = new Cookie("userName",name3);
                         cookie.setMaxAge(60*60*24);
+                        response.addCookie(cookie);
                         request.getSession().setAttribute("userName",name3);
                         Object attribute = request.getSession().getAttribute("userName");
-
+                        System.out.println("这是取出的session"+attribute);
+                        sessionData = attribute.toString();
+                        info.put("resultCode","200");
                     }else{
                         info.put("resultCode","202");
                     }
@@ -85,7 +93,6 @@ public class AdminController {
         }
         return info;
     }
-
     /**
      *
      * @return
@@ -146,5 +153,24 @@ public class AdminController {
             responseOutputStream.flush();
             responseOutputStream.close();
             return verifyCode;
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET ,value = "/test")
+    @ResponseBody
+    public Map<String,String> test(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request,
+            HttpSession session
+    ) throws Exception {
+            session.setAttribute("userName", sessionData);
+            String a = session.getAttribute("userName").toString();
+            System.out.println("恭喜你在后台取出session"+sessionData);
+            info.put("sessionData",a);
+            /*Object attribute = request.getSession().getAttribute("userName");
+            String a = attribute.toString();
+            System.out.println(a);*/
+            return info;
     }
 }

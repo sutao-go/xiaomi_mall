@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Insert title here</title>
 </head>
 <body>
-
+<span th:text = "${session.userName}" ></span><!--获取session中的userName -->
 </body>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    swal("Hello world!");
-</script>
 </html>
