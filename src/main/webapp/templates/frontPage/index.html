@@ -19,7 +19,6 @@
             left: 50px;
             width: 1306px;
             height: 474px;
-
         }
         .swiper-button-position-left{
             position: absolute;
@@ -129,6 +128,41 @@
         .shouye_right_child_a_2{
             cursor: pointer;
         }
+        .shouye_right_child_a_2{
+            height: 31px;
+            position: absolute;
+            z-index:1000;
+            top: 12px;
+            width: 60px;
+            left: 1056px;
+            font-size: 12px;
+            color:#b0b0b0;
+            overflow: paged-x;
+        }
+        .shouye_right_child_a_2:hover{
+            color: rgb(255,255,255);
+        }
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
     </style>
 </head>
 <body>
@@ -148,9 +182,7 @@
             <li>智能生活</li>
             <li>Select Location</li>
             <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
-            <li id="shouye_right_child_a_2" class="shouye_right_child_a_2">登陆
-            </li>
-            <li>注册</li>
+            <li id="shouye_right_child_a_3">注册</li>
             <li>消息通知</li>
             <div >
                 <li>
@@ -159,6 +191,8 @@
                 <li id="iconfont-cart">购物车</li>
             </div>
         </ul>
+    </div>
+    <div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
     </div>
 <div class = "shouye_div_bg_1">
 </div>
@@ -193,6 +227,7 @@
         </li>
     </ul>
 </div>
+    <!--以上代码可以复用，主要是搜索框的代码-->
     <div class="body_div">
         <ul>
             <li class="body_liebiao_ul_li_headAndFoot">
@@ -353,7 +388,6 @@
                 &nbsp;
             </li>
         </ul>
-
     <!--小米商城首页的轮播图-->
     <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -584,7 +618,7 @@
         </div>
         <div class="popular_div11">
             <img class="popular_ul_li11"
-                 src="../../../resources/upload/circle-arrow-right.png">
+                 src="../../resources/upload/circle-arrow-right.png">
             <h3 class="popular_div11_h1">浏览更多</h3>
             <p class="popular_div11_p1">热门</p>
         </div>
@@ -722,7 +756,7 @@
     <script type="text/javascript">
         $(function(){
             $("#shouye_right_child_a_2").click(function(){
-                window.location.href='/admin/registered';
+                window.location.href='/admin/login';
             });
         })
     </script>
@@ -736,23 +770,46 @@
                 /*向后端传输数据的类型*/
                 dataType:"json",
                 success:function (result){
-                    var a = result.sessionData.toString();
-                    /*var b = 0;
-                    var c = b.toString();
-                    var loginNumber = $("#shouye_right_child_a_2").val().toString();*/
-                        /*if (loginNumber == c){*/
-                            document.getElementById("shouye_right_child_a_2").innerHTML = a;
-
-                        /*}*/
-                    /*console.log("这是c的值"+c);
-                    console.log("这是session----a的值"+a);
-                    console.log("这是session长度"+loginNumber);*/
+                    a = result.sessionData.toString();
+                            document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                            $("#shouye_right_child_a_3").hide();
+                            $("#shouye_right_child_a_2").click(function(){
+                                window.location.href='/admin/user';
+                            });
+                            //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
+                            $("#shouye_right_child_a_2").mouseenter(function(){
+                                $("#shouye_right_child_a_2").append(
+                                    "<table id=\"shouye_user_down\" class=\"shouye_user_down\">\n" +
+                                    "            <tr class=\"shouye_user_down_tr\">\n" +
+                                    "                <td id=\"shouye_user_down_li0\" class=\"shouye_user_down_li0\">个人中心</td>\n" +
+                                    "            </tr>\n" +
+                                    "            <tr class=\"shouye_user_down_tr\">\n" +
+                                    "                <td id=\"shouye_user_down_li1\" class=\"shouye_user_down_li1\">评价晒单</td>\n" +
+                                    "            </tr>\n" +
+                                    "            <tr class=\"shouye_user_down_tr\">\n" +
+                                    "                <td id=\"shouye_user_down_li2\" class=\"shouye_user_down_li2\">我的喜欢</td>\n" +
+                                    "            </tr>\n" +
+                                    "            <tr class=\"shouye_user_down_tr\">\n" +
+                                    "                <td id=\"shouye_user_down_li3\" class = \"shouye_user_down_li3\">小米账户</td>\n" +
+                                    "            </tr>\n" +
+                                    "            <tr class=\"shouye_user_down_tr\">\n" +
+                                    "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
+                                    "            </tr>\n" +
+                                    "        </table>");
+                            })
                 },
                 error:function (){
                     console.log("false");
                 },
             })
     },1)
+</script>
+<script>
+        $(function (){
+            var a = document.getElementById("shouye_right_child_a_2");
+            var b = a.innerHTML;
+            console.log("这是b的值"+b);
+        })
 </script>
 </body>
 </html>

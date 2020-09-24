@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>Title</title>
+    <style>
+        #dv {
+            width: 600px;
+            height: 600px;
+            background-color: black;
+            border: 2px solid yellow;
+        }
+        span {
+            position: absolute;
+            color: yellow;
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
-<span th:text = "${session.userName}" ></span><!--获取session中的userName -->
+<input type="button" id="start" value="闪起来">
+<div id="dv"></div>
+<script>
+    document.getElementById('start').addEventListener('click',function () {
+        setInterval(function () {
+            var x = parseInt(Math.random()*600);
+            var y = parseInt(Math.random()*600);
+            var dvObj = document.getElementById('dv');
+            dvObj.innerHTML = '<span>★</span>';
+            dvObj.firstElementChild.style.left = x+'px';
+            dvObj.firstElementChild.style.top = y+'px';
+        },10)
+    },false)
+
+</script>
 </body>
 </html>
