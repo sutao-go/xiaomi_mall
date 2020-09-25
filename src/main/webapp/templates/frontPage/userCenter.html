@@ -240,6 +240,9 @@
             color: rgb(252,80,9);
             font: 12px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
         }
+        .personalCenter_a:hover{
+            cursor: pointer;
+        }
         .personalCenter_right{
             position: absolute;
 
@@ -280,10 +283,132 @@
             top: 458px;
             left: 292px;
         }
+        /*以下是关于待支付订单的样式*/
+        .userCenter_1{
+            width: 100px;
+            height: 100px;
+        }
+
+        .userCenter_3{
+            width: 100px;
+            height: 100px;
+        }
+        .userCenter_4{
+            width: 100px;
+            height: 100px;
+        }
+        .userCenter_pay{
+            position: absolute;
+            top: 515px;
+            left: 298px;
+        }
+        .userCenter_1_h3{
+            position: absolute;
+            top: 0px;
+            width: 140px;
+            left: 122px;
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_1_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_1_a1{
+            position: absolute;
+            width: 120px;
+            top:50px;
+            left: 122px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_1_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是待收货的订单的样式*/
+        .userCenter_2{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 406px;
+            top: 0;
+        }
+        .userCenter_2_h3{
+            position: absolute;
+            left: 528px;
+            width: 160px;
+            top: 0;
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_2_a1{
+            position: absolute;
+            width: 120px;
+            top:50px;
+            left: 528px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_2_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_2_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是待评价商品数的样式*/
+        .userCenter_3{
+            position: absolute;
+            top: 160px;
+        }
+        .userCenter_3_h3{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 166px;
+            position: absolute;
+            width: 160px;
+            left: 124px;
+        }
+        .userCenter_3_a1{
+            position: absolute;
+            width: 120px;
+            top:216px;
+            left: 122px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_3_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_3_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是喜欢的商品的样式*/
+        .userCenter_4{
+            position: absolute;
+            top: 160px;
+            left: 406px;
+        }
+        .userCenter_4_h3{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 166px;
+            position: absolute;
+            width: 160px;
+            left: 528px;
+        }
+        .userCenter_4_a1{
+            position: absolute;
+            width: 120px;
+            top:216px;
+            left: 528px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_4_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        .userCenter_4_h3>a{
+            color: rgb(252,80,9);
+        }
     </style>
 </head>
 <body>
-<div class="shouye_div_bg" th:fragment="head">
+<div class="shouye_div_bg" >
     <ul  class="shouye_left">
         <li id="shouye_left_a_1">小米商城</li>
         <li>MIUI</li>
@@ -402,25 +527,27 @@
         </ul>
     </div>
     <div class="Underscore"></div>
-    <div>
-        <table>
-            <tr >
-                <td>
-                    <img class="userCenter_1" src="../../resources/upload/userCenter_1.png">
-                </td>
-                <td>
-                    <img class="" src="../../resources/upload/userCenter_2.png">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="../../resources/upload/userCenter_3.png">
-                </td>
-                <td>
-                    <img src="../../resources/upload/userCenter_4.png">
-                </td>
-            </tr>
-        </table>
+    <div class="userCenter_pay">
+        <div>
+            <img  class="userCenter_1" src="../../resources/upload/userCenter_1.png">
+            <h3 class="userCenter_1_h3">待支付的订单&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_1_a1">查看待支付订单&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_2" src="../../resources/upload/userCenter_2.png">
+            <h3 class="userCenter_2_h3">待收货的订单&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_2_a1">查看待收获订单&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_3" src="../../resources/upload/userCenter_3.png">
+            <h3 class="userCenter_3_h3">待评价商品数&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_3_a1">查看待评价商品&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_4" src="../../resources/upload/userCenter_4.png">
+            <h3 class="userCenter_4_h3">喜欢的商品&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_4_a1">查看喜欢的商品></a>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
