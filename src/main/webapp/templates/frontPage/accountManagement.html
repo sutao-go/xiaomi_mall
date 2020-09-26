@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+    <style>
+        .background{
+            background-color: rgba(92,92,92,0.8);
+            width: 100%;
+            height: 790px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .account{
+            height: 480px;
+            width: 444px;
+            background-color: rgb(255,255,255);
+            position: absolute;
+            top: 158px;
+            left: 514px;
+            border-radius: 15px;
+        }
+        .Underscore{
+            width: 414px;
+            height: 1px;
+            background-color: rgb(226,226,226);
+            position: absolute;
+            top: 56px;
+            left: 15px;
+        }
+        .changePassword{
+            position: absolute;
+            left: 15px;
+            width: 80px;
+            top: 2px;
+
+        }
+        .oldPassword{
+            position: absolute;
+            top: 68px;
+            left: 56px;
+        }
+        .oldPassword_input{
+            position: absolute;
+            top: 116px;
+            left: 56px;
+            height: 44px;
+            width: 332px;
+            border: 1px solid rgb(226,226,226);
+        }
+        .newPassword{
+            position: absolute;
+            top: 156px;
+            left: 56px;
+        }
+        .newPassword_1{
+            position: absolute;
+            height: 44px;
+            width: 332px;
+            top: 206px;
+            left: 56px;
+            border: 1px solid rgb(226,226,226);
+        }
+        .newPassword_2{
+            position: absolute;
+            height: 44px;
+            width: 332px;
+            top: 262px;
+            left: 56px;
+            border: 1px solid rgb(226,226,226);
+        }
+        .determine{
+            position: absolute;
+            top: 412px;
+            left: 96px;
+            background-color: rgb(252,80,9);
+        }
+        .cancel{
+            position: absolute;
+            top: 412px;
+            left: 228px;
+            background-color:rgb(255,255,255);
+        }
+        .determine_border{
+            position: absolute;
+            height: 36px;
+            width: 124px;
+            top: 411px;
+            left: 95px;
+            border: 1px solid rgb(226,226,226);
+        }
+        .cancel_border{
+            position: absolute;
+            height: 36px;
+            width: 224px;
+            top: 411px;
+            left: 120px;
+            border: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="account">
+            <h4 class="changePassword">修改密码</h4>
+            <div class="Underscore"></div>
+            <h4 class="oldPassword">原密码</h4>
+            <input class="oldPassword_input"type="password" placeholder="输入原密码"
+            onfocus = "this.placeholder = ''"
+            onblur = "this.placeholder = '输入原密码'"
+            style="outline:none"
+            />
+            <h4 class="newPassword">新密码</h4>
+            <input
+            class="newPassword_1"
+            type="password"
+            placeholder="输入新密码"
+            onfocus = "this.placeholder = ''"
+            onblur = "this.placeholder = '输入新密码'"
+            style="outline:none"
+            />
+            <input
+            class="newPassword_2"
+            type="password"
+            placeholder="重复新密码"
+            onfocus = "this.placeholder = ''"
+            onblur = "this.placeholder = '重复新密码'"
+            style="outline:none"
+            />
+            <button
+                    class="determine"
+                    style="
+                    width:124px;
+                    height:36px;
+                    border-radius:0;
+                    border:0;
+                    outline:none;"
+                    value="确定"
+            >确定</button>
+            <button
+                    class="cancel"
+                    style="
+                    width:124px;
+                    height:36px;
+                    border-radius:0;
+                    border:0;
+                    outline:none;"
+                    value="取消"
+            >取消</button>
+            <div class="determine_border"><div>
+            <div class="cancel_border"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -713,6 +713,9 @@
         <a>后期拓展栏位</a>
     </div>
     <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <script>
+
+    </script>
     <script type="text/javascript">
         /*$(document).ready---当文档激活完成之后函数*/
         $(document).ready(function(){
@@ -760,6 +763,13 @@
             });
         })
     </script>
+    <script>
+        $(function(){
+            $("#shouye_user_down_li0").click(function(){
+                window.location.href='/user/center';
+            })
+        })
+        </script>
 <script>
     setTimeout(function(){
         $.ajax(
@@ -795,7 +805,11 @@
                                     "            <tr class=\"shouye_user_down_tr\">\n" +
                                     "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
                                     "            </tr>\n" +
-                                    "        </table>");
+                                    "        </table>"
+                                );
+                                    $("#shouye_user_down_li0").mousedown(function(){
+                                        window.location.href='/user/center';
+                                    });
                             })
                 },
                 error:function (){

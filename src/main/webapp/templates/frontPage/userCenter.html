@@ -60,6 +60,25 @@
             color: rgb(252,80,9);
             background-color: rgb(242,242,242);
         }
+
+        /*以下这段代码可以防止登录成功之后用户反复hover用户列表造成无法读取用户信息的问题*/
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
         /*以下的代码是属于这个网页的代码*/
         .userCenter{
             font-size: 12px;
@@ -140,8 +159,8 @@
         }
         .userCenter_left_div_ul1>li:hover{
             color: rgb(252,80,9);
+            cursor: pointer;
         }
-
         /*以下是左侧栏售后服务的样式*/
         .userCenter_left_div2{
             position: absolute;
@@ -405,6 +424,13 @@
         .userCenter_4_h3>a{
             color: rgb(252,80,9);
         }
+        /*以下是设置个人中心那个栏目样式颜色用的*/
+        .userCenter_left_div_ul_li_a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_left_div_ul_li_a:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -470,7 +496,7 @@
 </div>
 <div class="userCenterTitle">
     <div class="userCenter">
-        首页&nbsp;/&nbsp;xxxx
+        首页&nbsp;/&nbsp;个人中心
     </div>
     <div class="userCenter_left_div">
         <h3 class="userCenter_left_div_h3">订单中心</h3>
@@ -485,7 +511,7 @@
 <div class="userCenter_left_div1">
     <h3 class="userCenter_left_div_h3">个人中心</h3>
     <ul class="userCenter_left_div_ul1">
-        <li>我的个人中心</li>
+        <li><a class="userCenter_left_div_ul_li_a">我的个人中心</a></li>
         <li>消息通知</li>
         <li>购买资格</li>
         <li>现金账户</li>
@@ -573,6 +599,51 @@
             }
         });
     });
+</script>
+<script>
+    setTimeout(function(){
+        $.ajax(
+            {
+                url:"/admin/test",
+                /*向后端传输数据的方法*/
+                type:"get",
+                /*向后端传输数据的类型*/
+                dataType:"json",
+                success:function (result){
+                    a = result.sessionData.toString();
+                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    $("#shouye_right_child_a_3").hide();
+                    //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
+                    $("#shouye_right_child_a_2").mouseenter(function(){
+                        $("#shouye_right_child_a_2").append(
+                            "<table id=\"shouye_user_down\" class=\"shouye_user_down\">\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li0\" class=\"shouye_user_down_li0\">个人中心</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li1\" class=\"shouye_user_down_li1\">评价晒单</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li2\" class=\"shouye_user_down_li2\">我的喜欢</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li3\" class = \"shouye_user_down_li3\">小米账户</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
+                            "            </tr>\n" +
+                            "        </table>"
+                        );
+                        $("#shouye_user_down_li0").mousedown(function(){
+                            window.location.href='/user/center';
+                        });
+                    })
+                },
+                error:function (){
+                    console.log("false");
+                },
+            })
+    },1)
 </script>
 </body>
 </html>
