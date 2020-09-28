@@ -71,6 +71,7 @@ public class AdminController {
                     AdminUser user = adminUserService.login(userName,passWord);
                     if (user != null){
                         String a = adminUserService.find(userName).toString();
+                        /*这个是通过mybatis从数据库中取出来的数据{userName='123456', passWord='1234567'}*/
                         JSONObject b = JSONObject.fromObject(a);
                         String name3 = b.getString("userName");
                         String password = b.getString("passWord");

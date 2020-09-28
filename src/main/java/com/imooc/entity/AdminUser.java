@@ -5,6 +5,19 @@ public class AdminUser {
     private String userName;
     //用户密码
     private String passWord;
+    //用户重新设置之后的密码
+    private String newPassword;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
     public String getUserName() {
         return userName;
     }

@@ -75,15 +75,18 @@
             top: 412px;
             left: 96px;
             background-color: rgb(252,80,9);
+            z-index: 3;
         }
         .cancel{
             position: absolute;
+            z-index: 3;
             top: 412px;
             left: 228px;
             background-color:rgb(255,255,255);
         }
         .determine_border{
             position: absolute;
+            z-index: 1;
             height: 36px;
             width: 124px;
             top: 411px;
@@ -92,11 +95,12 @@
         }
         .cancel_border{
             position: absolute;
+            z-index: 1;
             height: 36px;
-            width: 224px;
+            width: 126px;
             top: 411px;
-            left: 120px;
-            border: red;
+            left: 226px;
+            border: 1px solid rgb(226,226,226);
         }
     </style>
 </head>
@@ -106,13 +110,14 @@
             <h4 class="changePassword">修改密码</h4>
             <div class="Underscore"></div>
             <h4 class="oldPassword">原密码</h4>
-            <input class="oldPassword_input"type="password" placeholder="输入原密码"
+            <input id="oldPassword_input" class="oldPassword_input"type="password" placeholder="输入原密码"
             onfocus = "this.placeholder = ''"
             onblur = "this.placeholder = '输入原密码'"
             style="outline:none"
             />
             <h4 class="newPassword">新密码</h4>
             <input
+            id="newPassword_1"
             class="newPassword_1"
             type="password"
             placeholder="输入新密码"
@@ -121,6 +126,7 @@
             style="outline:none"
             />
             <input
+            id="newPassword_2"
             class="newPassword_2"
             type="password"
             placeholder="重复新密码"
@@ -129,13 +135,15 @@
             style="outline:none"
             />
             <button
+                    id="determine"
                     class="determine"
                     style="
                     width:124px;
                     height:36px;
                     border-radius:0;
                     border:0;
-                    outline:none;"
+                    cursor: pointer;
+                    outline:none; "
                     value="确定"
             >确定</button>
             <button
@@ -145,12 +153,40 @@
                     height:36px;
                     border-radius:0;
                     border:0;
-                    outline:none;"
+                    outline:none;
+                    cursor: pointer"
                     value="取消"
             >取消</button>
-            <div class="determine_border"><div>
+            <div class="determine_border"></div>
             <div class="cancel_border"></div>
         </div>
     </div>
+    <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#determine").click(function(){
+                var data={};
+                    data.oldPassword = $("#oldPassword_input").val();
+                    data.newPassword1 = $("#newPassword_1").val();
+                    data.newPassword2 = $("#newPassword_2").val();
+                $.ajax(
+                    {
+                        url:"/user/accountManagement",
+                        dataType:"json",
+                        type:"post",
+                        data:{
+                            oldPassword:data.oldPassword,
+                            newPassword1:data.newPassword1,
+                            newPassword2:data.newPassword2
+                        },
+                        success:function(){
+                            console.log("修改密码成功");
+                        }
+
+                    }
+                )
+            })
+        })
+    </script>
 </body>
 </html>
