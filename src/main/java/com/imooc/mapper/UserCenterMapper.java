@@ -7,5 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserCenterMapper {
-    int changePassword(@Param("passWord")String passWord,@Param("userName")String userName);
+    /**
+     * mybatis中@param的顺序是会影响xml的执行的，不能乱放
+     */
+    int changePassword(@Param("userName")String userName,@Param("passWord")String passWord);
 }

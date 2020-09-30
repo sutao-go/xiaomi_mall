@@ -6,9 +6,13 @@
         <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
     </resultMap>
 
-    <update id="changePassword" >
+    <update id="changePassword" parameterType="com.imooc.entity.AdminUser">
         update adminUser
-        set pass_word= #{passWord,jdbcType=VARCHAR}
-         where user_name= #{userName,jdbcType=VARCHAR}
+        <set>
+        <if test="passWord != null">
+         pass_word = #{passWord,jdbcType=VARCHAR}
+        </if>
+        </set>
+         where user_name = #{userName,jdbcType=VARCHAR}
     </update>
 </mapper>

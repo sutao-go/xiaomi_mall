@@ -163,12 +163,21 @@
             color: rgb(252,80,9);
             background-color: rgb(242,242,242);
         }
+        .shouye_left_a_1:hover{
+            cursor: pointer;
+        }
+        .xiaomishoujilanmu1_img2_div:hover {
+            cursor: pointer;
+        }
+        .xiaomishoujilanmu1_img3_div:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="shouye_div_bg" th:fragment="head">
         <ul  class="shouye_left">
-            <li id="shouye_left_a_1">小米商城</li>
+            <li id="shouye_left_a_1" class="shouye_left_a_1">小米商城</li>
             <li>MIUI</li>
             <li>IoT</li>
             <li>云服务</li>
@@ -492,25 +501,25 @@
     <div>
         <img class="xiaomishoujilanmu1_img1" src="../../resources/upload/xiaomiMixAlpha.jpg">
     </div>
-    <div class="xiaomishoujilanmu1_img2_div">
+    <div id="xiaomishoujilanmu1_img2_div" class="xiaomishoujilanmu1_img2_div">
                 <img class="xiaomishoujilanmu1_img2" src="../../resources/upload/xiaomi10_zhizunban.jpg">
                 <h3 class="xiaomishoujilanmu1_img2_div_h3">小米10&nbsp;至尊版</h3>
                 <p class="xiaomishoujilanmu1_img2_div_p1">120X&nbsp;变焦/120W秒充/120Hz屏幕</p>
                 <p class="xiaomishoujilanmu1_img2_div_p2">5299元起</p>
     </div>
-    <div class="xiaomishoujilanmu1_img3_div">
+    <div class="xiaomishoujilanmu1_img3_div" onclick="RedmiK30()">
         <img class="xiaomishoujilanmu1_img3" src="../../resources/upload/RedmiK30_zhizunban.jpg">
         <h3 class="xiaomishoujilanmu1_img3_div_h3">Redmi&nbsp;K30&nbsp;至尊版</h3>
         <p class="xiaomishoujilanmu1_img3_div_p1">120Hz弹出全面屏，天玑1000+旗舰处...</p>
         <p class="xiaomishoujilanmu1_img3_div_p2">1999元起</p>
     </div>
-    <div class="xiaomishoujilanmu1_img4_div">
+    <div class="xiaomishoujilanmu1_img4_div" onclick="blackShark()">
         <img class="xiaomishoujilanmu1_img4" src="../../resources/upload/tengxun_heisha_3s.jpg">
         <h3 class="xiaomishoujilanmu1_img4_div_h3">腾讯黑鲨3S</h3>
         <p class="xiaomishoujilanmu1_img4_div_p1">晓龙865处理器，120Hz刷新率</p>
         <p class="xiaomishoujilanmu1_img4_div_p2">3999元起</p>
     </div>
-    <div class="xiaomishoujilanmu1_img5_div">
+    <div class="xiaomishoujilanmu1_img5_div" onclick="redmi9A()">
         <img class="xiaomishoujilanmu1_img5" src="../../resources/upload/Redmi_9A.jpg">
         <h3 class="xiaomishoujilanmu1_img5_div_h3">Redmi&nbsp;9A</h3>
         <p class="xiaomishoujilanmu1_img5_div_p1">5000mAh长循环大电量,6.53"超大护...</p>
@@ -816,14 +825,35 @@
                     console.log("false");
                 },
             })
-    },1)
+    },1);
+    $(function (){
+        $("#shouye_left_a_1").click(function (){
+            window.location.href='/admin/index';
+        })
+    });
+    $(function (){
+        $("#xiaomishoujilanmu1_img2_div").click(function (){
+            window.location.href='/orderlist/xiaomi10';
+        });
+    });
 </script>
 <script>
         $(function (){
             var a = document.getElementById("shouye_right_child_a_2");
             var b = a.innerHTML;
             console.log("这是b的值"+b);
-        })
+        });
 </script>
+    <script>
+        function RedmiK30(){
+            window.location.href='/orderlist/RedmiK30';
+        }
+        function blackShark(){
+            window.location.href='/orderlist/blackShark';
+        }
+        function redmi9A(){
+            window.location.href='/orderlist/redmi9A';
+        }
+    </script>
 </body>
 </html>
