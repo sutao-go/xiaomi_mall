@@ -106,6 +106,10 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/RedmiSmartTVX65";
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/RedmiSmartTVX70")
+    public String RedmiSmartTVX70(){
+        return "templates/frontPage/CollectionOfProductPages/RedmiTV70inches";
+    }
     /**
      * 这个实现了fullScreenTVE55A页面的跳转
      * @return
@@ -136,6 +140,59 @@ public class OrderListController {
     @RequestMapping(method = RequestMethod.GET,value = "/miTV4A60inches")
     public String miTV4A60inches(){
         return "templates/frontPage/CollectionOfProductPages/MiTV4A60inches";
+    }
+    /**
+     * 这个实现了米家互联网洗烘一体机Pro 10kg的页面跳转
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/mijiaWashingMachine")
+    public String mijiaWashingMachin(){
+        return "templates/frontPage/CollectionOfProductPages/mijiaWashingMachine";
+    }
+    /**
+     * 这个实现了Redmi全自动波轮洗衣机1A 8kg的页面跳转
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/redMiWashingMachine")
+    public String redmiWashingMachine(){
+        return "templates/frontPage/CollectionOfProductPages/redMiWashingMachine";
+    }
+
+    /**
+     * 这个实现了小米电脑页面的页面跳转
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/computer1")
+    public String computer1(){
+        return "templates/frontPage/CollectionOfProductPages/computer1";
+    }
+
+    /**
+     * 这个实现了小米电脑air的跳转
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/computer2")
+    public String computer2(){
+        return "templates/frontPage/CollectionOfProductPages/computer2";
+    }
+    /**
+     * 这个实现了MIXAlpha手机页面的跳转
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/mixAlpha")
+    public String mixAlpha(){
+        return "templates/frontPage/CollectionOfProductPages/MIXAlpha";
+    }
+    /**
+     * 这个实现了Redmi10XPro手机页面的跳转
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/redmi10XPro")
+    public String redmi10XPro(){
+        return "templates/frontPage/CollectionOfProductPages/Redmi10XPro5G";
+    }
+    /**
+     * 这个实现了小米手环4的跳转
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/miBand4")
+    public String miBand4(){
+        return "templates/frontPage/CollectionOfProductPages/MiBand4";
     }
 }
 

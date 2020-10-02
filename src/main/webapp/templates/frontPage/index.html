@@ -194,6 +194,51 @@
         .popular_ul_li1:hover{
             cursor:pointer;
         }
+        .popular_div2:hover{
+            cursor: pointer;
+        }
+        .popular_div4:hover{
+            cursor: pointer;
+        }
+        .popular_div5:hover{
+            cursor: pointer;
+        }
+        .popular_ul_li6:hover{
+            cursor: pointer;
+        }
+        .popular_div7:hover{
+            cursor: pointer;
+        }
+        .popular_div3:hover{
+            cursor: pointer;
+        }
+        .popular_div8:hover{
+            cursor: pointer;
+        }
+        .popular_div9:hover{
+            cursor: pointer;
+        }
+        .popular_div10:hover{
+            cursor: pointer;
+        }
+        .xiaomishoujilanmu1_img1:hover{
+            cursor: pointer;
+        }
+        .zhuti2_right_pic_ul_li0:hover{
+            cursor: pointer;
+        }
+        .zhuti2_right_pic_ul_li1:hover{
+            cursor: pointer;
+        }
+        .zhuti2_right_pic_ul_li2:hover{
+            cursor: pointer;
+        }
+        .xiaomishouji_title:hover{
+            cursor: pointer;
+        }
+        .SmartTv_title_div:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -497,14 +542,26 @@
     <!--现在开始制作话费通道旁边的那三张图片-->
     <div class="zhuti2_right_pic">
         <ul class="zhuti2_right_pic_ul">
-            <li><img src="../../resources/upload/Redmi_ad.jpg"></li>
-            <li><img src="../../resources/upload/Redmi_k30i.jpg"></li>
-            <li><img src="../../resources/upload/xiaomi_shouhuan.jpg"></li>
+            <li class="zhuti2_right_pic_ul_li0"
+                onclick="redmiK30Pro()"
+            >
+                <img src="../../resources/upload/Redmi_ad.jpg">
+            </li>
+            <li
+                    class="zhuti2_right_pic_ul_li1"
+                    onclick="redmi10XPro()"
+            ><img src="../../resources/upload/Redmi10X_pro.jpg"></li>
+            <li
+            class="zhuti2_right_pic_ul_li2"
+            onclick="miBand4()"
+            ><img src="../../resources/upload/xiaomi_shouhuan.jpg"></li>
         </ul>
     </div>
     <!--熟练度逐渐提升---奥利给！！！！-->
     <!--以下是小米手机专栏的html代码-->
-    <div class="xiaomishouji_title">
+    <div class="xiaomishouji_title"
+         onclick="xiaomishouji_title()"
+    >
         <img src="../../resources/upload/xiaomishouji_title.jpg">
     </div>
     <div class="xiaomishouji_text">
@@ -521,7 +578,10 @@
     </div>
     <div class="xiaomishoujilanmu1_div_parent">
     <div>
-        <img class="xiaomishoujilanmu1_img1" src="../../resources/upload/xiaomiMixAlpha.jpg">
+        <img class="xiaomishoujilanmu1_img1"
+             src="../../resources/upload/xiaomiMixAlpha.jpg"
+             onclick="MIXAlpha()"
+        >
     </div>
     <div id="xiaomishoujilanmu1_img2_div" class="xiaomishoujilanmu1_img2_div">
                 <img class="xiaomishoujilanmu1_img2" src="../../resources/upload/xiaomi10_zhizunban.jpg">
@@ -572,7 +632,9 @@
         <p class="xiaomishoujilanmu1_img9_div_p2">3799元起</p>
     </div>
     </div>
-    <div class="SmartTv_title_div">
+    <div class="SmartTv_title_div"
+         onclick="RedmiSmartTVX65()"
+    >
         <img class="SmartTv_title" src="../../resources/upload/Redmi_SmartTV.jpg">
     </div>
     <div class="homeAppliances_div">
@@ -611,7 +673,7 @@
              onclick="FullScreenTVE55A()"
         >
             <img class="popular_ul_li4"
-                 src="../../../resources/upload/xiaomiTV_3.jpg">
+                 src="../../resources/upload/xiaomiTV_3.jpg">
             <h3 class="popular_div4_h1">小米全面屏电视E55A</h3>
             <p class="popular_div4_p1">全面屏设计，人工智能系统</p>
             <p class="popular_div4_p2">1799元<s>1999元</s></p>
@@ -632,28 +694,35 @@
         </div>
         <div class="popular_div7">
             <img class="popular_ul_li7"
-                 src="../../../resources/upload/xiaomiTV_6.jpg">
+                 src="../../resources/upload/xiaomiTV_6.jpg"
+                 onclick="mijiaWashingMachine()"
+            >
             <h3 class="popular_div7_h1">米家互联网洗烘一体机&nbsp;Pro&nbsp;10kg</h3>
             <p class="popular_div7_p1">智能洗烘，省心省力</p>
             <p class="popular_div7_p2">2999元</s></p>
         </div>
         <div class="popular_div8">
             <img class="popular_ul_li8"
-                 src="../../../resources/upload/xiaomiTV_7.jpg">
+                 onclick="redMiWashingMachine()"
+                 src="../../resources/upload/xiaomiTV_7.jpg">
             <h3 class="popular_div8_h1">Redmi全自动波轮洗衣机1A&nbsp;8kg</h3>
             <p class="popular_div8_p1">一键操作父母都爱用</p>
             <p class="popular_div8_p2">799元<s>899元</s></p>
         </div>
         <div class="popular_div9">
             <img class="popular_ul_li9"
-                 src="../../../resources/upload/xiaomiTV_8.jpg">
-            <h3 class="popular_div9_h1">15.6"四核i7&nbsp;16G&nbsp;独显&nbsp;512G</h3>
+                 onclick="computer1()"
+                 src="../../resources/upload/xiaomiTV_8.jpg">
+            <h3 class="popular_div9_h1">15.6"四核i7&nbsp;16G&nbsp;独显&nbsp;5f12G</h3>
             <p class="popular_div9_p1">全面轻薄的国民轻薄本</p>
             <p class="popular_div9_p2">4899元</p>
         </div>
-        <div class="popular_div10">
+        <div class="popular_div10"
+             onclick="computer2()"
+        >
             <img class="popular_ul_li10"
-                 src="../../../resources/upload/xiaomiTV_9.jpg">
+
+                 src="../../resources/upload/xiaomiTV_9.jpg">
             <h3 class="popular_div10_h1">Air&nbsp;13.3"&nbsp;2019款</h3>
             <p class="popular_div10_p2">5699元起</p>
         </div>
@@ -865,7 +934,7 @@
     });
     $(function (){
         $("#xiaomishoujilanmu1_img2_div").click(function (){
-            window.location.href='/orderlist/xiaomi10';
+            window.location.href='/orderlist/xiaomi10pro';
         });
     });
 </script>
@@ -902,7 +971,7 @@
             window.location.href='/orderlist/RedmiSmartTVX65';
         }
         function RedmiTV70inches(){
-            window.location.href='/orderlist/RedmiSmartTVX65';
+            window.location.href='/orderlist/RedmiSmartTVX70';
         }
         function FullScreenTVE55A(){
             window.location.href='/orderlist/fullScreenTVE55A';
@@ -915,6 +984,30 @@
         }
         function miTV4A60inches(){
             window.location.href='/orderlist/miTV4A60inches';
+        }
+        function mijiaWashingMachine(){
+            window.location.href='/orderlist/mijiaWashingMachine';
+        }
+        function redMiWashingMachine(){
+            window.location.href='/orderlist/redMiWashingMachine';
+        }
+        function computer1(){
+            window.location.href='/orderlist/computer1';
+        }
+        function computer2(){
+            window.location.href='/orderlist/computer2';
+        }
+        function MIXAlpha(){
+            window.location.href='/orderlist/mixAlpha';
+        }
+        function redmi10XPro(){
+            window.location.href='/orderlist/redmi10XPro';
+        }
+        function miBand4(){
+            window.location.href='/orderlist/miBand4';
+        }
+        function xiaomishouji_title(){
+            window.location.href='/orderlist/xiaomi10pro';
         }
     </script>
 </body>
