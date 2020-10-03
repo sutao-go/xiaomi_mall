@@ -529,11 +529,11 @@
 </div>
 <div class="xiaomi10_body_div1"></div>
 <div class="xiaomi10_body_div2">
-    <div class="xiaomi10_body_div3">小米10至尊纪念版 8GB+256GB 陶瓷黑</div>
+    <div class="xiaomi10_body_div3" id="xiaomi10_body_div3">小米10至尊纪念版 8GB+256GB 陶瓷黑</div>
     <div class="xiaomi10_body_div4">5599元</div>
     <div class="xiaomi10_body_div5">总计：5599元</div>
 </div>
-<button class="addToShopping">加入购物车</button>
+<button class="addToShopping" id="addToShopping">加入购物车</button>
 <button class="like" ><img class="heart" src="../../../resources/upload/heart.png">喜欢</button>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
 <script type="text/javascript" src="../../../resources/static/jquery/jquery.min.js">
@@ -638,7 +638,30 @@
         $("#shouye_right_child_a_2").click(function (){
             window.location.href='/admin/login';
         })
+    });
+    $(function (){
+        $("#addToShopping").click(function (){
+            var data ={};
+            data.phoneName= "小米10至尊纪念版 8GB+256GB 陶瓷黑";
+            console.log(data.phoneName);
+            $.ajax({
+                url:"/orderlist/xiaomi10pro",
+                type:"post",
+                dataType: "json",
+                data: {
+                    /*用k-v键值对*/
+                    phoneName:data.phoneName
+                },
+                success:function (){
+                    swal("添加成功");
+                },
+                error:function (){
+                    swal("添加失败");
+                }
+            })
+        })
     })
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

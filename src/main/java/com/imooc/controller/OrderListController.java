@@ -1,14 +1,25 @@
 package com.imooc.controller;
 
+import com.imooc.service.AdminUserShoppingCartService;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/orderlist")
 public class OrderListController {
+    @Autowired
+    AdminUserShoppingCartService adminUserShoppingCartService;
     /**
      * 这个主要是用来跳转到带支付订单信息的页面的
      * @return
@@ -35,18 +46,44 @@ public class OrderListController {
     }
 
     /**
-     * 这个主要是用来实现小米10网页跳转的
+     * 这个主要是用来实现小米10pro网页跳转的
      */
     @RequestMapping(method = RequestMethod.GET,value = "/xiaomi10pro")
     public String xiaomi10(){
         return "templates/frontPage/CollectionOfProductPages/xiaomi_10_pro";
     }
     /**
-     * 用于小米10业务处理的
+     * 用于小米10pro业务处理的
      */
     @RequestMapping(method = RequestMethod.POST,value = "/xiaomi10pro")
-    public String doPostXiaomi10(){
-        return null;
+    @ResponseBody
+    public Map<String,String> doPostXiaomi10(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String phoneName = name.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        String userName = user.toString();
+        if (userName.length() != 0){
+            //如果登录了就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+            adminUserShoppingCartService.Settlement(1);
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+
+
+
+
+
+
+        return info;
     }
     /**
      * 这个主要是用来实现Redmi K30 至尊纪念版网页跳转的

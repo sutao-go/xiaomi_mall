@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.AdminUserShoppingCartMapper">
+    <resultMap id="BaseResultMap" type="com.imooc.entity.OrderList">
+        <id column="user_name" jdbcType="VARCHAR" property="consumer"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="price" jdbcType="VARCHAR" property="price"/>
+        <result column="numbers_of_products" jdbcType="VARCHAR" property="quantity"/>
+    </resultMap>
+    <sql id="BaseResult_list">
+        user_name,product_name,price,numbers_of_products
+    </sql>
+
+    <select id="addToShoppingCart" resultType="com.imooc.entity.OrderList">
+    </select>
+</mapper>

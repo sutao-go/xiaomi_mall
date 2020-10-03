@@ -56,7 +56,6 @@ public class AdminController {
         String passWord = name1.toString();
         Object name2 =info.get("kaptcha");
         String kaptcha = name2.toString();
-        System.out.println(info);
         if (StringUtils.isEmpty(userName)){
             info.put("resultCode","100");
         }if (StringUtils.isEmpty(kaptcha)){
@@ -66,7 +65,6 @@ public class AdminController {
             info.put("resultCode","100");
         }
         if(userName.length() != 0 && passWord.length() != 0 && kaptcha.length() != 0){
-            System.out.println("这是验证码"+verifyCode);
                 if (kaptcha.equals(verifyCode)){
                     AdminUser user = adminUserService.login(userName,passWord);
                     if (user != null){
@@ -80,7 +78,6 @@ public class AdminController {
                         response.addCookie(cookie);
                         request.getSession().setAttribute("userName",name3);
                         Object attribute = request.getSession().getAttribute("userName");
-                        System.out.println("这是取出的session"+attribute);
                         sessionData = attribute.toString();
                         info.put("resultCode","200");
                     }else{
@@ -115,7 +112,6 @@ public class AdminController {
     ){
         Object name =info.get("accountnumber");
         String userName = name.toString();
-        System.out.println(userName);
         Object name1 = info.get("password");
         String passWord = name1.toString();
         if (userName.length() != 0 && passWord.length() != 0){
@@ -140,7 +136,6 @@ public class AdminController {
             ByteArrayOutputStream imgOutputStream = new ByteArrayOutputStream();
             //生产验证码字符串并保存到session中
              verifyCode = kaptchaProducer.createText();
-            System.out.println(verifyCode);
             request.getSession().setAttribute("verifyCode",verifyCode);
             BufferedImage challenge = kaptchaProducer.createImage(verifyCode);
             ImageIO.write(challenge,"jpg",imgOutputStream);
@@ -167,7 +162,6 @@ public class AdminController {
     ) throws Exception {
             session.setAttribute("userName", sessionData);
             String a = session.getAttribute("userName").toString();
-            System.out.println("恭喜你在后台取出session"+sessionData);
             info.put("sessionData",a);
             /*Object attribute = request.getSession().getAttribute("userName");
             String a = attribute.toString();
