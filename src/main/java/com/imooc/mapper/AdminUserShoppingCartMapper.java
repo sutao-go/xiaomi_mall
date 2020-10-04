@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminUserShoppingCartMapper {
-    OrderList addToShoppingCart(@Param("productName")String productName,
-                                @Param("quantity")Integer quantity,
+    OrderList addToShoppingCart(@Param("consumer")String consumer,
+                                @Param("productName")String productName,
                                 @Param("price")String price,
-                                @Param("consumer")Integer consumer);
+                                @Param("quantity")Integer quantity
+                                );
 }

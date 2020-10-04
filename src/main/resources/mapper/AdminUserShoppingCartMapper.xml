@@ -2,15 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.imooc.mapper.AdminUserShoppingCartMapper">
     <resultMap id="BaseResultMap" type="com.imooc.entity.OrderList">
-        <id column="user_name" jdbcType="VARCHAR" property="consumer"/>
+        <id column="price" jdbcType="VARCHAR" property="price"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
-        <result column="price" jdbcType="VARCHAR" property="price"/>
+        <result column="usr_name" jdbcType="VARCHAR" property="consumer"/>
         <result column="numbers_of_products" jdbcType="VARCHAR" property="quantity"/>
     </resultMap>
     <sql id="BaseResult_list">
         user_name,product_name,price,numbers_of_products
     </sql>
 
-    <select id="addToShoppingCart" resultType="com.imooc.entity.OrderList">
-    </select>
+    <insert id="addToShoppingCart" parameterType="com.imooc.entity.OrderList">
+    insert into adminUserShoppingCart(user_name,product_name,price,numbers_of_products)
+    values (#{consumer,jdbcType=VARCHAR},
+    #{productName,jdbcType=VARCHAR},
+    #{price,jdbcType=VARCHAR},
+    #{quantity,jdbcType=INTEGER}
+            )
+    </insert>
 </mapper>

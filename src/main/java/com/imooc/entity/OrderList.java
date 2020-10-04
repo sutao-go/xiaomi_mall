@@ -7,6 +7,8 @@ public class OrderList {
     public String price;
     //商品数量(小记)
     public Integer quantity;
+    //消费者
+    public String consumer;
 
     public String getProductName() {
         return productName;
@@ -32,17 +34,13 @@ public class OrderList {
         this.quantity = quantity;
     }
 
-    public Integer getConsumer() {
+    public String getConsumer() {
         return consumer;
     }
 
-    public void setConsumer(Integer consumer) {
+    public void setConsumer(String consumer) {
         this.consumer = consumer;
     }
-
-    //购买人
-    public Integer consumer;
-
     @Override
     public String toString() {
         return "OrderList{" +

@@ -64,13 +64,15 @@ public class OrderListController {
             HttpSession session
     )throws Exception{
         Object name =info.get("phoneName");
-        String phoneName = name.toString();
+        String productName = name.toString();
+        Object name2 = info.get("price");
+        String price = name2.toString();
         //判断前端用户有没有登录
         Object user = request.getSession().getAttribute("userName");
-        String userName = user.toString();
-        if (userName.length() != 0){
+        String consumer = user.toString();
+        if (consumer.length() != 0){
             //如果登录了就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
-            adminUserShoppingCartService.Settlement(1);
+            adminUserShoppingCartService.settlement(productName,1,price,consumer);
         }else{
             //如果没有登录就在cookie中去添加数据
 

@@ -11,7 +11,7 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     @Autowired
     private AdminUserShoppingCartMapper adminUserShoppingCartMapper;
     @Override
-    public OrderList settlement(String productName, Integer quantity, String price, Integer consumer) {
-        return adminUserShoppingCartMapper.addToShoppingCart(productName,quantity,price,consumer);
+    public OrderList settlement(String productName, Integer quantity, String price, String consumer) {
+        return adminUserShoppingCartMapper.addToShoppingCart(consumer,productName,price,quantity);
     }
 }

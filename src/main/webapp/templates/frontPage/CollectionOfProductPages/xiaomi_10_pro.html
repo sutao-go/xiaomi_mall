@@ -643,6 +643,7 @@
         $("#addToShopping").click(function (){
             var data ={};
             data.phoneName= "小米10至尊纪念版 8GB+256GB 陶瓷黑";
+            data.price = "5599";
             console.log(data.phoneName);
             $.ajax({
                 url:"/orderlist/xiaomi10pro",
@@ -650,7 +651,8 @@
                 dataType: "json",
                 data: {
                     /*用k-v键值对*/
-                    phoneName:data.phoneName
+                    phoneName:data.phoneName,
+                    price:data.price
                 },
                 success:function (){
                     swal("添加成功");
