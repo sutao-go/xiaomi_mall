@@ -1,6 +1,7 @@
 package com.imooc.entity;
 
 public class OrderList {
+    public String consumer;
     //商品名称
     public String productName;
     //单价
@@ -8,7 +9,7 @@ public class OrderList {
     //商品数量(小记)
     public Integer quantity;
     //消费者
-    public String consumer;
+
 
     public String getProductName() {
         return productName;
@@ -41,13 +42,14 @@ public class OrderList {
     public void setConsumer(String consumer) {
         this.consumer = consumer;
     }
+
     @Override
     public String toString() {
         return "OrderList{" +
-                "productName='" + productName + '\'' +
+                "consumer='" + consumer + '\'' +
+                ", productName='" + productName + '\'' +
                 ", price='" + price + '\'' +
                 ", quantity=" + quantity +
-                ", consumer=" + consumer +
                 '}';
     }
 }

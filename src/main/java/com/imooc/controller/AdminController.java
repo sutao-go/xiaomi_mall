@@ -163,9 +163,6 @@ public class AdminController {
             session.setAttribute("userName", sessionData);
             String a = session.getAttribute("userName").toString();
             info.put("sessionData",a);
-            /*Object attribute = request.getSession().getAttribute("userName");
-            String a = attribute.toString();
-            System.out.println(a);*/
             return info;
     }
 }

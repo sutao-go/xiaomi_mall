@@ -11,7 +11,7 @@
         user_name,product_name,price,numbers_of_products
     </sql>
 
-    <insert id="addToShoppingCart" parameterType="com.imooc.entity.OrderList">
+    <insert id="addToShoppingCart">
     insert into adminUserShoppingCart(user_name,product_name,price,numbers_of_products)
     values (#{consumer,jdbcType=VARCHAR},
     #{productName,jdbcType=VARCHAR},
@@ -19,4 +19,25 @@
     #{quantity,jdbcType=INTEGER}
             )
     </insert>
+
+    <select id="ShoppingRecords" resultType="java.lang.Boolean">
+        select * from adminUserShoppingCart where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="checkProductQuantity" resultType="java.lang.String">
+        select numbers_of_products from adminUserShoppingCart where user_name = #{consumer,jdbcType=VARCHAR}
+    </select>
+    <select id="queryProductInformation" resultType="java.lang.String">
+        select product_name,price,numbers_of_products from adminUserShoppingCart where user_name = #{consumer,jdbcType=VARCHAR}
+    </select>
+
+    <update id="addQuantity">
+        update adminUserShoppingCart
+        <set>
+        <if test="quantity3  != null">
+        numbers_of_products  = #{quantity3,jdbcType=INTEGER}
+        </if>
+        </set>
+        where user_name = #{consumer,jdbcType=VARCHAR}
+    </update>
 </mapper>

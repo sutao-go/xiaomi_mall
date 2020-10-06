@@ -18,6 +18,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/orderlist")
 public class OrderListController {
+    String consumer;
     @Autowired
     AdminUserShoppingCartService adminUserShoppingCartService;
     /**
@@ -69,22 +70,31 @@ public class OrderListController {
         String price = name2.toString();
         //判断前端用户有没有登录
         Object user = request.getSession().getAttribute("userName");
-        String consumer = user.toString();
+        consumer = user.toString();
         if (consumer.length() != 0){
-            //如果登录了就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
-            adminUserShoppingCartService.settlement(productName,1,price,consumer);
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String quantity = adminUserShoppingCartService.checkProductQuantity(consumer);
+                System.out.println("该用户购买的数量是"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity2 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity3 = quantity2+1;
+                //将+1的数据写入数据库存储
+                adminUserShoppingCartService.addQuantity(quantity3,consumer);
+            }
         }else{
             //如果没有登录就在cookie中去添加数据
 
             //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
 
         }
-
-
-
-
-
-
         return info;
     }
     /**
@@ -233,5 +243,33 @@ public class OrderListController {
     public String miBand4(){
         return "templates/frontPage/CollectionOfProductPages/MiBand4";
     }
+
+    /**
+     * 这个是用来实现结算购物车功能的
+     * @return
+     * 1.先查出这个属于用户所有的商品信息
+     * 2.将所有的商品信息展示在前端
+     * 3.当用户在点击结算按钮的时候结算前端页面购物车中所有商品的价格
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/QueryProductInformation")
+    public String shoppingCart(){
+        return "templates/frontPage/ShoppingCart";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/QueryProductInformation")
+    @ResponseBody
+    public Map<String,String> shoppingCart1(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        String user = (String) request.getSession().getAttribute("userName");
+        System.out.println("XXXX"+user);
+        String text = adminUserShoppingCartService.queryProductInformation(user);
+        System.out.println("可以查到数据了"+text);
+        return info;
+    }
+
 }
 

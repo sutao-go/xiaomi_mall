@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小米购物车</title>
+    <style>
+        .shoppingCart{
+            font: 28px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            left: 202px;
+            position: absolute;
+            top: 6px;
+        }
+        .xiaomi_title_left{
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            left: 108px;
+            top: 26px;
+        }
+        .title{
+            background-color: rgb(255,255,255);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            border-bottom:2px solid rgb(237,113,46) ;
+        }
+        .shouye_right_child_a_2{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 24px;
+            position: absolute;
+            left: 1268px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 24px;
+            position: absolute;
+            left: 1310px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered:hover{
+            color: rgb(237,113,46);
+        }
+        .shouye_right_child_a_2:hover{
+            color: rgb(237,113,46);
+        }
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
+        .hide{
+            background-color: rgb(189,189,189);
+            height: 16px;
+            width: 1px;
+            position: absolute;
+            left: 1300px;
+            top: 44px;
+        }
+        .shouye_right_child_a_2:hover{
+            cursor: pointer;
+        }
+        .registered:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="title">
+    <h2 class="shoppingCart">我的购物车</h2>
+    <img id="xiaomi_title" class="xiaomi_title_left" src="../../resources/upload/xiaomi_title_left.jpg">
+    <div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
+    </div>
+    <div class="registered">注册</div>
+    <div class="hide"></div>
+</div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#xiaomi_title').on({
+            mouseover : function(){
+                $(this).attr('src','../../resources/upload/xiaomi_home.jpg');
+            },
+            mouseout :function (){
+                $(this).attr('src','../../resources/upload/xiaomi_title_left.jpg');
+            }
+        });
+    });
+    </script>
+<script>
+        $.ajax(
+            {
+                url:"/admin/test",
+                /*向后端传输数据的方法*/
+                type:"get",
+                /*向后端传输数据的类型*/
+                dataType:"json",
+                success:function (result){
+                    a = result.sessionData.toString();
+                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    $("#shouye_right_child_a_3").hide();
+                    $("#shouye_right_child_a_2").click(function(){
+                        window.location.href='/admin/user';
+                    });
+                    //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
+                    $("#shouye_right_child_a_2").mouseenter(function(){
+                        $("#shouye_right_child_a_2").append(
+                            "<table id=\"shouye_user_down\" class=\"shouye_user_down\">\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li0\" class=\"shouye_user_down_li0\">个人中心</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li1\" class=\"shouye_user_down_li1\">评价晒单</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li2\" class=\"shouye_user_down_li2\">我的喜欢</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li3\" class = \"shouye_user_down_li3\">小米账户</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
+                            "            </tr>\n" +
+                            "        </table>"
+                        );
+                        $("#shouye_user_down_li0").mousedown(function(){
+                            window.location.href='/user/center';
+                        });
+                    })
+                },
+                error:function (){
+                    console.log("false");
+                },
+            }
+            );
+        $(function (){
+                var data ={};
+                $.ajax({
+                    url:"/orderlist/QueryProductInformation",
+                    type:"post",
+                    dataType: "json",
+                    data: {
+                        /*用k-v键值对*/
+                        price:data.price
+                    },
+                    success:function (){
+                    },
+                    error:function (){
+                        swal("请求数据失败");
+                    }
+                })
+        })
+    $(function (){
+        $("#shouye_left_a_1").click(function (){
+            window.location.href='/admin/index';
+        })
+    });
+    $(function (){
+        $("#xiaomishoujilanmu1_img2_div").click(function (){
+            window.location.href='/orderlist/xiaomi10pro';
+        });
+    });
+    $(function (){
+        $("#shouye_right_child_a_2").click(function (){
+            window.location.href='/admin/login';
+        })
+    })
+</script>
+<script type="text/javascript" src="../../resources/static/jqgrid-5.3.0/jquery.jqGrid.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
