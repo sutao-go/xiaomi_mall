@@ -43,5 +43,5 @@ public interface AdminUserShoppingCartMapper {
      */
     String checkProductQuantity(@Param("consumer")String consumer);
 
-    String queryProductInformation(@Param("consumer")String consumer);
+    OrderList queryProductInformation(@Param("consumer")String consumer);
 }

@@ -1,5 +1,6 @@
 package com.imooc.service.impl;
 
+import com.imooc.entity.OrderList;
 import com.imooc.mapper.AdminUserShoppingCartMapper;
 import com.imooc.service.AdminUserShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     }
 
     @Override
-    public String queryProductInformation(String consumer) {
+    public OrderList queryProductInformation(String consumer) {
         return adminUserShoppingCartMapper.queryProductInformation(consumer);
     }
 }

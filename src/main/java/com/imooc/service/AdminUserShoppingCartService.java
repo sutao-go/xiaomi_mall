@@ -1,5 +1,7 @@
 package com.imooc.service;
 
+import com.imooc.entity.OrderList;
+
 public interface AdminUserShoppingCartService {
     /**
      * 这个是用来向后端的数据库中添加用户添加购物车的数据库的
@@ -37,6 +39,6 @@ public interface AdminUserShoppingCartService {
      * @param consumer 用户名称
      * @return
      */
-    String queryProductInformation(String consumer);
+    OrderList queryProductInformation(String consumer);
 
 }

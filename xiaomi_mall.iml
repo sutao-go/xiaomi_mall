@@ -51,5 +51,9 @@
     <orderEntry type="library" name="sweetalert" level="application" />
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
     <orderEntry type="library" name="swiper" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="ui.jqgrid" level="application" />
+    <orderEntry type="library" name="grid.locale-en" level="application" />
+    <orderEntry type="library" name="jquery.jqGrid" level="application" />
   </component>
 </module>

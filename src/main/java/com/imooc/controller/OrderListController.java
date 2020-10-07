@@ -1,8 +1,10 @@
 package com.imooc.controller;
 
+import com.imooc.entity.OrderList;
 import com.imooc.service.AdminUserShoppingCartService;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -257,19 +259,32 @@ public class OrderListController {
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/QueryProductInformation")
-    @ResponseBody
     public Map<String,String> shoppingCart1(
             @RequestParam Map<String,String>info,
             HttpServletRequest request,
             HttpServletResponse response,
             HttpSession session
     )throws Exception{
+        //从前端获取用户登录之后的session
         String user = (String) request.getSession().getAttribute("userName");
-        System.out.println("XXXX"+user);
-        String text = adminUserShoppingCartService.queryProductInformation(user);
-        System.out.println("可以查到数据了"+text);
+        OrderList text = adminUserShoppingCartService.queryProductInformation(user);
+        String a = text.toString().substring(9);
+        JSONObject ob = JSONObject.fromObject(a);
+        String userName = ob.getString("consumer");
+        String productName = ob.getString("productName");
+        String price = ob.getString("price");
+        String quantity = ob.getString("quantity");
+        String json =
+                "{data: {"
+                +"userName:" + userName
+                + ", productName:" +"\""+productName+"\""
+                + ", price: " +price
+                + ", quantity: "+quantity
+                +"}}";
+        JSONObject testjson = JSONObject.fromObject(json);
+        String change1 = testjson.toString();
+        response.getWriter().write(change1);
         return info;
     }
-
 }
 

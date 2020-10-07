@@ -85,7 +85,15 @@
         .registered:hover{
             cursor: pointer;
         }
+        .title1{
+            position: absolute;
+            top: 200px;
+
+        }
     </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+         <!--jqgrid的css-->
+         <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
 </head>
 <body>
 <div class="title">
@@ -95,7 +103,17 @@
     </div>
     <div class="registered">注册</div>
     <div class="hide"></div>
+    <div class="title1">
+        <div class="card-body">
+            <div class="card-body">
+                <table id="jqGrid" class="table table-bordered">
+                </table>
+                <div id="jqGridPager"></div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -155,23 +173,7 @@
                 },
             }
             );
-        $(function (){
-                var data ={};
-                $.ajax({
-                    url:"/orderlist/QueryProductInformation",
-                    type:"post",
-                    dataType: "json",
-                    data: {
-                        /*用k-v键值对*/
-                        price:data.price
-                    },
-                    success:function (){
-                    },
-                    error:function (){
-                        swal("请求数据失败");
-                    }
-                })
-        })
+
     $(function (){
         $("#shouye_left_a_1").click(function (){
             window.location.href='/admin/index';
@@ -188,7 +190,57 @@
         })
     })
 </script>
-<script type="text/javascript" src="../../resources/static/jqgrid-5.3.0/jquery.jqGrid.min.js"></script>
+<script>
+    $(function () {
+        $("#jqGrid").jqGrid({
+            <!--数据类型-->
+            datatype: "json",
+            <!--请求数据的地址-->
+            url: '/admin/QueryProductInformation',
+            <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
+            <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
+            <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
+            colModel: [
+                {label:'用户ID', name: 'userName', index: 'userName', width: 200, key: true },
+                {label:'账号', name: 'productName', index: 'productName', width: 480},
+                {label:'别名', name: 'price', index: 'price', width: 720},
+                {label: '登录密码', name: 'quantity', index: 'quantity', width: 720},
+            ],
+            height: 560,
+            rowNum: 10,
+            rowList:[10,20,50],
+            styleUI: 'Bootstrap',
+            loadtext: '信息读取中...',
+            <!--如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'-->
+            rownumbers: false,
+            <!--如果rownumbers为true，则可以设置column的宽度-->
+            rownumWidth: 200,
+            <!--如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth-->
+            autowidth: true,
+            <!--定义是否可以多选-->
+            multiselect: true,
+            pager: 'pager',
+            <!--pager是加入分页器-->
+            pager: "#jqGridPager",jsonReader: {
+                root: "data.list",
+                page: "data.currPage",
+                total: "data.totalPage",
+                records: "data.totalCount"
+            },
+            /*prmNames: {
+                page: "page",
+                rows: "limit",
+                order: "order",
+            },*/
+            gridComplete: function () {
+                //隐藏grid底部滚动条
+                $("#jqGrid").closest("ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+            }
+        });
+    });
+</script>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
 </body>
 </html>

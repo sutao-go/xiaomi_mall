@@ -4,10 +4,10 @@
     <resultMap id="BaseResultMap" type="com.imooc.entity.OrderList">
         <id column="price" jdbcType="VARCHAR" property="price"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
-        <result column="usr_name" jdbcType="VARCHAR" property="consumer"/>
+        <result column="user_name" jdbcType="VARCHAR" property="consumer"/>
         <result column="numbers_of_products" jdbcType="VARCHAR" property="quantity"/>
     </resultMap>
-    <sql id="BaseResult_list">
+    <sql id="Base_Column_List">
         user_name,product_name,price,numbers_of_products
     </sql>
 
@@ -27,8 +27,11 @@
     <select id="checkProductQuantity" resultType="java.lang.String">
         select numbers_of_products from adminUserShoppingCart where user_name = #{consumer,jdbcType=VARCHAR}
     </select>
-    <select id="queryProductInformation" resultType="java.lang.String">
-        select product_name,price,numbers_of_products from adminUserShoppingCart where user_name = #{consumer,jdbcType=VARCHAR}
+    <select id="queryProductInformation" resultMap="BaseResultMap">
+        select
+        user_name,product_name,price,numbers_of_products
+        from adminUserShoppingCart
+        where user_name = #{consumer,jdbcType=VARCHAR}
     </select>
 
     <update id="addQuantity">
