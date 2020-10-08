@@ -55,5 +55,6 @@
     <orderEntry type="library" name="ui.jqgrid" level="application" />
     <orderEntry type="library" name="grid.locale-en" level="application" />
     <orderEntry type="library" name="jquery.jqGrid" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

@@ -88,12 +88,19 @@
         .title1{
             position: absolute;
             top: 200px;
-
+        }
+        .card-body{
+            width: 1440px;
+            position: absolute;
+            top: -50px;
         }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
          <!--jqgrid的css-->
          <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="title">
@@ -173,7 +180,6 @@
                 },
             }
             );
-
     $(function (){
         $("#shouye_left_a_1").click(function (){
             window.location.href='/admin/index';
@@ -196,15 +202,15 @@
             <!--数据类型-->
             datatype: "json",
             <!--请求数据的地址-->
-            url: '/admin/QueryProductInformation',
+            url: '/orderlist/QueryProductInformation/list',
             <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
             <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
             <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
             colModel: [
-                {label:'用户ID', name: 'userName', index: 'userName', width: 200, key: true },
-                {label:'账号', name: 'productName', index: 'productName', width: 480},
-                {label:'别名', name: 'price', index: 'price', width: 720},
-                {label: '登录密码', name: 'quantity', index: 'quantity', width: 720},
+                {label:'用户名', name: 'userName', index: 'userName', width: 200, key: true },
+                {label:'商品名称', name: 'productName', index: 'productName', width: 480},
+                {label:'单价', name: 'price', index: 'price', width: 720},
+                {label: '购买数量', name: 'quantity', index: 'quantity', width: 720},
             ],
             height: 560,
             rowNum: 10,
@@ -214,24 +220,19 @@
             <!--如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'-->
             rownumbers: false,
             <!--如果rownumbers为true，则可以设置column的宽度-->
-            rownumWidth: 200,
+            rownumWidth: 400,
             <!--如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth-->
             autowidth: true,
             <!--定义是否可以多选-->
             multiselect: true,
-            pager: 'pager',
             <!--pager是加入分页器-->
-            pager: "#jqGridPager",jsonReader: {
+            pager: "#jqGridPager",
+            jsonReader: {
                 root: "data.list",
                 page: "data.currPage",
                 total: "data.totalPage",
                 records: "data.totalCount"
             },
-            /*prmNames: {
-                page: "page",
-                rows: "limit",
-                order: "order",
-            },*/
             gridComplete: function () {
                 //隐藏grid底部滚动条
                 $("#jqGrid").closest("ui-jqgrid-bdiv").css({"overflow-x": "hidden"});

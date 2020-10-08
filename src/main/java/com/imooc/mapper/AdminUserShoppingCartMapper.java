@@ -4,6 +4,8 @@ import com.imooc.entity.OrderList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdminUserShoppingCartMapper {
     /**
@@ -43,5 +45,5 @@ public interface AdminUserShoppingCartMapper {
      */
     String checkProductQuantity(@Param("consumer")String consumer);
 
-    OrderList queryProductInformation(@Param("consumer")String consumer);
+    List<OrderList> queryProductInformation(@Param("consumer")String consumer);
 }

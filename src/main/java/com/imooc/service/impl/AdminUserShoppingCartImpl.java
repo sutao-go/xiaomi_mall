@@ -6,6 +6,8 @@ import com.imooc.service.AdminUserShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     @Autowired
@@ -45,7 +47,7 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     }
 
     @Override
-    public OrderList queryProductInformation(String consumer) {
+    public List<OrderList> queryProductInformation(String consumer) {
         return adminUserShoppingCartMapper.queryProductInformation(consumer);
     }
 }

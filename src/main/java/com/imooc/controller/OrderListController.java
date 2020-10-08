@@ -4,7 +4,9 @@ import com.imooc.entity.OrderList;
 import com.imooc.service.AdminUserShoppingCartService;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +17,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/orderlist")
 public class OrderListController {
+    //消费者
     String consumer;
+    //用来装购物车中的数据
+    Map map = new HashMap();
+    //将上面map中存取的数据存到list中去
+    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    //这个是用来存储从数据库中读取出来的用户条数的
+    int i;
     @Autowired
     AdminUserShoppingCartService adminUserShoppingCartService;
     /**
@@ -255,36 +267,58 @@ public class OrderListController {
      */
     @RequestMapping(method = RequestMethod.GET,value = "/QueryProductInformation")
     public String shoppingCart(){
+
+
         return "templates/frontPage/ShoppingCart";
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/QueryProductInformation")
-    public Map<String,String> shoppingCart1(
-            @RequestParam Map<String,String>info,
+    @RequestMapping(method = RequestMethod.GET,value = "/QueryProductInformation/list")
+    public  void shoppingCart1(
             HttpServletRequest request,
-            HttpServletResponse response,
-            HttpSession session
+            HttpServletResponse response
     )throws Exception{
         //从前端获取用户登录之后的session
         String user = (String) request.getSession().getAttribute("userName");
-        OrderList text = adminUserShoppingCartService.queryProductInformation(user);
-        String a = text.toString().substring(9);
+        Object text =  adminUserShoppingCartService.queryProductInformation(user);
+        String a = text.toString().substring(10);
+        System.out.println("这是从数据库中取出来的数据"+a);
+
         JSONObject ob = JSONObject.fromObject(a);
-        String userName = ob.getString("consumer");
-        String productName = ob.getString("productName");
-        String price = ob.getString("price");
-        String quantity = ob.getString("quantity");
-        String json =
-                "{data: {"
-                +"userName:" + userName
-                + ", productName:" +"\""+productName+"\""
-                + ", price: " +price
-                + ", quantity: "+quantity
-                +"}}";
+        list.add(ob);
+        System.out.println("这是list的数据"+list);
+        for (i = 0;i< ob.size();i++){
+            JSONObject jsonObject = (JSONObject) ob.get(i);
+            String userName = ob.getString("consumer");
+            String productName = ob.getString("productName");
+            String price = ob.getString("price");
+            String quantity = ob.getString("quantity");
+            map.put("userName",userName);
+            map.put("productName",productName);
+            map.put("price",price);
+            map.put("quantity",quantity);
+            JSONObject d = JSONObject.fromObject(map);
+            String b = d.toString();
+            list.add(d);
+        }
+        JSONArray jsonArray1 = JSONArray.fromObject(list);
+        String change = jsonArray1.toString();
+        String page = request.getParameter("page"); // 取得当前页数,注意这是jqgrid自身的参数
+        String rows = request.getParameter("rows"); // 取得每页显示行数，,注意这是jqgrid自身的参数
+        int totalCount = 1; // 总记录数(应根据数据库取得，在此只是模拟)
+        int totalPage = totalCount % Integer.parseInt(rows) == 0 ? totalCount
+                / Integer.parseInt(rows) : totalCount / Integer.parseInt(rows)
+                + 1; // 计算总页数
+        int index = (Integer.parseInt(page) - 1) * Integer.parseInt(rows); // 开始记录数
+        int pageSize = Integer.parseInt(rows);
+        // 以下模拟构造JSON数据对象
+        String json = "{data: {"+"totalCount:" + totalCount + ", pageSize: " + pageSize
+                + ", totalPage: " + totalPage + ", list: "+change+"}}";
         JSONObject testjson = JSONObject.fromObject(json);
-        String change1 = testjson.toString();
+        String change1 =testjson.toString();
+        System.out.println("响应到前端的json:"+change1);
         response.getWriter().write(change1);
-        return info;
+        /*System.out.println("测试json"+testjson);*/
     }
+
 }
 
