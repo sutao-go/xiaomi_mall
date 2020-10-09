@@ -29,7 +29,7 @@
         .shouye_right_child_a_2{
             font-size: 12px;
             background-color: rgb(255,255,255);
-            width: 24px;
+            width: 44px;
             position: absolute;
             left: 1268px;
             top: 44px;
@@ -94,6 +94,30 @@
             position: absolute;
             top: -50px;
         }
+        .modify{
+            position: absolute;
+            z-index: 1000;
+            background-color: rgb(236,133,46);
+            top: 710px;
+            left: 1200px;
+            color: white;
+        }
+        .modify:hover{
+            cursor: pointer;
+            background-color: rgb(252,80,9);
+        }
+        .purchase_settlement{
+            position: absolute;
+            background-color: rgb(236,133,46);
+            z-index: 1000;
+            color: white;
+            top: 710px;
+            left: 1340px;
+        }
+        .purchase_settlement:hover{
+            cursor: pointer;
+            background-color: rgb(252,80,9);
+        }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
          <!--jqgrid的css-->
@@ -120,6 +144,9 @@
         </div>
     </div>
 </div>
+<div class="modify">修改购物信息</div>
+<div class="purchase_settlement">购买结算</div>
+
 
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script>
@@ -207,7 +234,7 @@
             <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
             <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
             colModel: [
-                {label:'用户名', name: 'userName', index: 'userName', width: 200, key: true },
+                /*{label:'用户名', name: 'userName', index: 'userName', width: 200, key: true },*/
                 {label:'商品名称', name: 'productName', index: 'productName', width: 480},
                 {label:'单价', name: 'price', index: 'price', width: 720},
                 {label: '购买数量', name: 'quantity', index: 'quantity', width: 720},

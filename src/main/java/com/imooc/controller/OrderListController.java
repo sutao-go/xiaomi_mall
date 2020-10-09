@@ -1,12 +1,10 @@
 package com.imooc.controller;
 
-import com.imooc.entity.OrderList;
 import com.imooc.service.AdminUserShoppingCartService;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +28,10 @@ public class OrderListController {
     //用来装购物车中的数据
     Map map = new HashMap();
     //将上面map中存取的数据存到list中去
-    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    List<String> list = new ArrayList<String>();
     //这个是用来存储从数据库中读取出来的用户条数的
     int i;
+    String jsonAddList;
     @Autowired
     AdminUserShoppingCartService adminUserShoppingCartService;
     /**
@@ -279,14 +278,18 @@ public class OrderListController {
     )throws Exception{
         //从前端获取用户登录之后的session
         String user = (String) request.getSession().getAttribute("userName");
-        Object text =  adminUserShoppingCartService.queryProductInformation(user);
-        String a = text.toString().substring(10);
-        System.out.println("这是从数据库中取出来的数据"+a);
-
-        JSONObject ob = JSONObject.fromObject(a);
-        list.add(ob);
-        System.out.println("这是list的数据"+list);
-        for (i = 0;i< ob.size();i++){
+        List text =  adminUserShoppingCartService.queryProductInformation(user);
+        /*String a = text.toString();*/
+        int mysqlData = text.size();
+        /*list.add(a);*/
+        for (int i=0;i<text.size();i++){
+            String Data = text.get(i).toString().substring(9);
+            JSONObject jsonData = JSONObject.fromObject(Data);
+            jsonAddList = jsonData.toString();
+            list.add(jsonAddList);
+            System.out.println("循环取出来的数据："+jsonAddList);
+        }
+        /*for (i = 0;i< ob.size();i++){
             JSONObject jsonObject = (JSONObject) ob.get(i);
             String userName = ob.getString("consumer");
             String productName = ob.getString("productName");
@@ -299,7 +302,7 @@ public class OrderListController {
             JSONObject d = JSONObject.fromObject(map);
             String b = d.toString();
             list.add(d);
-        }
+        }*/
         JSONArray jsonArray1 = JSONArray.fromObject(list);
         String change = jsonArray1.toString();
         String page = request.getParameter("page"); // 取得当前页数,注意这是jqgrid自身的参数
@@ -317,6 +320,8 @@ public class OrderListController {
         String change1 =testjson.toString();
         System.out.println("响应到前端的json:"+change1);
         response.getWriter().write(change1);
+        //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长值的问题
+        list.clear();
         /*System.out.println("测试json"+testjson);*/
     }
 
