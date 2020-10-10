@@ -325,5 +325,9 @@ public class OrderListController {
         /*System.out.println("测试json"+testjson);*/
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/confirmOrder")
+    public  String confirmOrder(){
+        return "templates/frontPage/confirmOrder";
+    }
 }
 

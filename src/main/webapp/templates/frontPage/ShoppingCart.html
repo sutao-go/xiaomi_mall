@@ -145,10 +145,17 @@
     </div>
 </div>
 <div class="modify">修改购物信息</div>
-<div class="purchase_settlement">购买结算</div>
+<div id="purchase_settlement" class="purchase_settlement">购买结算</div>
 
 
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script>
+    $(function (){
+        $("#purchase_settlement").click(function (){
+            window.location.href = '/orderlist/confirmOrder';
+        })
+    })
+</script>
 <script>
     $(document).ready(function(){
         $('#xiaomi_title').on({
