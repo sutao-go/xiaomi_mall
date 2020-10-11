@@ -61,12 +61,6 @@
             width: 60px;
             background-color: rgb(255,255,255);
         }
-        .shouye_user_down{
-            position: absolute;
-            top: -134px;
-            color: rgb(242,242,242);
-            width: 60px;
-        }
         .shouye_user_down_tr:hover td{
             color: rgb(252,80,9);
             background-color: rgb(242,242,242);
@@ -84,35 +78,6 @@
         }
         .registered:hover{
             cursor: pointer;
-        }
-        .title1{
-            position: absolute;
-            top: 200px;
-        }
-        .card-body{
-            width: 1440px;
-            position: absolute;
-            top: -50px;
-        }
-        .modify{
-            position: absolute;
-            z-index: 1000;
-            background-color: rgb(236,133,46);
-            top: 710px;
-            left: 1200px;
-            color: white;
-        }
-        .modify:hover{
-            cursor: pointer;
-            background-color: rgb(252,80,9);
-        }
-        .purchase_settlement{
-            position: absolute;
-            background-color: rgb(236,133,46);
-            z-index: 1000;
-            color: white;
-            top: 710px;
-            left: 1340px;
         }
         .background{
             background-color: rgb(245,245,245);
@@ -145,7 +110,33 @@
             height: 180px;
             left: 26px;
             top: 92px;
-            border:1px black solid;
+            border:1px rgb(224,224,224) solid;
+        }
+        .chooseShippingAddress:hover{
+            border:1px rgb(193,193,193) solid;
+        }
+        .Recipient{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            left: 20px;
+            top: 10px;
+            position: absolute;
+        }
+        .phoneNumber{
+            top: 56px;
+            left: 24px;
+            position: absolute;
+        }
+        .shippingAddress2{
+            position: absolute;
+            left: 24px;
+            top: 78px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            width: 200px;
+        }
+        .changeAddress{
+            position: absolute;
+            left: 216px;
+            top: 152px;
         }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
@@ -169,7 +160,9 @@
             收货地址
         </div>
             <div id="chooseShippingAddress" class="chooseShippingAddress">
-
+                <h6 class="Recipient">苏涛</h6>
+                <p class="phoneNumber">155****6752</p>
+                <a class="shippingAddress2">四川资阳市雁江区雁江镇台阳路石油小区108号</a>
             </div>
         </div>
     </div>
@@ -178,9 +171,41 @@
 
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script>
-    $("#chooseShippingAddress").mouseup(function(){
+
+    $("#chooseShippingAddress").mouseenter(function(){
+        $("#changeAddress").show();
+        $("#chooseShippingAddress").append(
+            "<a class=\"changeAddress\" id=\"changeAddress\">修改</a>"
+        )
+    });
+    $("#chooseShippingAddress").mouseenter(function (){
+        document.getElementById("changeAddress").style.color = "rgb(237,113,46)";
+    })
+    $("#chooseShippingAddress").click(function(){
         document.getElementById("chooseShippingAddress").style.borderColor ="rgb(252,80,9)";
     });
+    $("#chooseShippingAddress").mouseleave(function(){
+        $("#changeAddress").hide();
+    });
+    setTimeout(function(){
+        $.ajax(
+            {
+                url:"/orderlist/shippingAddress",
+                /*向后端传输数据的方法*/
+                type:"get",
+                /*向后端传输数据的类型*/
+                dataType:"json",
+                success:function (result){
+
+                    },
+                error:function (){
+
+                },
+            })
+    },1);
+</script>
+<script>
+
 </script>
 </body>
 </html>
