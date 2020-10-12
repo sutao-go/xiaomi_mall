@@ -89,7 +89,6 @@
         .shippingAddress{
             width: 80px;
             font-size: 18px;
-            background: #00F7DE;
             position: absolute;
             left: 28px;
             top: 52px;
@@ -138,6 +137,115 @@
             left: 216px;
             top: 152px;
         }
+        .settlementGoods{
+            position: absolute;
+            z-index: 1000;
+            top: 494px;
+            left: 133px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .productsAndCoupons{
+            position: absolute;
+            z-index: 1000;
+            top: 454px;
+            font-size: 18px;
+            left: 133px;
+        }
+        .numberOfProducts{
+            position: absolute;
+            z-index: 1000;
+            top: 494px;
+            left: 701px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .settlementAmount{
+            position: absolute;
+            z-index: 1000;
+            color: #ff6701;
+            top: 494px;
+            left: 1001px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+        }
+        .line{
+            background-color:rgb(224,224,224);
+            height: 1px;
+            width: 1178px;
+            z-index: 1000;
+            top: 546px;
+            left: 133px;
+            position: absolute;
+        }
+        .deliveryMethod{
+            position: absolute;
+            z-index: 1000;
+            font-size:18px ;
+            top: 578px;
+            left: 133px;
+        }
+        .freeShipping{
+            top: 584px;
+            left: 283px;
+            position: absolute;
+            z-index: 1000;
+            color: #ff6700;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .line2{
+            background-color:rgb(224,224,224);
+            height: 1px;
+            width: 1178px;
+            z-index: 1000;
+            top: 644px;
+            left: 133px;
+            position: absolute;
+        }
+        /*.invoice{
+            position: absolute;
+            z-index: 1000;
+            font-size: 18px;
+            top: 682px;
+            left: 133px;
+        }*/
+        .changeAddress:hover{
+            cursor: pointer;
+        }
+        .returnToShoppingCart{
+            background-color: rgb(255,255,255);
+            border: 1px solid rgb(176,176,176);
+            color: rgb(176,176,176);
+            width: 160px;
+            height: 40px;
+            text-align: center;
+            left: 958px;
+            padding-top: 10px;
+            position: absolute;
+            z-index: 1000;
+            top: 664px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .returnToShoppingCart:hover{
+            cursor: pointer;
+        }
+        .toSettle{
+            background-color: #ff6700;
+            color: white;
+            width: 160px;
+            height: 40px;
+            text-align: center;
+            left: 1150px;
+            padding-top: 10px;
+            position: absolute;
+            z-index: 1000;
+            top: 664px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .toSettle:hover{
+            cursor: pointer;
+        }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
     <!--jqgrid的css-->
@@ -167,33 +275,46 @@
         </div>
     </div>
 </div>
+<div class="productsAndCoupons">商品以及优惠券</div>
+<div class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
+<div class="numberOfProducts">129元*1</div>
+<div class="settlementAmount">129元</div>
+<div class="line"></div>
+<div class="deliveryMethod">配送方式</div>
+<div class="freeShipping">包邮</div>
+<div class="line2"></div>
+<div id="returnToShoppingCart" class="returnToShoppingCart">返回购物车</div>
+<div id="toSettle" class="toSettle">去结算</div>
+<!--<div class="invoice">发票</div>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script>
-
     $("#chooseShippingAddress").mouseenter(function(){
         $("#changeAddress").show();
         $("#chooseShippingAddress").append(
-            "<a class=\"changeAddress\" id=\"changeAddress\">修改</a>"
-        )
-    });
-    $("#chooseShippingAddress").mouseenter(function (){
+            "<p class=\"changeAddress\" id=\"changeAddress\">修改</p>"
+        );
         document.getElementById("changeAddress").style.color = "rgb(237,113,46)";
-    })
-    $("#chooseShippingAddress").click(function(){
-        document.getElementById("chooseShippingAddress").style.borderColor ="rgb(252,80,9)";
     });
     $("#chooseShippingAddress").mouseleave(function(){
-        $("#changeAddress").hide();
+        $("#changeAddress").remove();
     });
-    setTimeout(function(){
+    $("#returnToShoppingCart").click(function (){
+        window.location.href='/orderlist/QueryProductInformation/';
+    });
+    $("#toSettle").click(function (){
+
+    });
+    $("#chooseShippingAddress").click(function (){
+        document.getElementById("chooseShippingAddress").style.borderColor="rgb(237,113,46)";
+    });
+    /*setTimeout(function(){
         $.ajax(
             {
                 url:"/orderlist/shippingAddress",
-                /*向后端传输数据的方法*/
+                /!*向后端传输数据的方法*!/
                 type:"get",
-                /*向后端传输数据的类型*/
+                /!*向后端传输数据的类型*!/
                 dataType:"json",
                 success:function (result){
 
@@ -202,7 +323,7 @@
 
                 },
             })
-    },1);
+    },1);*/
 </script>
 <script>
 
