@@ -95,6 +95,8 @@
             background-color: rgb(255,255,255);
             top: 188px;
             left: 260px;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
         }
         .qrCode{
             width: 168px;
@@ -156,6 +158,53 @@
             left: 1094px;
             top: 132px;
         }
+        .box3{
+            width: 160px;
+            height: 502px;
+            background-color: rgb(230,230,230);
+            position: absolute;
+            z-index: 1000;
+            top: 190px;
+            left: 1052px;
+            border-radius: 10px 0 0 10px;
+        }
+        .Tv{
+            width: 73px;
+            height: 58px;
+            top: 176px;
+            position: absolute;
+            left: 38px;
+        }
+        .Alipay{
+            width: 50px;
+            height: 17px;
+            position: absolute;
+            background-color: rgb(255,255,255);
+            top: 184px;
+            left: 49px;
+            padding-top: 5px;
+            padding-bottom: 3px;
+        }
+        .login{
+            width: 109px;
+            height: 39px;
+            background-color: rgb(0,174,239);
+            border-radius: 5px 5px 5px 5px;
+            top: 253px;
+            position: absolute;
+            left: 22px;
+        }
+        .login:hover{
+            cursor: pointer;
+        }
+        .login_a{
+            color: rgb(239,255,255);
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            top: 10px;
+            left: 12px;
+        }
+
     </style>
 </head>
 <body>
@@ -181,6 +230,16 @@
 <div class="prompt2">打开手机支付宝
     扫一扫继续付款</div>
 <div class="amountsPayable2">5元</div>
-<div class="">
+<div class="box3">
+    <div>
+        <img class="Tv" src="../../resources/upload/zhifubaoTV.png">
+        <div>
+            <img class="Alipay" src="../../resources/upload/zhifubao2.png">
+        </div>
+    </div>
+    <div class="login">
+        <a class="login_a"><登录账户付款</a>
+    </div>
+</div>
 </body>
 </html>

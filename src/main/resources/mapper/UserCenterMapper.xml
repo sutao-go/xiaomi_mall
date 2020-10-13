@@ -7,7 +7,7 @@
     </resultMap>
 
     <update id="changePassword" parameterType="com.imooc.entity.AdminUser">
-        update adminUser
+        update adminuser
         <set>
         <if test="passWord != null">
          pass_word = #{passWord,jdbcType=VARCHAR}

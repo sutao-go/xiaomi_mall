@@ -12,17 +12,17 @@
     <select id="login" resultMap="BaseResultMap" >
         select
         <include refid="BaseResult_list"/>
-        from adminUser
+        from adminuser
         where user_name = #{userName,jdbcType=VARCHAR}
         and pass_word = #{passWord,jdbcType=VARCHAR}
     </select>
 
     <select id="insert" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
-    insert into adminUser(user_name,pass_word)
+    insert into adminuser(user_name,pass_word)
     values (#{userName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR})
     </select>
 
     <select id="find" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
-        select * from adminUser where user_name = #{userName,jdbcType=VARCHAR}
+        select * from adminuser where user_name = #{userName,jdbcType=VARCHAR}
     </select>
 </mapper>

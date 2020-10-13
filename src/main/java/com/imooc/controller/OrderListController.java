@@ -289,20 +289,6 @@ public class OrderListController {
             list.add(jsonAddList);
             System.out.println("循环取出来的数据："+jsonAddList);
         }
-        /*for (i = 0;i< ob.size();i++){
-            JSONObject jsonObject = (JSONObject) ob.get(i);
-            String userName = ob.getString("consumer");
-            String productName = ob.getString("productName");
-            String price = ob.getString("price");
-            String quantity = ob.getString("quantity");
-            map.put("userName",userName);
-            map.put("productName",productName);
-            map.put("price",price);
-            map.put("quantity",quantity);
-            JSONObject d = JSONObject.fromObject(map);
-            String b = d.toString();
-            list.add(d);
-        }*/
         JSONArray jsonArray1 = JSONArray.fromObject(list);
         String change = jsonArray1.toString();
         String page = request.getParameter("page"); // 取得当前页数,注意这是jqgrid自身的参数
@@ -320,15 +306,30 @@ public class OrderListController {
         String change1 =testjson.toString();
         System.out.println("响应到前端的json:"+change1);
         response.getWriter().write(change1);
-        //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长值的问题
+        //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长的问题
         list.clear();
-        /*System.out.println("测试json"+testjson);*/
     }
 
+    /**
+     * 这个是用来跳转到用户选择地址的页面的
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET,value = "/confirmOrder")
     public  String confirmOrder(){
         return "templates/frontPage/confirmOrder";
     }
+
+    /**
+     * 这个是用来跳转到支付宝付款页面的
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/alipay")
+    public String alipay(){
+
+        return "templates/frontPage/alipay";
+
+    }
+
 
 }
 

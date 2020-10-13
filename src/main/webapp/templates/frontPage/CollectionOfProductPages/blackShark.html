@@ -425,11 +425,11 @@
         <li>Select Location</li>
         <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
         <li id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录</li>
-        <li>注册</li>
+        <li id="shouye_right_child_a_3" >注册</li>
         <li>消息通知</li>
-        <div >
+        <div id="shoppingCart">
             <li>
-                <img src="../../../resources/upload/iconfont-cart.jpg">
+                <img src="../../resources/upload/iconfont-cart.jpg">
             </li>
             <li id="iconfont-cart">购物车</li>
         </div>
@@ -620,6 +620,7 @@
                             "            </tr>\n" +
                             "        </table>"
                         );
+
                         $("#shouye_user_down_li0").mousedown(function(){
                             window.location.href='/user/center';
                         });
@@ -638,6 +639,14 @@
     $(function (){
         $("#shouye_right_child_a_2").click(function (){
             window.location.href='/admin/login';
+        })
+    });
+
+</script>
+<script>
+    $(function (){
+        $("#shoppingCart").click(function (){
+            window.location.href='/orderlist/QueryProductInformation';
         })
     })
 </script>

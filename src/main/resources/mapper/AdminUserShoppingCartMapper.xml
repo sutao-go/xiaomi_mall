@@ -12,7 +12,7 @@
     </sql>
 
     <insert id="addToShoppingCart">
-    insert into adminUserShoppingCart(user_name,product_name,price,numbers_of_products)
+    insert into adminusershoppingcart(user_name,product_name,price,numbers_of_products)
     values (#{consumer,jdbcType=VARCHAR},
     #{productName,jdbcType=VARCHAR},
     #{price,jdbcType=VARCHAR},

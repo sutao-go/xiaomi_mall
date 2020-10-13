@@ -267,6 +267,7 @@
         <div class="shippingAddress">
             收货地址
         </div>
+            <!--以下信息需要从数据库中查询-->
             <div id="chooseShippingAddress" class="chooseShippingAddress">
                 <h6 class="Recipient">苏涛</h6>
                 <p class="phoneNumber">155****6752</p>
@@ -276,9 +277,11 @@
     </div>
 </div>
 <div class="productsAndCoupons">商品以及优惠券</div>
+<!--以下信息需要从数据库中查询-->
 <div class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
 <div class="numberOfProducts">129元*1</div>
 <div class="settlementAmount">129元</div>
+<!--以上信息需要从数据库中查询-->
 <div class="line"></div>
 <div class="deliveryMethod">配送方式</div>
 <div class="freeShipping">包邮</div>
@@ -303,27 +306,13 @@
         window.location.href='/orderlist/QueryProductInformation/';
     });
     $("#toSettle").click(function (){
-
     });
     $("#chooseShippingAddress").click(function (){
         document.getElementById("chooseShippingAddress").style.borderColor="rgb(237,113,46)";
     });
-    /*setTimeout(function(){
-        $.ajax(
-            {
-                url:"/orderlist/shippingAddress",
-                /!*向后端传输数据的方法*!/
-                type:"get",
-                /!*向后端传输数据的类型*!/
-                dataType:"json",
-                success:function (result){
-
-                    },
-                error:function (){
-
-                },
-            })
-    },1);*/
+    $("#toSettle").click(function (){
+        window.location.href='/orderlist/alipay';
+    });
 </script>
 <script>
 

@@ -328,7 +328,7 @@
         <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
         <li id="shouye_right_child_a_3">注册</li>
         <li>消息通知</li>
-        <div >
+        <div id="shoppingCart">
             <li>
                 <img src="../../resources/upload/iconfont-cart.jpg">
             </li>
@@ -502,6 +502,13 @@
     $(function (){
         $("#shouye_left_a_1_o").click(function (){
             window.location.href='/admin/index';
+        })
+    })
+</script>
+<script>
+    $(function (){
+        $("#shoppingCart").click(function (){
+            window.location.href='/orderlist/confirmOrder';
         })
     })
 </script>
