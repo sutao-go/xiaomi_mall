@@ -1,7 +1,6 @@
 
 package com.imooc.service;
 import com.imooc.entity.AdminUser;
-import org.springframework.stereotype.Service;
 
 public interface AdminUserService {
     /**
