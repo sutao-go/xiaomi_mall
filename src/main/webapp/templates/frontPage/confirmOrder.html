@@ -258,20 +258,20 @@
 <div class="title">
     <h2 class="shoppingCart">我的购物车</h2>
     <img id="xiaomi_title" class="xiaomi_title_left" src="../../resources/upload/xiaomi_title_left.jpg">
-    <div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
+   <!-- <div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
     </div>
-    <div class="registered">注册</div>
+    <div class="registered">注册</div>-->
     <div class="hide"></div>
     <div class="background">
         <div class="background2">
         <div class="shippingAddress">
             收货地址
-        </div>
+        </div >
             <!--以下信息需要从数据库中查询-->
             <div id="chooseShippingAddress" class="chooseShippingAddress">
-                <h6 class="Recipient">苏涛</h6>
-                <p class="phoneNumber">155****6752</p>
-                <a class="shippingAddress2">四川资阳市雁江区雁江镇台阳路石油小区108号</a>
+                <!--<h6 id="Recipient" class="Recipient">苏涛</h6>
+                <p id="phoneNumber" class="phoneNumber">155****6752</p>
+                <a id="shippingAddress2" class="shippingAddress2">四川资阳市雁江区雁江镇台阳路石油小区108号</a>-->
             </div>
         </div>
     </div>
@@ -315,7 +315,42 @@
     });
 </script>
 <script>
+    $.ajax(
+        {
+            url:"/user/checkOutTheShoppingCart",
+            type:"post",
+            dataType:"json",
+            success:function (info){
+                var address = info.address;
+                var nickname = info.nickname;
+                var phoneNumber = info.phoneNumber;
+                $("#chooseShippingAddress").append(
+                    "<h6 id=\"Recipient\" class=\"Recipient\"></h6>\n" +
+                    "                <p id=\"phoneNumber\" class=\"phoneNumber\"></p>\n" +
+                    "                <a id=\"shippingAddress2\" class=\"shippingAddress2\"></a>"
+                );
+                document.getElementById("Recipient").innerHTML=nickname;
+                document.getElementById("phoneNumber").innerHTML=phoneNumber;
+                document.getElementById("shippingAddress2").innerHTML=address;
+            },
+            error:function (){
+                console.log("出错了");
+            }
+        }
+    );
+    $.ajax(
+        {
+            url:"/user/settlementProductList",
+            type: "post",
+            dataType: "json",
+            success:function (info){
 
+            },
+            error:function (info){
+
+            }
+        }
+    )
 </script>
 </body>
 </html>

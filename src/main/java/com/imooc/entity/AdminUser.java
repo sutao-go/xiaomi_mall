@@ -10,11 +10,9 @@ public class AdminUser {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
     public String getNewPassword() {
         return newPassword;
     }
-
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
@@ -35,6 +33,7 @@ public class AdminUser {
         return "{" +
                 "userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
+                ", newPassword='" + newPassword + '\'' +
                 '}';
     }
 }

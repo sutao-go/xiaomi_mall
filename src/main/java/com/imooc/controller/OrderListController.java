@@ -279,7 +279,8 @@ public class OrderListController {
         //从前端获取用户登录之后的session
         String user = (String) request.getSession().getAttribute("userName");
         List text =  adminUserShoppingCartService.queryProductInformation(user);
-        /*String a = text.toString();*/
+
+        String a = text.toString();
         int mysqlData = text.size();
         /*list.add(a);*/
         for (int i=0;i<text.size();i++){
@@ -287,7 +288,6 @@ public class OrderListController {
             JSONObject jsonData = JSONObject.fromObject(Data);
             jsonAddList = jsonData.toString();
             list.add(jsonAddList);
-            System.out.println("循环取出来的数据："+jsonAddList);
         }
         JSONArray jsonArray1 = JSONArray.fromObject(list);
         String change = jsonArray1.toString();

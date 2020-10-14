@@ -1,8 +1,11 @@
 package com.imooc.controller;
 
 import com.imooc.entity.AdminUser;
+import com.imooc.entity.ShoppingCart;
+import com.imooc.service.ShippingAddressService;
 import com.imooc.service.UserCenterService;
 import com.imooc.service.AdminUserService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +27,8 @@ public class UserCenterController {
     private UserCenterService userCenterService;
     @Autowired
     private AdminUserService adminUserService;
+    @Autowired
+    private ShippingAddressService shippingAddressService;
     /**
      * 这个主要是用来实现前端页面跳转用的，跳转到个人用户中心用的
      */
@@ -81,5 +87,51 @@ public class UserCenterController {
             }
         }
         return data;
+    }
+
+    /**
+     * 这个功能用来实现购物车的查询商品信息的功能的
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/checkOutTheShoppingCart")
+    @ResponseBody
+    public Map<String,String> checkOutTheShoppingCart(
+            @RequestParam Map<String,String> info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        String userName = request.getSession().getAttribute("userName").toString();
+        List<ShoppingCart>adminUser = shippingAddressService.lookForTheAddress(userName);
+        /*这个查询出来的结果是
+        [ShoppingCart{userName='123456', address='四川省资阳市台阳路石油小区', phoneNumber='17883464189', nickname='苏涛'}]
+        需要将它转换为JSONArray然后再转换为JSONObject*/
+        JSONArray json = JSONArray.fromObject(adminUser);
+        String test = json.getString(0);
+        /*转换成为JSONArrray的结果
+        {"address":"四川省资阳市台阳路石油小区","phoneNumber":"17883464189","nickname":"苏涛","userName":"123456"}
+        */
+        JSONObject test1 = JSONObject.fromObject(test);
+        String address = test1.getString("address");
+        String phoneNumber = test1.getString("phoneNumber");
+        String nickName = test1.getString("nickname");
+        info.put("nickname",nickName);
+        info.put("address",address);
+        info.put("phoneNumber",phoneNumber);
+        return info;
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/settlementProductList")
+    @ResponseBody
+    public Map<String,String> settlementProductList(
+            HttpServletResponse response,
+            HttpServletRequest request,
+            HttpSession session
+    ){
+
     }
 }
