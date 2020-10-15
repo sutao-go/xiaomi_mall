@@ -251,8 +251,9 @@
     <!--jqgrid的css-->
     <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 </head>
 <body>
 <div class="title">
@@ -272,15 +273,18 @@
                 <!--<h6 id="Recipient" class="Recipient">苏涛</h6>
                 <p id="phoneNumber" class="phoneNumber">155****6752</p>
                 <a id="shippingAddress2" class="shippingAddress2">四川资阳市雁江区雁江镇台阳路石油小区108号</a>-->
+
             </div>
         </div>
     </div>
 </div>
 <div class="productsAndCoupons">商品以及优惠券</div>
 <!--以下信息需要从数据库中查询-->
-<div class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
-<div class="numberOfProducts">129元*1</div>
-<div class="settlementAmount">129元</div>
+<div id="shoppingInformation">
+<div id="settlementGoods" class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
+<div id="numberOfProducts" class="numberOfProducts">129元*1</div>
+<div id="settlementAmount"  class="settlementAmount">129元</div>
+</div>
 <!--以上信息需要从数据库中查询-->
 <div class="line"></div>
 <div class="deliveryMethod">配送方式</div>
@@ -289,6 +293,7 @@
 <div id="returnToShoppingCart" class="returnToShoppingCart">返回购物车</div>
 <div id="toSettle" class="toSettle">去结算</div>
 <!--<div class="invoice">发票</div>-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script>
@@ -298,7 +303,14 @@
             "<p class=\"changeAddress\" id=\"changeAddress\">修改</p>"
         );
         document.getElementById("changeAddress").style.color = "rgb(237,113,46)";
+        $("#changeAddress").click(
+            function (){
+                window.location.href = '/user/modifyShippingAddress';
+            }
+        );
     });
+    <!--当点击修改的时候可以修改收货的地址-->
+
     $("#chooseShippingAddress").mouseleave(function(){
         $("#changeAddress").remove();
     });
@@ -338,12 +350,29 @@
             }
         }
     );
+
+</script>
+<script>
     $.ajax(
         {
             url:"/user/settlementProductList",
             type: "post",
             dataType: "json",
             success:function (info){
+                var imgurl = info.imgurl;
+                var productName = info.productName;
+                var price = info.price;
+                var quantity = info.quantity;
+                console.log(productName);
+                $("#shoppingInformation").append(
+                    "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n" +
+                    "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n" +
+                    "<div id=\"settlementAmount\"  class=\"settlementAmount\"></div>"
+                );
+                $("#img").attr('src',imgurl);
+                document.getElementById("settlementGoods").innerHTML = productName;
+                document.getElementById("numberOfProducts").innerHTML = price+"元*"+quantity;
+                document.getElementById("settlementAmount").innerHTML = price;
 
             },
             error:function (info){

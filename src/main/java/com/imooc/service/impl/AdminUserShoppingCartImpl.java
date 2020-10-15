@@ -13,6 +13,11 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     @Autowired
     private AdminUserShoppingCartMapper adminUserShoppingCartMapper;
 
+    @Override
+    public List<OrderList> findimg(String userName) {
+        return adminUserShoppingCartMapper.findimg(userName);
+    }
+
     /**
      * 首次点击时候添加商品数量用的
      * @param consumer 用户名

@@ -1,7 +1,10 @@
 package com.imooc.controller;
 
 import com.imooc.entity.AdminUser;
+import com.imooc.entity.OrderList;
 import com.imooc.entity.ShoppingCart;
+import com.imooc.mapper.AdminUserShoppingCartMapper;
+import com.imooc.service.AdminUserShoppingCartService;
 import com.imooc.service.ShippingAddressService;
 import com.imooc.service.UserCenterService;
 import com.imooc.service.AdminUserService;
@@ -29,6 +32,8 @@ public class UserCenterController {
     private AdminUserService adminUserService;
     @Autowired
     private ShippingAddressService shippingAddressService;
+    @Autowired
+    private AdminUserShoppingCartService adminUserShoppingCartService;
     /**
      * 这个主要是用来实现前端页面跳转用的，跳转到个人用户中心用的
      */
@@ -125,13 +130,60 @@ public class UserCenterController {
         return info;
     }
 
+    /**
+     * 这个是用来将数据库中的图片等信息可以展示在前端页面上的
+     * @param info
+     * @param response
+     * @param request
+     * @param session
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/settlementProductList")
     @ResponseBody
     public Map<String,String> settlementProductList(
+            @RequestParam Map<String,String> info,
             HttpServletResponse response,
             HttpServletRequest request,
             HttpSession session
     ){
+    String userName = request.getSession().getAttribute("userName").toString();
+    List<OrderList>img = adminUserShoppingCartService.findimg(userName);
+    String a = img.toString();
+    JSONArray imgdata = JSONArray.fromObject(img);
+    String test = imgdata.getString(0);
+    JSONObject test1 = JSONObject.fromObject(test);
+    String imgurl = test1.getString("imgurl");
+    String productName = test1.getString("productName");
+    String quantity = test1.getString("quantity");
+    String price = test1.getString("price");
+    info.put("imgurl",imgurl);
+    info.put("productName",productName);
+    info.put("quantity",quantity);
+    info.put("price",price);
+    return  info;
+    }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/modifyShippingAddress")
+    public String modifyShippingAddress1(){
+        return  "";
+    }
+    /**
+     * 这个是用来修改用户地址的
+     * @param info
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/modifyShippingAddress")
+    @ResponseBody
+    public Map<String,String> modifyShippingAddress(
+            @RequestParam Map<String,String> info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        return  null;
     }
 }

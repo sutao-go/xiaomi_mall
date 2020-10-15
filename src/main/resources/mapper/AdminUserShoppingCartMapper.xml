@@ -6,6 +6,7 @@
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="user_name" jdbcType="VARCHAR" property="consumer"/>
         <result column="numbers_of_products" jdbcType="VARCHAR" property="quantity"/>
+        <result column="img" jdbcType="VARCHAR" property="imgurl"/>
     </resultMap>
     <sql id="Base_Column_List">
         user_name,product_name,price,numbers_of_products
@@ -43,4 +44,10 @@
         </set>
         where user_name = #{consumer,jdbcType=VARCHAR}
     </update>
+
+    <select id="findimg" resultMap="BaseResultMap">
+        select img,product_name,price,numbers_of_products
+        from adminusershoppingcart
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -9,6 +9,13 @@ import java.util.List;
 @Repository
 public interface AdminUserShoppingCartMapper {
     /**
+     * 用户结算购物车中的商品的时候用来显示对应商品的照片的
+     * @param userName
+     * @return
+     */
+     List<OrderList> findimg(@Param("userName")String userName);
+
+    /**
      * 用户第一次点击加入购物车时向数据库中加入的数据
      * @param consumer 用户名
      * @param productName 商品名称

@@ -56,5 +56,9 @@
     <orderEntry type="library" name="jquery.jqGrid" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="ui.jqgrid" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

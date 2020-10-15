@@ -8,7 +8,8 @@ public class OrderList {
     public String price;
     //商品数量(小记)
     public Integer quantity;
-    //消费者
+    //图片的路径
+    public String imgurl;
 
 
     public String getProductName() {
@@ -43,6 +44,14 @@ public class OrderList {
         this.consumer = consumer;
     }
 
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
     @Override
     public String toString() {
         return "OrderList{" +
@@ -50,6 +59,7 @@ public class OrderList {
                 ", productName='" + productName + '\'' +
                 ", price='" + price + '\'' +
                 ", quantity=" + quantity +
+                ", imgurl='" + imgurl + '\'' +
                 '}';
     }
 }

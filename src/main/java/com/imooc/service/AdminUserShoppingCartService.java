@@ -6,6 +6,13 @@ import java.util.List;
 
 public interface AdminUserShoppingCartService {
     /**
+     * 这个主要是用来查询数据库中的图片信息的，然后添加到网页中显示出来的
+     * @param userName
+     * @return
+     */
+    List<OrderList> findimg(String userName);
+
+    /**
      * 这个是用来向后端的数据库中添加用户添加购物车的数据库的
      * @param consumer 用户名
      * @param productName 商品名称
