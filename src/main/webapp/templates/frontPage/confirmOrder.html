@@ -132,10 +132,20 @@
             font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
             width: 200px;
         }
-        .changeAddress{
+        #resetbutton{
             position: absolute;
-            left: 216px;
-            top: 152px;
+            left: 342px;
+            top: 386px;
+            outline: none;
+            background-color: rgb(255,255,255);
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            color:rgb(252,80,9);
+            font:14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            box-shadow: none;
+            z-index: 1000;
         }
         .settlementGoods{
             position: absolute;
@@ -203,16 +213,6 @@
             left: 133px;
             position: absolute;
         }
-        /*.invoice{
-            position: absolute;
-            z-index: 1000;
-            font-size: 18px;
-            top: 682px;
-            left: 133px;
-        }*/
-        .changeAddress:hover{
-            cursor: pointer;
-        }
         .returnToShoppingCart{
             background-color: rgb(255,255,255);
             border: 1px solid rgb(176,176,176);
@@ -251,9 +251,9 @@
     <!--jqgrid的css-->
     <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+    <script src="../../resources/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="title">
@@ -293,27 +293,43 @@
 <div id="returnToShoppingCart" class="returnToShoppingCart">返回购物车</div>
 <div id="toSettle" class="toSettle">去结算</div>
 <!--<div class="invoice">发票</div>-->
+<button id="resetbutton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    修改
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    修改地址
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>收件人</div>
+                <input id="recipient">
+                <div>收件地址</div>
+                <input id="shippingAddress">
+                <div>收件人手机号码</div>
+                <input id="phoneNumber1">
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button id="change" type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    $("#chooseShippingAddress").mouseenter(function(){
-        $("#changeAddress").show();
-        $("#chooseShippingAddress").append(
-            "<p class=\"changeAddress\" id=\"changeAddress\">修改</p>"
-        );
-        document.getElementById("changeAddress").style.color = "rgb(237,113,46)";
-        $("#changeAddress").click(
-            function (){
-                window.location.href = '/user/modifyShippingAddress';
-            }
-        );
-    });
-    <!--当点击修改的时候可以修改收货的地址-->
-
-    $("#chooseShippingAddress").mouseleave(function(){
-        $("#changeAddress").remove();
-    });
     $("#returnToShoppingCart").click(function (){
         window.location.href='/orderlist/QueryProductInformation/';
     });
@@ -350,7 +366,6 @@
             }
         }
     );
-
 </script>
 <script>
     $.ajax(
@@ -380,6 +395,32 @@
             }
         }
     )
+</script>
+<script>
+    $("#change").click(function (){
+        var data ={};
+        data.shippingAddress = $("#shippingAddress").val();
+        data.recipient = $("#recipient").val();
+        data.phoneNumber1 = $("#phoneNumber1").val();
+        $.ajax(
+            {
+                url:"/user/modifyShippingAddress",
+                type:"post",
+                dataType:"json",
+                data:{
+                    shippingAddress:data.shippingAddress,
+                    recipient:data.recipient,
+                    phoneNumber1:data.phoneNumber1
+                },
+                success:function(){
+                        swal("修改成功");
+                },
+                error:function (){
+                        swal("修改失败");
+                }
+            }
+        )
+    });
 </script>
 </body>
 </html>

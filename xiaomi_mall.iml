@@ -60,5 +60,6 @@
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="ui.jqgrid" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="sweetalert" level="application" />
   </component>
 </module>

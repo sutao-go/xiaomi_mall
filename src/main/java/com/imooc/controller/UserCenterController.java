@@ -163,10 +163,6 @@ public class UserCenterController {
     return  info;
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/modifyShippingAddress")
-    public String modifyShippingAddress1(){
-        return  "";
-    }
     /**
      * 这个是用来修改用户地址的
      * @param info
@@ -184,6 +180,15 @@ public class UserCenterController {
             HttpServletResponse response,
             HttpSession session
     )throws Exception{
+            String userName = request.getSession().getAttribute("userName").toString();
+            Object shippingAddress = info.get("shippingAddress");
+            String shippingAddress1 = shippingAddress.toString();
+            Object recipient = info.get("recipient");
+            String recipient1 = recipient.toString();
+            Object phoneNumber = info.get("phoneNumber1");
+            String phoneNumber1 = phoneNumber.toString();
+            String change = shippingAddressService.changeDeliveryInformation(userName,shippingAddress1,recipient1,phoneNumber1);
+
         return  null;
     }
 }

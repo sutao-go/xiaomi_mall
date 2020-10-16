@@ -13,4 +13,16 @@
         from adminusershippingaddress
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
+
+    <update id="changeDeliveryInformation">
+        update adminusershippingaddress
+        <set>
+        <if test="shippingAddress1  != null">
+            nickname= #{recipient1,jdbcType=INTEGER},
+            address= #{shippingAddress1,jdbcType=INTEGER},
+            phone_number= #{phoneNumber1,jdbcType=INTEGER}
+        </if>
+        </set>
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </update>
 </mapper>

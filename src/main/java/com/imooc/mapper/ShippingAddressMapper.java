@@ -9,4 +9,10 @@ import java.util.List;
 @Repository
 public interface ShippingAddressMapper {
     List<ShoppingCart> lookForTheAddress(@Param("userName")String userName);
+
+    String changeDeliveryInformation(@Param("shippingAddress1")String shippingAddress1,
+                                     @Param("recipient1")String recipient1,
+                                     @Param("phoneNumber1")String phoneNumber1,
+                                     @Param("userName") String userName
+                                    );
 }

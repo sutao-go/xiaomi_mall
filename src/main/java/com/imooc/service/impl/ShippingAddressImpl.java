@@ -17,4 +17,10 @@ public class ShippingAddressImpl implements ShippingAddressService {
     public List<ShoppingCart> lookForTheAddress(String userName) {
         return shippingAddressMapper.lookForTheAddress(userName);
     }
+
+    @Override
+    public String changeDeliveryInformation(String userName,String shippingAddress1, String recipient1, String phoneNumber1) {
+        return shippingAddressMapper.changeDeliveryInformation(userName,shippingAddress1,recipient1,phoneNumber1);
+    }
+
 }
