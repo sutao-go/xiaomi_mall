@@ -1,6 +1,8 @@
 package com.imooc.service;
 
+import com.imooc.entity.OrderList;
 import com.imooc.entity.ShoppingCart;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 
 import java.util.List;
 
@@ -15,9 +17,8 @@ public interface ShippingAddressService {
     /**
      * 修改收货地址
      * @param shippingAddress1
-     * @param recipient1
      * @param phoneNumber1
      * @return
      */
-    String changeDeliveryInformation(String userName,String shippingAddress1, String recipient1, String phoneNumber1);
+    int changeDeliveryInformation(String userName, String shippingAddress1, String phoneNumber1,String nickName);
 }

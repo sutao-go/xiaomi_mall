@@ -53,4 +53,6 @@ public interface AdminUserShoppingCartMapper {
     String checkProductQuantity(@Param("consumer")String consumer);
 
     List<OrderList> queryProductInformation(@Param("consumer")String consumer);
+
+    String totalAmount(@Param("userName") String userName);
 }

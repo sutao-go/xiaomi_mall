@@ -204,8 +204,14 @@
             top: 10px;
             left: 12px;
         }
-
     </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
+    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+    <script src="../../resources/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="title">
@@ -223,13 +229,13 @@
 <div class="Beneficiary">收款方：商户简称：小米网</div>
 <div class="Box"></div>
 <div class="scanPayment">扫一扫付款(元)</div>
-<div class="amountsPayable">5元</div>
+<div id="amountsPayable" class="amountsPayable">5元</div>
 <img class="qrCode" src="../../resources/upload/WechatIMG13.png">
 <div class="box2"></div>
 <img class ="sacnCode" src="../../resources/upload/scanCode.png">
 <div class="prompt2">打开手机支付宝
     扫一扫继续付款</div>
-<div class="amountsPayable2">5元</div>
+<div id="amountsPayable2" class="amountsPayable2">5元</div>
 <div class="box3">
     <div>
         <img class="Tv" src="../../resources/upload/zhifubaoTV.png">
@@ -241,5 +247,24 @@
         <a class="login_a"><登录账户付款</a>
     </div>
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$(document).ready(function (){
+    var data={};
+    $.ajax(
+        {
+            url:"/user/paymentAmount",
+            type:"post",
+            dataType:"json",
+            success:function (){
+
+            },
+            error:function (){
+
+            }
+        }
+    )
+})
+</script>
 </body>
 </html>

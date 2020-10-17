@@ -412,8 +412,12 @@
                     recipient:data.recipient,
                     phoneNumber1:data.phoneNumber1
                 },
-                success:function(){
-                        swal("修改成功");
+                success:function(result){
+                    if(result.resultCode == 200){
+                        window.location.href='/orderlist/confirmOrder';
+                    }if (result.resultCode == 500){
+                        swal("程序可能出错了");
+                    }
                 },
                 error:function (){
                         swal("修改失败");

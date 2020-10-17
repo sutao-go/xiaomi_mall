@@ -7,6 +7,7 @@
         <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
     </resultMap>
+
     <select id="lookForTheAddress"  resultMap="BaseResultMap">
         select
         user_name,address,nickname,phone_number
@@ -14,15 +15,20 @@
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
 
-    <update id="changeDeliveryInformation">
+    <update id="changeDeliveryInformation" >
         update adminusershippingaddress
         <set>
-        <if test="shippingAddress1  != null">
-            nickname= #{recipient1,jdbcType=INTEGER},
-            address= #{shippingAddress1,jdbcType=INTEGER},
-            phone_number= #{phoneNumber1,jdbcType=INTEGER}
-        </if>
+                <if test="shippingAddress1  != null">
+                    address= #{shippingAddress1,jdbcType=VARCHAR},
+                </if>
+                <if test="phoneNumber1 != null">
+                    phone_number= #{phoneNumber1,jdbcType=VARCHAR},
+                </if>
+                <if test="nickName  != null">
+                nickname= #{nickName,jdbcType=VARCHAR}
+                </if>
         </set>
         where user_name = #{userName,jdbcType=VARCHAR}
     </update>
+
 </mapper>

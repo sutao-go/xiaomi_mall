@@ -50,4 +50,5 @@ public interface AdminUserShoppingCartService {
      */
     List<OrderList> queryProductInformation(String consumer);
 
+    String totalAmount(String userName);
 }

@@ -55,4 +55,9 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     public List<OrderList> queryProductInformation(String consumer) {
         return adminUserShoppingCartMapper.queryProductInformation(consumer);
     }
+
+    @Override
+    public String totalAmount(String userName) {
+        return adminUserShoppingCartMapper.totalAmount(userName);
+    }
 }

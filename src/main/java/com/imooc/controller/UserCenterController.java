@@ -10,6 +10,7 @@ import com.imooc.service.UserCenterService;
 import com.imooc.service.AdminUserService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,13 +183,43 @@ public class UserCenterController {
     )throws Exception{
             String userName = request.getSession().getAttribute("userName").toString();
             Object shippingAddress = info.get("shippingAddress");
+            //收件地址
             String shippingAddress1 = shippingAddress.toString();
             Object recipient = info.get("recipient");
-            String recipient1 = recipient.toString();
+            //收件人姓名
+            String nickName = recipient.toString();
             Object phoneNumber = info.get("phoneNumber1");
             String phoneNumber1 = phoneNumber.toString();
-            String change = shippingAddressService.changeDeliveryInformation(userName,shippingAddress1,recipient1,phoneNumber1);
+            int change = shippingAddressService.changeDeliveryInformation(userName,shippingAddress1,nickName,phoneNumber1);
+            if (change == 1){
+                info.put("resultCode","200");
+                return info;
+            }else{
+                info.put("resultCode","500");
+                return info;
+            }
 
-        return  null;
+    }
+
+    /**
+     * 用来计算用户在支付宝二维码那个界面的支付金额的问题
+     * @param info
+     * @param response
+     * @param request
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/paymentAmount")
+    public Map<String,String> paymentAmount(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request,
+            HttpSession session
+    )throws Exception{
+        String userName = request.getSession().getAttribute("userName").toString();
+        String totalAmount = adminUserShoppingCartService.totalAmount(userName);
+
+        return null;
     }
 }
