@@ -50,5 +50,10 @@
         from adminusershoppingcart
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-    
+
+    <select id="totalAmount" resultMap="BaseResultMap">
+    select user_name,product_name,price,numbers_of_products
+    from adminusershoppingcart
+    where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>

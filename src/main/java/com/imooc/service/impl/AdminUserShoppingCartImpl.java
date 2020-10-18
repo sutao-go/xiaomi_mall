@@ -57,7 +57,7 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     }
 
     @Override
-    public String totalAmount(String userName) {
+    public List<OrderList> totalAmount(String userName) {
         return adminUserShoppingCartMapper.totalAmount(userName);
     }
 }

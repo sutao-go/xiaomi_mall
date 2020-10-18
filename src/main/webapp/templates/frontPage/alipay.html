@@ -235,7 +235,7 @@
 <img class ="sacnCode" src="../../resources/upload/scanCode.png">
 <div class="prompt2">打开手机支付宝
     扫一扫继续付款</div>
-<div id="amountsPayable2" class="amountsPayable2">5元</div>
+<div id="amountsPayable1" class="amountsPayable2">5元</div>
 <div class="box3">
     <div>
         <img class="Tv" src="../../resources/upload/zhifubaoTV.png">
@@ -247,17 +247,19 @@
         <a class="login_a"><登录账户付款</a>
     </div>
 </div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function (){
-    var data={};
+
     $.ajax(
         {
             url:"/user/paymentAmount",
             type:"post",
             dataType:"json",
-            success:function (){
-
+            success:function (result){
+                document.getElementById("amountsPayable").innerHTML=result.realTotalAmount+"元";
+                document.getElementById("amountsPayable1").innerHTML=result.realTotalAmount+"元";
             },
             error:function (){
 

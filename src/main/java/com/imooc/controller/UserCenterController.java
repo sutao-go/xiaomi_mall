@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,8 @@ public class UserCenterController {
     private ShippingAddressService shippingAddressService;
     @Autowired
     private AdminUserShoppingCartService adminUserShoppingCartService;
+    //定义一个用于存放这个用户每件商品总金额的数组
+    List<Integer>list = new ArrayList<Integer>();
     /**
      * 这个主要是用来实现前端页面跳转用的，跳转到个人用户中心用的
      */
@@ -211,6 +214,7 @@ public class UserCenterController {
      * @throws Exception
      */
     @RequestMapping(method = RequestMethod.POST,value = "/paymentAmount")
+    @ResponseBody
     public Map<String,String> paymentAmount(
             @RequestParam Map<String,String> info,
             HttpServletResponse response,
@@ -218,8 +222,28 @@ public class UserCenterController {
             HttpSession session
     )throws Exception{
         String userName = request.getSession().getAttribute("userName").toString();
-        String totalAmount = adminUserShoppingCartService.totalAmount(userName);
-
-        return null;
+        List<OrderList>totalAmount = adminUserShoppingCartService.totalAmount(userName);
+        String totalAmount1 = totalAmount.toString();
+        System.out.println("商品的价格是"+totalAmount1);
+        JSONArray change1 = JSONArray.fromObject(totalAmount);
+        //将获取到的数据添加到数组中去
+        for (int i = 0;i<change1.size();i++){
+            String change2 = change1.getString(i);
+            JSONObject change3 = JSONObject.fromObject(change2);
+            int price = Integer.parseInt(change3.getString("price"));
+            int quantity = Integer.parseInt(change3.getString("quantity"));
+            //商品的总额度
+            int totalAmount2 = price*quantity;
+            list.add(totalAmount2);
+        }
+        int sum=0;
+        //将数组中的数据取出来然后进行累加得到该用户购物车中商品的总金额
+        for (int i=0;i<list.size();i++){
+            sum = sum+list.get(i);
+        }
+        //将获取到的总金额推送到前端去展示
+        info.put("realTotalAmount",Integer.toString(sum));
+        list.clear();
+        return info;
     }
 }

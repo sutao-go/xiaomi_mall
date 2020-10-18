@@ -54,5 +54,10 @@ public interface AdminUserShoppingCartMapper {
 
     List<OrderList> queryProductInformation(@Param("consumer")String consumer);
 
-    String totalAmount(@Param("userName") String userName);
+    /**
+     *计算商品的总金额
+     * @param userName
+     * @return
+     */
+    List<OrderList> totalAmount(@Param("userName") String userName);
 }
