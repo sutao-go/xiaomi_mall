@@ -314,8 +314,6 @@
                 <input id="shippingAddress">
                 <div>收件人手机号码</div>
                 <input id="phoneNumber1">
-
-
             </div>
             <div class="modal-footer">
                 <button type="button"  class="btn btn-default" data-dismiss="modal">
@@ -374,21 +372,28 @@
             type: "post",
             dataType: "json",
             success:function (info){
-                var imgurl = info.imgurl;
-                var productName = info.productName;
-                var price = info.price;
-                var quantity = info.quantity;
-                console.log(productName);
+
+                for(var i = 0;i<3;i++){
+                     a1 ="quantity"+i;
+                    console.log(a1);
+                    var quantity4=info.a1;
+                    console.log("XX"+quantity4);
+                    /*var ima = info.quantity1*/
+                }
+                var imgurl = typeof(info.imgurl1) ;
+
+                var price = info.price1;
+                var quantity = info.quantity1;
+                console.log("asdf"+quantity);
                 $("#shoppingInformation").append(
-                    "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n" +
-                    "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n" +
+                    "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n"+
+                    "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n"+
                     "<div id=\"settlementAmount\"  class=\"settlementAmount\"></div>"
                 );
                 $("#img").attr('src',imgurl);
                 document.getElementById("settlementGoods").innerHTML = productName;
                 document.getElementById("numberOfProducts").innerHTML = price+"元*"+quantity;
                 document.getElementById("settlementAmount").innerHTML = price;
-
             },
             error:function (info){
 

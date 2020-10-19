@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -154,16 +152,20 @@ public class UserCenterController {
     List<OrderList>img = adminUserShoppingCartService.findimg(userName);
     String a = img.toString();
     JSONArray imgdata = JSONArray.fromObject(img);
-    String test = imgdata.getString(0);
-    JSONObject test1 = JSONObject.fromObject(test);
-    String imgurl = test1.getString("imgurl");
-    String productName = test1.getString("productName");
-    String quantity = test1.getString("quantity");
-    String price = test1.getString("price");
-    info.put("imgurl",imgurl);
-    info.put("productName",productName);
-    info.put("quantity",quantity);
-    info.put("price",price);
+    /*int i = imgdata.size();*/
+        for (int i =0;i<imgdata.size();i++){
+            String a1 =Integer.toString(i+1);
+            String test = imgdata.getString(i);
+            JSONObject test1 = JSONObject.fromObject(test);
+            String productName = test1.getString("productName");
+            String quantity = test1.getString("quantity");
+            String price = test1.getString("price");
+            info.put("productName"+i,productName);
+            info.put("quantity"+i,quantity);
+            info.put("price"+i,price);
+            info.put("information"+i,a1);
+        }
+        System.out.println("数据"+info);
     return  info;
     }
 

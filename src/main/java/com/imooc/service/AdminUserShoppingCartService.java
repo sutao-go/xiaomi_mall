@@ -27,21 +27,21 @@ public interface AdminUserShoppingCartService {
      * @param userName 用户名
      * @return
      */
-    Boolean queryShoppingRecords(String userName);
+    Boolean queryShoppingRecords(String userName,String productName);
 
     /**
      * 这个是用来当用户在点击添加购物车时候购物车商品数量+1时使用的
-     * @param quantity3 最终修改的商品数量
+     * @param quantity2 最终修改的商品数量
      * @return
      */
-    int addQuantity(Integer quantity3,String consumer);
+    int addQuantity(Integer quantity2,String consumer,String productName);
 
     /**
      * 这个用来查询这个用户对应的商品数量的
      * @param consumeer 用户名
      * @return
      */
-    String checkProductQuantity(String consumeer);
+    String checkProductQuantity(String consumeer,String productName);
 
     /**
      * 这个是用来取出数据库中有关用户购物信息的
@@ -51,4 +51,13 @@ public interface AdminUserShoppingCartService {
     List<OrderList> queryProductInformation(String consumer);
 
     List<OrderList> totalAmount(String userName);
+
+    /**
+     * 此方法用于更新用户购物车中的商品数量的
+     * @param userName
+     * @param productName1
+     * @param quantity
+     * @return
+     */
+    int updateQuantity(String quantity,String userName, String productName1);
 }

@@ -31,26 +31,27 @@ public interface AdminUserShoppingCartMapper {
 
     /**
      * 查询此用户是否存在
+     *
      * @param userName 用户名
      * @return
      */
-    Boolean ShoppingRecords(@Param("userName")String userName);
+    Boolean ShoppingRecords(@Param("userName")String userName,@Param("productName")String productName);
 
     /**
      * 如果用户多次点击添加购物车向数据库中
         添加的商品数量
-     * @param quantity3 向数据库中添加的商品数量
+     * @param quantity2 向数据库中添加的商品数量
      * @param consumer 用户名
      * @return
      */
-    int addQuantity(@Param("quantity3")Integer quantity3,@Param("consumer")String consumer);
+    int addQuantity(@Param("quantity2")Integer quantity2,@Param("consumer")String consumer,@Param("productName")String productName);
 
     /**
      * 查询该用户对应的商品数量
      * @param consumer 用户名
      * @return
      */
-    String checkProductQuantity(@Param("consumer")String consumer);
+    String checkProductQuantity(@Param("consumer")String consumer,@Param("productName")String productName);
 
     List<OrderList> queryProductInformation(@Param("consumer")String consumer);
 
@@ -60,4 +61,16 @@ public interface AdminUserShoppingCartMapper {
      * @return
      */
     List<OrderList> totalAmount(@Param("userName") String userName);
+
+    /**
+     * 更新用户购物车中的商品数量
+     * @param userName
+     * @param productName1
+     * @param quantity
+     * @return
+     */
+    int updateQuantity(@Param("quantity")String quantity,
+                            @Param("userName")String userName,
+                          @Param("productName1")String productName1
+                         );
 }

@@ -1,18 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <style>
-     .a{
-         float: left;
-     }
- </style>
+    <meta charset="UTF-8">
+    <title>小米购物车</title>
+    <style>
+        .shoppingCart{
+            font: 28px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            left: 202px;
+            position: absolute;
+            top: 6px;
+        }
+        .xiaomi_title_left{
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            left: 108px;
+            top: 26px;
+        }
+        .title{
+            background-color: rgb(255,255,255);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            border-bottom:2px solid rgb(237,113,46) ;
+        }
+        .shouye_right_child_a_2{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 44px;
+            position: absolute;
+            left: 1268px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 24px;
+            position: absolute;
+            left: 1310px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered:hover{
+            color: rgb(237,113,46);
+        }
+        .shouye_right_child_a_2:hover{
+            color: rgb(237,113,46);
+        }
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
+        .hide{
+            background-color: rgb(189,189,189);
+            height: 16px;
+            width: 1px;
+            position: absolute;
+            left: 1300px;
+            top: 44px;
+        }
+        .shouye_right_child_a_2:hover{
+            cursor: pointer;
+        }
+        .registered:hover{
+            cursor: pointer;
+        }
+        .title1{
+            position: absolute;
+            top: 200px;
+        }
+        .card-body{
+            width: 1440px;
+            position: absolute;
+            top: -50px;
+        }
+        .modify{
+            position: absolute;
+            z-index: 1000;
+            background-color: rgb(236,133,46);
+            top: 710px;
+            left: 1200px;
+            color: white;
+        }
+        .modify:hover{
+            cursor: pointer;
+            background-color: rgb(252,80,9);
+        }
+        .purchase_settlement{
+            position: absolute;
+            background-color: rgb(236,133,46);
+            z-index: 1000;
+            color: white;
+            top: 710px;
+            left: 1340px;
+        }
+        .purchase_settlement:hover{
+            cursor: pointer;
+            background-color: rgb(252,80,9);
+        }
+    </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
+    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-<ul class="a">
-    <li>fsdafsda</li>
-    <li>sdfadsfas</li>
-    <li>fsdafdas</li>
-    <li>fdsafdsa</li>
-</ul>
+···代码省略···
+<table id="rowed3"></table>
+<div id="prowed3"></div>
+···代码省略··
+
+
+
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
+<script>
+    $(function(){
+        pageInit();
+    });
+    function pageInit(){
+        var lastsel;
+        jQuery("#rowed3").jqGrid(
+            {
+                url : ctx+'/JSONData',
+                datatype : "json",
+                colNames : [ 'Inv No', 'Date', 'Client', 'Amount', 'Tax','Total', 'Notes' ],
+                colModel : [
+                    {name : 'id',index : 'id',width : 55},
+                    {name : 'invdate',index : 'invdate',width : 90,editable : true},
+                    {name : 'name',index : 'name',width : 100,editable : true},
+                    {name : 'amount',index : 'amount',width : 80,align : "right",editable : true},
+                    {name : 'tax',index : 'tax',width : 80,align : "right",editable : true},
+                    {name : 'total',index : 'total',width : 80,align : "right",editable : true},
+                    {name : 'note',index : 'note',width : 150,sortable : false,editable : true}
+                ],
+                rowNum : 10,
+                rowList : [ 10, 20, 30 ],
+                pager : '#prowed3',
+                sortname : 'id',
+                viewrecords : true,
+                sortorder : "desc",
+                onSelectRow : function(id) {
+                    if (id && id !== lastsel) {
+                        jQuery('#rowed3').jqGrid('restoreRow', lastsel);
+                        jQuery('#rowed3').jqGrid('editRow', id, true);
+                        lastsel = id;
+                    }
+                },
+                editurl : ctx+"/RowEditing",
+                caption : "Using events example"
+            });
+        jQuery("#rowed3").jqGrid('navGrid', "#prowed3", {
+            edit : false,
+            add : false,
+            del : false
+        });
+
+
+
+    }
+</script>
 </body>
 </html>

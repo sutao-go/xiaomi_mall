@@ -37,19 +37,21 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
      * @return
      */
     @Override
-    public Boolean queryShoppingRecords(String userName) {
-        return adminUserShoppingCartMapper.ShoppingRecords(userName);
+    public Boolean queryShoppingRecords(String userName, String productName) {
+        return adminUserShoppingCartMapper.ShoppingRecords(userName,productName);
     }
 
     @Override
-    public int addQuantity(Integer quantity3,String consumer) {
-        return adminUserShoppingCartMapper.addQuantity(quantity3,consumer);
+    public int addQuantity(Integer quantity2,String consumer,String productName) {
+        return adminUserShoppingCartMapper.addQuantity(quantity2,consumer,productName);
     }
 
     @Override
-    public String checkProductQuantity(String consumeer) {
-        return adminUserShoppingCartMapper.checkProductQuantity(consumeer);
+    public String checkProductQuantity(String consumeer, String productName) {
+        return adminUserShoppingCartMapper.checkProductQuantity(consumeer,productName);
     }
+
+
 
     @Override
     public List<OrderList> queryProductInformation(String consumer) {
@@ -59,5 +61,10 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     @Override
     public List<OrderList> totalAmount(String userName) {
         return adminUserShoppingCartMapper.totalAmount(userName);
+    }
+
+    @Override
+    public int updateQuantity(String quantity,String userName, String productName1) {
+        return adminUserShoppingCartMapper.updateQuantity(quantity,userName,productName1);
     }
 }
