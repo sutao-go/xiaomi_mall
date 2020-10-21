@@ -134,13 +134,14 @@ public class UserCenterController {
 
     /**
      * 这个是用来将数据库中的图片等信息可以展示在前端页面上的
+     * （思考了一天暂时没有好的饭没有方法去做，后面再来，先注释掉留着）
      * @param info
      * @param response
      * @param request
      * @param session
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST,value = "/settlementProductList")
+    /*@RequestMapping(method = RequestMethod.POST,value = "/settlementProductList")
     @ResponseBody
     public Map<String,String> settlementProductList(
             @RequestParam Map<String,String> info,
@@ -152,9 +153,9 @@ public class UserCenterController {
     List<OrderList>img = adminUserShoppingCartService.findimg(userName);
     String a = img.toString();
     JSONArray imgdata = JSONArray.fromObject(img);
-    /*int i = imgdata.size();*/
+    *//*int i = imgdata.size();*//*
         for (int i =0;i<imgdata.size();i++){
-            String a1 =Integer.toString(i+1);
+            String a1 =Integer.toString(i);
             String test = imgdata.getString(i);
             JSONObject test1 = JSONObject.fromObject(test);
             String productName = test1.getString("productName");
@@ -166,8 +167,8 @@ public class UserCenterController {
             info.put("information"+i,a1);
         }
         System.out.println("数据"+info);
-    return  info;
-    }
+        return info;
+    }*/
 
     /**
      * 这个是用来修改用户地址的

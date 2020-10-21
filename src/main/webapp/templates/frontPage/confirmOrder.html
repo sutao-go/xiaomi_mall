@@ -278,12 +278,12 @@
         </div>
     </div>
 </div>
-<div class="productsAndCoupons">商品以及优惠券</div>
-<!--以下信息需要从数据库中查询-->
-<div id="shoppingInformation">
-<div id="settlementGoods" class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
+<!--<div class="productsAndCoupons">商品以及优惠券</div>
+&lt;!&ndash;以下信息需要从数据库中查询&ndash;&gt;
+<div id="shoppingInformation">-->
+<!--<div id="settlementGoods" class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
 <div id="numberOfProducts" class="numberOfProducts">129元*1</div>
-<div id="settlementAmount"  class="settlementAmount">129元</div>
+<div id="settlementAmount"  class="settlementAmount">129元</div>-->
 </div>
 <!--以上信息需要从数据库中查询-->
 <div class="line"></div>
@@ -364,27 +364,21 @@
             }
         }
     );
+
 </script>
-<script>
+<!--一个砍掉的功能-->
+<!--<script>
     $.ajax(
         {
             url:"/user/settlementProductList",
             type: "post",
             dataType: "json",
             success:function (info){
-
-                for(var i = 0;i<3;i++){
-                     a1 ="quantity"+i;
-                    console.log(a1);
-                    var quantity4=info.a1;
-                    console.log("XX"+quantity4);
-                    /*var ima = info.quantity1*/
-                }
-                var imgurl = typeof(info.imgurl1) ;
-
-                var price = info.price1;
-                var quantity = info.quantity1;
-                console.log("asdf"+quantity);
+                var imgurl = info.imgurl0;
+                var price = info.price0;
+                var productName =info.productName0;
+                var quantity = info.quantity0;
+                console.log(quantity);
                 $("#shoppingInformation").append(
                     "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n"+
                     "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n"+
@@ -396,11 +390,9 @@
                 document.getElementById("settlementAmount").innerHTML = price;
             },
             error:function (info){
-
             }
-        }
-    )
-</script>
+        });
+</script>-->
 <script>
     $("#change").click(function (){
         var data ={};

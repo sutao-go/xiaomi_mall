@@ -173,12 +173,108 @@ public class OrderListController {
     public String blackShark(){
         return "templates/frontPage/CollectionOfProductPages/blackShark";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/blackShark")
+    @ResponseBody
+    public Map<String,String> doPostBlackShark(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了Redmi 9A手机页面的跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/redmi9A")
     public String redmi9A(){
         return "templates/frontPage/CollectionOfProductPages/Redmi9A";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/redmi9A")
+    @ResponseBody
+    public Map<String,String> doPostredmi9A(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了小米10青春版的手机页面跳转
@@ -187,12 +283,108 @@ public class OrderListController {
     public String xiaomi10youth(){
         return "templates/frontPage/CollectionOfProductPages/Mi10YouthEdition5G";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/xiaomi10youth")
+    @ResponseBody
+    public Map<String,String> doPostXiaomi10youth(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了小米10页面的跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/xiaomi10")
     public String xiaomi10r(){
         return "templates/frontPage/CollectionOfProductPages/xiaomi_10";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/xiaomi10")
+    @ResponseBody
+    public Map<String,String> doPostXiaomi101(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了redmik30页面的跳转
@@ -201,12 +393,108 @@ public class OrderListController {
     public String redmik30(){
     return "templates/frontPage/CollectionOfProductPages/RedmiK30Pro";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/redMiK30pro")
+    @ResponseBody
+    public Map<String,String> doPostredMiK30pro(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了RedmiK30ProZoomVersion页面的跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/RedmiK30ProZoomVersion")
     public String RedmiK30ProZoomVersion(){
         return "templates/frontPage/CollectionOfProductPages/RedmiK30ProZoomVersion";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/RedmiK30ProZoomVersion")
+    @ResponseBody
+    public Map<String,String> doPostRedmiK30ProZoomVersion(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了RedmiSmartTVX65页面的跳转
@@ -217,9 +505,104 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/RedmiSmartTVX65";
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/RedmiSmartTVX65")
+    @ResponseBody
+    public Map<String,String> doPostRedmiSmartTVX65(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     @RequestMapping(method = RequestMethod.GET,value = "/RedmiSmartTVX70")
     public String RedmiSmartTVX70(){
         return "templates/frontPage/CollectionOfProductPages/RedmiTV70inches";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/RedmiSmartTVX70")
+    @ResponseBody
+    public Map<String,String> doPostRedmiSmartTVX70(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了fullScreenTVE55A页面的跳转
@@ -230,6 +613,53 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/FullScreenTVE55A";
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/fullScreenTVE55A")
+    @ResponseBody
+    public Map<String,String> doPostfullScreenTVE55A(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了MiFullScreenTVE32C页面的跳转
      * @return
@@ -238,12 +668,108 @@ public class OrderListController {
     public String miFullScreenTVE32C(){
         return "templates/frontPage/CollectionOfProductPages/MiFullScreenTVE32C";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/miFullScreenTVE32C")
+    @ResponseBody
+    public Map<String,String> doPostmiFullScreenTVE32C(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      *这个实现了MijiaAirConditioning页面的跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/mijiaAirConditioning")
     public String mijiaAirConditioning(){
         return "templates/frontPage/CollectionOfProductPages/MijiaAirConditioning";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/mijiaAirConditioning")
+    @ResponseBody
+    public Map<String,String> doPostmijiaAirConditioning(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了小米电视4A 60英寸页面的跳转
@@ -252,12 +778,108 @@ public class OrderListController {
     public String miTV4A60inches(){
         return "templates/frontPage/CollectionOfProductPages/MiTV4A60inches";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/miTV4A60inches")
+    @ResponseBody
+    public Map<String,String> doPostmiTV4A60inches(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了米家互联网洗烘一体机Pro 10kg的页面跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/mijiaWashingMachine")
     public String mijiaWashingMachin(){
         return "templates/frontPage/CollectionOfProductPages/mijiaWashingMachine";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/mijiaWashingMachine")
+    @ResponseBody
+    public Map<String,String> doPostmijiaWashingMachine(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了Redmi全自动波轮洗衣机1A 8kg的页面跳转
@@ -267,6 +889,53 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/redMiWashingMachine";
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/redMiWashingMachine")
+    @ResponseBody
+    public Map<String,String> doPostredMiWashingMachine(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了小米电脑页面的页面跳转
      * @return
@@ -276,6 +945,53 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/computer1";
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/computer1")
+    @ResponseBody
+    public Map<String,String> doPostcomputer1(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了小米电脑air的跳转
      * @return
@@ -284,6 +1000,54 @@ public class OrderListController {
     public String computer2(){
         return "templates/frontPage/CollectionOfProductPages/computer2";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/computer2")
+    @ResponseBody
+    public Map<String,String> doPostcomputer2(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了MIXAlpha手机页面的跳转
      */
@@ -291,12 +1055,108 @@ public class OrderListController {
     public String mixAlpha(){
         return "templates/frontPage/CollectionOfProductPages/MIXAlpha";
     }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/mixAlpha")
+    @ResponseBody
+    public Map<String,String> doPostmixAlpha(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个实现了Redmi10XPro手机页面的跳转
      */
     @RequestMapping(method = RequestMethod.GET,value = "/redmi10XPro")
     public String redmi10XPro(){
         return "templates/frontPage/CollectionOfProductPages/Redmi10XPro5G";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/redmi10XPro")
+    @ResponseBody
+    public Map<String,String> doPostredmi10XPro(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
     }
     /**
      * 这个实现了小米手环4的跳转
@@ -306,6 +1166,53 @@ public class OrderListController {
         return "templates/frontPage/CollectionOfProductPages/MiBand4";
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/miBand4")
+    @ResponseBody
+    public Map<String,String> doPostmiBand4(
+            @RequestParam Map<String,String>info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("phoneName");
+        String productName = name.toString();
+        System.out.println(productName);
+        Object name2 = info.get("price");
+        String price = name2.toString();
+        //判断前端用户有没有登录
+        Object user = request.getSession().getAttribute("userName");
+        consumer = user.toString();
+        if (consumer.length() != 0){
+            //当用户添加购物车的时候，先去数据库中查询下有无此用户的购物记录
+            Boolean a = adminUserShoppingCartService.queryShoppingRecords(consumer,productName);
+            System.out.println("这个是购物车中的用户名"+a);
+            if (a == null){
+                //如果登录了并且数据库中没有数据就获取session然后将加入购物车的数据添加到数据库中去,让数据库中的数据+1
+                adminUserShoppingCartService.settlement(consumer,productName,price,1);
+            }else{
+                //如果登录了就先去查询这个用户购买的商品数量是多少
+                String  quantity = adminUserShoppingCartService.checkProductQuantity(consumer,productName);
+                /*System.out.println("该用户购买的数量是"+quantity);*/
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                System.out.println("xxxxx"+quantity);
+                //将查询出来的数据进行强制转换，把String类型转换成为int类型
+                int quantity1 = Integer.parseInt(quantity);
+                //将查询出来的数据+1
+                int quantity2 = quantity1+1;
+                //将+1的数据写入数据库存储
+                int test = adminUserShoppingCartService.addQuantity(quantity2,consumer,productName);
+                System.out.println("ooo"+test);
+                //将+1的数据写入数据库存储
+                /*adminUserShoppingCartService.addQuantity(quantity3,consumer);*/
+            }
+        }else{
+            //如果没有登录就在cookie中去添加数据
+
+            //如果在添加cookie之后再登录的就在登录之后去数据库中添加数据
+
+        }
+        return info;
+    }
     /**
      * 这个是用来实现结算购物车功能的
      * @return

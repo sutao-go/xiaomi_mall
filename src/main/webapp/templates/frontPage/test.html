@@ -1,188 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>小米购物车</title>
-    <style>
-        .shoppingCart{
-            font: 28px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
-            left: 202px;
-            position: absolute;
-            top: 6px;
-        }
-        .xiaomi_title_left{
-            width: 48px;
-            height: 48px;
-            position: absolute;
-            left: 108px;
-            top: 26px;
-        }
-        .title{
-            background-color: rgb(255,255,255);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            border-bottom:2px solid rgb(237,113,46) ;
-        }
-        .shouye_right_child_a_2{
-            font-size: 12px;
-            background-color: rgb(255,255,255);
-            width: 44px;
-            position: absolute;
-            left: 1268px;
-            top: 44px;
-            color: rgb(189,189,189);
-        }
-        .registered{
-            font-size: 12px;
-            background-color: rgb(255,255,255);
-            width: 24px;
-            position: absolute;
-            left: 1310px;
-            top: 44px;
-            color: rgb(189,189,189);
-        }
-        .registered:hover{
-            color: rgb(237,113,46);
-        }
-        .shouye_right_child_a_2:hover{
-            color: rgb(237,113,46);
-        }
-        #shouye_right_child_a_2:hover > .shouye_user_down{
-            position: absolute;
-            font-size: 12px;
-            float:left;
-            top: 30px;
-            left: 0;
-            z-index:1000;
-            color: black;
-            width: 60px;
-            background-color: rgb(255,255,255);
-        }
-        .shouye_user_down{
-            position: absolute;
-            top: -134px;
-            color: rgb(242,242,242);
-            width: 60px;
-        }
-        .shouye_user_down_tr:hover td{
-            color: rgb(252,80,9);
-            background-color: rgb(242,242,242);
-        }
-        .hide{
-            background-color: rgb(189,189,189);
-            height: 16px;
-            width: 1px;
-            position: absolute;
-            left: 1300px;
-            top: 44px;
-        }
-        .shouye_right_child_a_2:hover{
-            cursor: pointer;
-        }
-        .registered:hover{
-            cursor: pointer;
-        }
-        .title1{
-            position: absolute;
-            top: 200px;
-        }
-        .card-body{
-            width: 1440px;
-            position: absolute;
-            top: -50px;
-        }
-        .modify{
-            position: absolute;
-            z-index: 1000;
-            background-color: rgb(236,133,46);
-            top: 710px;
-            left: 1200px;
-            color: white;
-        }
-        .modify:hover{
-            cursor: pointer;
-            background-color: rgb(252,80,9);
-        }
-        .purchase_settlement{
-            position: absolute;
-            background-color: rgb(236,133,46);
-            z-index: 1000;
-            color: white;
-            top: 710px;
-            left: 1340px;
-        }
-        .purchase_settlement:hover{
-            cursor: pointer;
-            background-color: rgb(252,80,9);
-        }
-    </style>
-    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
-    <!--jqgrid的css-->
-    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>NewBee商城-购物车</title>
+    <link rel="stylesheet" th:href="@{mall/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{mall/css/common.css}">
+    <link rel="stylesheet" th:href="@{mall/styles/header.css}">
+    <link rel="stylesheet" th:href="@{mall/styles/cart.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
 </head>
 <body>
-···代码省略···
-<table id="rowed3"></table>
-<div id="prowed3"></div>
-···代码省略··
 
+<div id="cart">
+    <div class="banner_x center">
+        <a th:href="@{/index}" target="_blank">
+            <div class="logo fl">
+                <img src="mall/image/new-bee-logo-3.png"/>
+            </div>
+        </a>
 
+        <div class="wdgwc fl ml20">购物车</div>
+        <div class="wxts fl ml20">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</div>
+        <div class="clear"></div>
+    </div>
+    <div class="cart_line"></div>
+    <div class="cart_bg">
+        <th:block th:if="${#lists.isEmpty(myShoppingCartItems)}">
+            <div class="list center">
+                <!-- todo 无购物项时 换背景图 -->
+                无数据
+            </div>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(myShoppingCartItems)}">
+            <div class="list center">
+                <div class="top2 center">
+                    <div class="sub_top fl">
+                    </div>
+                    <div class="sub_top fl">商品名称</div>
+                    <div class="sub_top fl">单价</div>
+                    <div class="sub_top fl">数量</div>
+                    <div class="sub_top fl">小计</div>
+                    <div class="sub_top fr">操作</div>
+                    <div class="clear"></div>
+                </div>
+                <th:block th:each="item : ${myShoppingCartItems}">
+                    <div class="content2 center">
+                        <div class="sub_content fl ">
+                        </div>
+                        <div class="sub_content cover fl"><img th:src="@{${item.goodsCoverImg}}"></div>
+                        <div class="sub_content fl ft20" th:text="${item.goodsName}">商品名称</div>
+                        <div class="sub_content fl" th:text="${item.sellingPrice+'元'}">1299元</div>
+                        <div class="sub_content fl">
+                            <input class="goods_count" th:id="${'goodsCount'+item.cartItemId}" type="number"
+                                   th:onblur="'updateItem('+${item.cartItemId}+')'"
+                                   th:value="${item.goodsCount}" step="1" min="1"
+                                   max="5">
+                        </div>
+                        <div class="sub_content fl" th:text="${item.goodsCount*item.sellingPrice+'元'}">1299元</div>
+                        <div class="sub_content fl"><a href="##" th:onclick="'deleteItem('+${item.cartItemId}+')'">×</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </th:block>
+            </div>
+        </th:block>
+        <div class="pre_order mt20 center">
+            <div class="tips fl ml20">
+                <ul>
+                    <li><a th:href="@{/index}">继续购物</a></li>
+                    <li>|</li>
+                    <li>共<span th:text="${itemsTotal}">13</span>件商品</li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="order_div fr">
+                <div class="order_total fl">合计（不含运费）：<span th:text="${priceTotal}+'.00元'">1299.00元</span></div>
+                <div class="order_button fr">
+                    <th:block th:if="${itemsTotal == 0}">
+                        <input class="order_button_c" type="button" name="tip"
+                               onclick="tip()"
+                               value="去结算"/>
+                    </th:block>
+                    <th:block th:unless="${itemsTotal == 0}">
+                        <input class="order_button_d" type="button" name="settle"
+                               onclick="settle()"
+                               value="去结算"/>
+                    </th:block>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div th:replace="mall/footer::footer-fragment"></div>
 
-<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
-<script>
-    $(function(){
-        pageInit();
-    });
-    function pageInit(){
-        var lastsel;
-        jQuery("#rowed3").jqGrid(
-            {
-                url : ctx+'/JSONData',
-                datatype : "json",
-                colNames : [ 'Inv No', 'Date', 'Client', 'Amount', 'Tax','Total', 'Notes' ],
-                colModel : [
-                    {name : 'id',index : 'id',width : 55},
-                    {name : 'invdate',index : 'invdate',width : 90,editable : true},
-                    {name : 'name',index : 'name',width : 100,editable : true},
-                    {name : 'amount',index : 'amount',width : 80,align : "right",editable : true},
-                    {name : 'tax',index : 'tax',width : 80,align : "right",editable : true},
-                    {name : 'total',index : 'total',width : 80,align : "right",editable : true},
-                    {name : 'note',index : 'note',width : 150,sortable : false,editable : true}
-                ],
-                rowNum : 10,
-                rowList : [ 10, 20, 30 ],
-                pager : '#prowed3',
-                sortname : 'id',
-                viewrecords : true,
-                sortorder : "desc",
-                onSelectRow : function(id) {
-                    if (id && id !== lastsel) {
-                        jQuery('#rowed3').jqGrid('restoreRow', lastsel);
-                        jQuery('#rowed3').jqGrid('editRow', id, true);
-                        lastsel = id;
-                    }
-                },
-                editurl : ctx+"/RowEditing",
-                caption : "Using events example"
-            });
-        jQuery("#rowed3").jqGrid('navGrid', "#prowed3", {
-            edit : false,
-            add : false,
-            del : false
+</body>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script type="text/javascript">
+
+    /**
+     * 购物车中数量为0时提示
+     */
+    function tip() {
+        swal("购物车中无数据，无法结算", {
+            icon: "error",
         });
+    }
 
+    /**
+     * 跳转至结算页面
+     */
+    function settle() {
+        window.location.href = '/shop-cart/settle'
+    }
 
+    /**
+     *更新购物项
+     *
+     * todo 判断是否与原值相同
+     */
+    function updateItem(id) {
+        var domId = 'goodsCount' + id;
+        var goodsCount = $("#" + domId).val();
+        if (goodsCount > 5) {
+            swal("单个商品最多可购买5个", {
+                icon: "error",
+            });
+            return;
+        }
+        if (goodsCount < 1) {
+            swal("数量异常", {
+                icon: "error",
+            });
+            return;
+        }
+        var data = {
+            "cartItemId": id,
+            "goodsCount": goodsCount
+        };
+        $.ajax({
+            type: 'PUT',
+            url: '/shop-cart',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    window.location.reload();
+                } else {
+                    swal("操作失败", {
+                        icon: "error",
+                    });
+                }
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+            }
+        });
+    }
 
+    /**
+     * * 删除购物项
+     * @param id
+     */
+    function deleteItem(id) {
+        swal({
+            title: "确认弹框",
+            text: "确认要删除数据吗?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((flag) => {
+                if (flag) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/shop-cart/' + id,
+                        success: function (result) {
+                            if (result.resultCode == 200) {
+                                window.location.reload();
+                            } else {
+                                swal("操作失败", {
+                                    icon: "error",
+                                });
+                            }
+                        },
+                        error: function () {
+                            swal("操作失败", {
+                                icon: "error",
+                            });
+                        }
+                    });
+                }
+            }
+        )
+        ;
     }
 </script>
-</body>
 </html>

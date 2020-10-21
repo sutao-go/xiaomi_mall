@@ -242,7 +242,7 @@
             <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
             colModel: [
                 /*{label:'用户名', name: 'userName', index: 'userName', width: 200, key: true },*/
-                {label:'商品名称', name: 'productName', index: 'productName', width: 480,editable : true},
+                {label:'商品名称', name: 'productName', index: 'productName', width: 480},
                 {label:'单价', name: 'price', index: 'price', width: 720},
                 {label: '购买数量', name: 'quantity', index: 'quantity', width: 720,editable : true},
             ],
@@ -251,7 +251,6 @@
             rowList:[10,20,50],
             styleUI: 'Bootstrap',
             loadtext: '信息读取中...',
-
             cellEdit : true,
             cellsubmit: "remote",
             //向后端传递前端修改的商品数量
@@ -277,7 +276,6 @@
                 //隐藏grid底部滚动条
                 $("#jqGrid").closest("ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
             },
-
             onSelectRow: function(id){
                 if(id && id!==lastSel){
                     jQuery('#grid_id').restoreRow(lastSel);
@@ -286,7 +284,6 @@
                 }
                 jQuery('#grid_id').editRow(id, true);
             },
-
         });
     });
 

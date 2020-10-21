@@ -501,7 +501,7 @@
     <div class="xiaomi10_body_div4">4699元</div>
     <div class="xiaomi10_body_div5">总计：4699元</div>
 </div>
-<button class="addToShopping">加入购物车</button>
+<button id="addToShopping" class="addToShopping">加入购物车</button>
 <button class="like" ><img class="heart" src="../../../resources/upload/heart.png">喜欢</button>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
 <script type="text/javascript" src="../../../resources/static/jquery/jquery.min.js">
@@ -550,6 +550,7 @@
         },
     })
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     setTimeout(function(){
         $.ajax(
@@ -605,6 +606,30 @@
     $(function (){
         $("#shouye_right_child_a_2").click(function (){
             window.location.href='/admin/login';
+        })
+    });
+    $(function (){
+        $("#addToShopping").click(function (){
+            var data ={};
+            data.phoneName= "15.6 四核i7 16G 独显 512G";
+            data.price = "4699";
+            console.log(data.phoneName);
+            $.ajax({
+                url:"/orderlist/computer1",
+                type:"post",
+                dataType: "json",
+                data: {
+                    /*用k-v键值对*/
+                    phoneName:data.phoneName,
+                    price:data.price
+                },
+                success:function (){
+                    swal("添加成功");
+                },
+                error:function (){
+                    swal("添加失败");
+                }
+            })
         })
     });
 </script>
