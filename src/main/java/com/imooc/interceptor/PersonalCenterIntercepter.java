@@ -8,17 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 前台系统登录拦截器
+ * 个人中心拦截器
  */
 @Component
-public class FrontEndSystemAuthenticationInterceptor implements HandlerInterceptor {
-
+public class PersonalCenterIntercepter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-
         String uri = request.getRequestURI();
         System.out.println("获取到的链接："+uri);
-        if (uri.startsWith("/admin") && null == request.getSession().getAttribute("userName")) {
+        if (uri.startsWith("/user") && null == request.getSession().getAttribute("userName")) {
             request.getSession().setAttribute("errorMsg", "请登陆");
             response.sendRedirect(request.getContextPath() + "/admin/login");
             return false;
@@ -26,7 +24,6 @@ public class FrontEndSystemAuthenticationInterceptor implements HandlerIntercept
             request.getSession().removeAttribute("errorMsg");
             return true;
         }
-
     }
 
     @Override
