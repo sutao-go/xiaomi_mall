@@ -31,4 +31,9 @@ public class AdminUserImpl implements AdminUserService {
     public AdminUser find(String userName){
         return adminUserMapper.find(userName);
     }
+
+    @Override
+    public AdminUser findAdministrator(String userName, String password) {
+        return adminUserMapper.findAdministrator(userName,password);
+    }
 }

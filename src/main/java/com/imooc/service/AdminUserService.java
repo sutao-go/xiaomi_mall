@@ -20,5 +20,7 @@ public interface AdminUserService {
     AdminUser registered(String userName,String passWord);
 
     AdminUser find(String userName);
+
+    AdminUser findAdministrator(String userName, String password);
 }
 

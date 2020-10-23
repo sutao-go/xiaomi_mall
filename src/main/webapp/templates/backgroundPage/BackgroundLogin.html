@@ -111,11 +111,38 @@
 
     </div>
     <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
-    <script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
         $(function (){
-            $.ajax({
+            $("#loginaccount").click(function (){
+                var data ={};
+                data.accountnumber = $("#account_number").val();
+                data.password = $("#password").val();
+                $.ajax(
+                    {
+                        url:"/backendLogin/login",
+                        /*向后端传输数据的方法*/
+                        type:"post",
+                        /*向后端传输数据的类型*/
+                        dataType:"json",
+                        /*向后端传输的数据*/
+                        data: {
+                            /*用k-v键值对*/
+                            accountnumber:data.accountnumber,
+                            password:data.password
+                        },
+                        success:function (result) {
+                            if (result.resultCode == 200){
+                                window.location.href = '/backendLogin/index';
+                            }
 
+                        },
+                        error:function (){
+                            swal("登录后台失败");
+                        },
+                    })
             })
+
         })
     </script>
 </body>

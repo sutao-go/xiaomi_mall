@@ -25,4 +25,15 @@
     <select id="find" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
         select * from adminuser where user_name = #{userName,jdbcType=VARCHAR}
     </select>
+
+    <select id="findAdministrator" resultMap="BaseResultMap" parameterType="com.imooc.entity.AdminUser">
+        select
+        user_name,pass_word
+        from
+        administrator
+        where
+        user_name = #{userName,jdbcType=VARCHAR}
+        and
+        pass_word = #{password,jdbcType=VARCHAR}
+    </select>
 </mapper>
