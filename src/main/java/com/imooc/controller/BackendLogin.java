@@ -62,7 +62,7 @@ public class BackendLogin {
 
     @RequestMapping(method = RequestMethod.GET,value = "/index")
     public String index(){
-        return "templates/backgroundPage/layuiadmin/src/views/index";
+        return "templates/backgroundPage/BackgroundIndex";
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/index")
