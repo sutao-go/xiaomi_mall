@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../resources/static/layui/css/layui.css">
+    <style>
+    .CommodityInformationEditing{
+        font-size: 1.25rem;
+    }
+    .CommodityInformationEditing_div{
+        width: 1160px;
+        height: 54px;
+        border-top: #0000FF;
+        background-color: #00F7DE;
+        border-radius: 10px 10px 0 0 ;
+    }
+    </style>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -44,16 +56,24 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">关于用户</a>
+                    <a class="" href="javascript:;">产品管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户信息</a></dd>
-                        <dd><a href="javascript:;">账户管理</a></dd>
+                        <dd>
+                            <a href="javascript:;">轮播图设置</a>
+                        </dd>
+                        <dd>
+                            <a id="CommodityOnAndOffShelves" href="javascript:;">商品上下架</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">商品的分类</a>
+                        </dd>
+
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">关于商品</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">商品上下架</a></dd>
+                        <dd><a href="javascript:;">商品新增</a></dd>
                         <dd><a href="javascript:;">订单管理</a></dd>
                     </dl>
                 </li>
@@ -65,20 +85,110 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-    </div>
-
+        <div class="CommodityInformationEditing_div">
+            <h3 class="CommodityInformationEditing">商品信息编辑</h3>
+        </div>
+        <textarea id="editor_id" name="content" style="width:100%;height:1000px;">
+        &lt;strong&gt;HTML内容&lt;/strong&gt;
+        </textarea>
     <div class="layui-footer">
         <!-- 底部固定区域 -->
         © layui.com - 底部固定区域
     </div>
 </div>
 <script src="../../resources/static/layui/layui.js"></script>
+<script src="../../resources/static/kindeditor/kindeditor-all.js"></script>
+<script src="../../resources/static/kindeditor/lang/zh-CN.js"></script>
 <script>
     //JavaScript代码区域
     layui.use('element', function(){
         var element = layui.element;
     });
 </script>
+<script>
+    $(function () {
+        $("#jqGrid").jqGrid({
+            <!--数据类型-->
+            datatype: "json",
+            <!--请求数据的地址-->
+            url: '/orderlist/QueryProductInformation/list',
+            <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
+            <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
+            <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
+            colModel: [
+                /*{label:'用户名', name: 'userName', index: 'userName', width: 200, key: true },*/
+                {label:'商品名称', name: 'productName', index: 'productName', width: 480},
+                {label:'单价', name: 'price', index: 'price', width: 720},
+                {label: '购买数量', name: 'quantity', index: 'quantity', width: 720,editable : true},
+            ],
+            height: 560,
+            rowNum: 10,
+            rowList:[10,20,50],
+            styleUI: 'Bootstrap',
+            loadtext: '信息读取中...',
+            cellEdit : true,
+            cellsubmit: "remote",
+            //向后端传递前端修改的商品数量
+            cellurl: '/orderlist/modifiedProductQuantity',
+
+            <!--如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'-->
+            rownumbers: false,
+            <!--如果rownumbers为true，则可以设置column的宽度-->
+            rownumWidth: 400,
+            <!--如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth-->
+            autowidth: true,
+            <!--定义是否可以多选-->
+            multiselect: true,
+            <!--pager是加入分页器-->
+            pager: "#jqGridPager",
+            jsonReader: {
+                root: "data.list",
+                page: "data.currPage",
+                total: "data.totalPage",
+                records: "data.totalCount"
+            },
+            gridComplete: function () {
+                //隐藏grid底部滚动条
+                $("#jqGrid").closest("ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+            },
+            onSelectRow: function(id){
+                if(id && id!==lastSel){
+                    jQuery('#grid_id').restoreRow(lastSel);
+                    lastSel=id;
+                    console.log("xxxx"+id);
+                }
+                jQuery('#grid_id').editRow(id, true);
+            },
+        });
+    });
+
+</script>
+<script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_id');
+    });
+    var options = {
+        cssPath : '/css/index.css',
+        filterMode : true
+    };
+    var editor = K.create('textarea[name="content"]', options);
+    // 取得HTML内容
+    html = editor.html();
+    // 同步数据后可以直接取得textarea的value
+    editor.sync();
+    html = document.getElementById('editor_id').value; // 原生API
+    html = $('#editor_id').val(); // jQuery
+
+    // 设置HTML内容
+    editor.html('HTML内容');
+    KindEditor.options.filterMode = false;
+</script>
+    <script>
+        $(function (){
+            $("#CommodityOnAndOffShelves").click(function (){
+                window.location
+            })
+        })
+    </script>
 </body>
 </html>
