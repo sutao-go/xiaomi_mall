@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+<link type="text/css" href="../../resources/static/bootstrap/css/bootstrap-theme.min.css">
+<link type="text/css" href="../../resources/static/bootstrap/js/bootstrap.min.js">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .xiaomi_mall{
+            height: 98px;
+            width: 202px;
+            margin-left: 155px;
+        }
+        .xiaomi_10_qingchunban{
+            margin-top: -14px;
+            height: 588px;
+            width: 1440px;
+        }
+        .login{
+            position: absolute;
+            z-index: 1;
+            width: 416px;
+            height: 566px;
+            background-color: rgb(255,255,255);
+            margin-left: 874px;
+            margin-top: -571px;
+        }
+        .sign_in{
+            font-size: 24px;
+            color: rgb(252,80,9);
+            margin-left: 159px;
+            margin-top: 34px;
+        }
+        .account_number{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            font-size: 14px;
+            color: black;
+            outline: none;
+        }
+        .password{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            font-size: 14px;
+            outline: none;
+            color: black;
+        }
+        .Welcome_to_my_website{
+            width: 354px;
+            height: 50px;
+            background-color: rgb(252,80,9);
+            border-radius: 0;
+            margin-left: 31px;
+            border: 0 ;
+            outline: none;
+            color: white;
+            cursor:pointer ;
+        }
+        .Welcome_to_my_website:hover{
+            color: black;
+        }
+        .login_a{
+            font-size: 14px;
+            color: rgb(217,217,217);
+            margin-left: 180px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .login_a:hover{
+            color: rgb(252,80,9);
+        }
+        .kaptcha{
+            margin-left: 100px;
+        }
+        .kaptcha_img{
+            margin-left: 54px;
+            margin-top: 5px;
+
+        }
+        .j_captcha{
+            outline: none;
+        }
+        .account_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 911px;
+            margin-top: -418px;
+            z-index: 2;
+            font-size: 12px;
+        }
+        .passWord_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 911px;
+            margin-top: -346px;
+            z-index: 3;
+            font-size: 12px;
+        }
+        .verifyCode_prompt{
+            position: absolute;
+            color: rgb(255,255,255);
+            margin-left: 1030px;
+            margin-top: -250px;
+            z-index: 3;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img class="xiaomi_mall" src="../../resources/upload/xiaomi_mall.png">
+</div>
+<div>
+    <img class="xiaomi_10_qingchunban" src="../../resources/upload/xiaomi_10_qingchunban.png">
+</div>
+<div >
+    <form class="login" id="login">
+        <br>
+        <br>
+        <a class="sign_in">账号注册</a>
+        <br>
+        <br>
+        <input id="account_number" class="account_number" placeholder="邮箱/手机号码/小米ID"
+               onfocus="this.placeholder=''"
+               onblur="this.placeholder='邮箱/手机号码/小米ID'"
+               maxlength="20"
+        >
+        <!--1.没有点击那么表单为空
+        2.点击了但是onblur没有值为空-->
+        <br>
+        <br>
+        <input id="password" class="password" placeholder="密码"
+               onfocus="this.placeholder=''"
+               onblur="this.placeholder='密码'"
+               type="text"
+               maxlength="20"
+        >
+        <br>
+        <br>
+        <br>
+        <br>
+        <button id="Welcome_to_regiser" type="button" class="Welcome_to_my_website" value="注册">注册</button>
+        <br>
+        <br>
+        <a class="login_a" id="login_a">立即登录</a>
+    </form>
+    <div>
+        <a id="account_prompt" class="account_prompt">请输入账号</a>
+    </div>
+    <div >
+        <a id="passWord_prompt" class="passWord_prompt">请输入密码</a>
+    </div>
+</div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--以下的代码用于做前后端账号密码数据的传递-->
+<script type="text/javascript">
+    $(function (){
+        $("#Welcome_to_regiser").click(function (){
+            var data ={};
+            data.accountnumber = $("#account_number").val();
+            data.password = $("#password").val();
+            console.log(data.password);
+            $.ajax(
+                {
+                    url:"/admin/registered",
+                    /*向后端传输数据的方法*/
+                    type:"post",
+                    /*向后端传输数据的类型*/
+                    dataType:"json",
+                    /*向后端传输的数据*/
+                    data: {
+                        /*用k-v键值对*/
+                        accountnumber:data.accountnumber,
+                        password:data.password
+                    },
+                    success:function (result) {
+                        if(result.resultCode == 206){
+                            swal("恭喜您注册成功");
+                        }
+                    },
+                    error:function (){
+                            swal("很遗憾您注册失败了");
+                    },
+                })
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(function(){
+        $("#login_a").click(function(){
+            window.location.href= '/admin/login';
+        })
+    })
+</script>
+<script type="text/javascript">
+        $(function(){
+            $("#Welcome_to_regiser").mousedown(function(){
+                var far ={};
+                far.password = $("#password").val();
+                var s = far.password.toString();
+                console.log("点击"+s);
+                if (s.length == 0){
+                    swal("请输入密码");
+                }
+            });
+            $("#Welcome_to_regiser").mousedown(function(){
+                var far ={};
+                far.accountnumber = $("#account_number").val();
+                var s = far.accountnumber.toString();
+                console.log("点击"+s);
+                if (s.length == 0){
+                    swal("请输入账号");
+                }
+            });
+            $("#Welcome_to_regiser").mouseup(function(){
+                document.getElementById("passWord_prompt").style.color ="rgb(255,255,255)";
+                document.getElementById("account_prompt").style.color ="rgb(255,255,255)";
+            });
+        })
+</script>
+</body>
+</html>

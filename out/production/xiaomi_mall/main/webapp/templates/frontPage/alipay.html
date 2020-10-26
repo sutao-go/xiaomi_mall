@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付宝页面</title>
+    <style>
+        .title{
+            width: 1440px;
+            height: 28px;
+            background-color: rgb(129,134,138);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .title1{
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            left: 962px;
+            color: white;
+            top: 4px;
+        }
+        .title2{
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            left: 1148px;
+            color: white;
+            top: 4px;
+        }
+        .title3{
+            height: 14px;
+            width: 1px;
+            background-color: rgb(109,114,118);
+            position: absolute;
+            left: 1132px;
+            top: 8px;
+        }
+        .alipayTitle{
+            position: absolute;
+            width: 100%;
+            height: 60px;
+            top: 28px;
+            left: 0;
+            border-bottom: 1px solid rgb(217,217,217);
+        }
+        .alipay{
+            position: absolute;
+            top: 38px;
+            left: 244px;
+        }
+        .verticalLine{
+            position: absolute;
+            height: 32px;
+            width: 1px;
+            background-color: black;
+            left: 369px;
+            top: 43px;
+        }
+        .checkoutCounter{
+            position: absolute;
+            top: 55px;
+            font: 16px/1.5 tahoma,arial,\5b8b\4f53;
+            left: 375px;
+            color: rgb(103,109,112);
+        }
+        .background{
+            width: 100%;
+            height: 800px;
+            background-color:rgb(239,240,241);
+            position: absolute;
+            left: 0;
+            top: 90px;
+        }
+        .prompt{
+            position: absolute;
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            top: 118px;
+            left: 260px;
+        }
+        .tradingInformation{
+            font-size: 14px;
+            position: absolute;
+            left: 260px;
+            top: 152px;
+        }
+        .Beneficiary{
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            left: 520px;
+            top: 152px;
+        }
+        .Box{
+            width: 952px;
+            height: 502px;
+            position: absolute;
+            background-color: rgb(255,255,255);
+            top: 188px;
+            left: 260px;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+        }
+        .qrCode{
+            width: 168px;
+            height: 168px;
+            position: absolute;
+            z-index: 1001;
+            left: 556px;
+            top: 312px;
+        }
+        .scanPayment{
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            left: 598px;
+            top: 244px;
+        }
+        .amountsPayable{
+            font-size: 26px;
+            font-weight: 700;
+            color: #f60;
+            position: absolute;
+            left: 612px;
+            top: 260px;
+        }
+        .box2{
+            width: 182px;
+            height: 234px;
+            background-color: rgb(255,255,255);
+            position: absolute;
+            z-index:1000;
+            left: 550px;
+            top: 306px;
+            border-top: 1px rgb(211,211,211) solid;
+            border-left: 1px rgb(211,211,211) solid;
+            border-bottom: 2px rgb(211,211,211) solid;
+            border-right: 2px rgb(211,211,211) solid;
+        }
+        .sacnCode{
+            height: 28px;
+            width: 28px;
+            position: absolute;
+            top: 500px;
+            left: 560px;
+            z-index: 1001;
+
+        }
+        .prompt2{
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            width: 90px;
+            position: absolute;
+            top: 494px;
+            left: 600px;
+            z-index: 1000;
+        }
+        .amountsPayable2{
+            font-size: 26px;
+            font-weight: 700;
+            color: #f60;
+            position: absolute;
+            left: 1094px;
+            top: 132px;
+        }
+        .box3{
+            width: 160px;
+            height: 502px;
+            background-color: rgb(230,230,230);
+            position: absolute;
+            z-index: 1000;
+            top: 190px;
+            left: 1052px;
+            border-radius: 10px 0 0 10px;
+        }
+        .Tv{
+            width: 73px;
+            height: 58px;
+            top: 176px;
+            position: absolute;
+            left: 38px;
+        }
+        .Alipay{
+            width: 50px;
+            height: 17px;
+            position: absolute;
+            background-color: rgb(255,255,255);
+            top: 184px;
+            left: 49px;
+            padding-top: 5px;
+            padding-bottom: 3px;
+        }
+        .login{
+            width: 109px;
+            height: 39px;
+            background-color: rgb(0,174,239);
+            border-radius: 5px 5px 5px 5px;
+            top: 253px;
+            position: absolute;
+            left: 22px;
+        }
+        .login:hover{
+            cursor: pointer;
+        }
+        .login_a{
+            color: rgb(239,255,255);
+            font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+            position: absolute;
+            top: 10px;
+            left: 12px;
+        }
+    </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
+    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+    <script src="../../resources/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="title">
+<div class="title1">你好，欢迎使用支付宝付款!</div>
+<div class="title2">常见问题</div>
+<div class="title3"></div>
+</div>
+<div class="alipayTitle"></div>>
+<div class="alipay"><img src="../../resources/upload/Alipay.png"></div>
+<div class="verticalLine"></div>
+<div class="checkoutCounter">我的收银台</div>
+<div class="background"></div>
+<div class="prompt">正在使用即时到账交易 [?]交易将在1分钟后关闭，请及时付款！</div>
+<div class="tradingInformation"><b>小米科技5201012405703026号订单</b></div>
+<div class="Beneficiary">收款方：商户简称：小米网</div>
+<div class="Box"></div>
+<div class="scanPayment">扫一扫付款(元)</div>
+<div id="amountsPayable" class="amountsPayable"></div>
+<img class="qrCode" src="../../resources/upload/WechatIMG13.png">
+<div class="box2"></div>
+<img class ="sacnCode" src="../../resources/upload/scanCode.png">
+<div class="prompt2">打开手机支付宝
+    扫一扫继续付款</div>
+<div id="amountsPayable1" class="amountsPayable2"></div>
+<div class="box3">
+    <div>
+        <img class="Tv" src="../../resources/upload/zhifubaoTV.png">
+        <div>
+            <img class="Alipay" src="../../resources/upload/zhifubao2.png">
+        </div>
+    </div>
+    <div class="login">
+        <a class="login_a"><登录账户付款</a>
+    </div>
+</div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$(document).ready(function (){
+
+    $.ajax(
+        {
+            url:"/user/paymentAmount",
+            type:"post",
+            dataType:"json",
+            success:function (result){
+                document.getElementById("amountsPayable").innerHTML=result.realTotalAmount+"元";
+                document.getElementById("amountsPayable1").innerHTML=result.realTotalAmount+"元";
+            },
+            error:function (){
+
+            }
+        }
+    )
+})
+</script>
+</body>
+</html>

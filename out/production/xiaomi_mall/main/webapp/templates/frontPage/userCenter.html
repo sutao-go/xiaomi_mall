@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../resources/static/frontPage/head.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/static/frontPage/head2.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/static/frontPage/indexbody.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/static/frontPage/indexbody2.css" type="text/css">
+    <link rel="stylesheet" href="../../resources/static/swiper/swiper-3.4.2.min.css">
+    <script type="text/javascript" src="../../resources/static/swiper/swiper-3.4.2.min.js"></script>
+    <style>
+        .footer_headline_ul1 li{
+            font-weight: 400;
+            color: rgb(108,108,108);
+            margin-right: 46px;
+            margin-left: 76px;
+        }
+        .footer_headline_ul1 li:hover{
+            color: rgb(252,80,9);
+        }
+        .footer_headline_ul1>li img{
+            height: 24px;
+            width: 24px;
+            margin-right: 10px;
+            padding-top: -40px;
+        }
+        /*以上这些代码主要是用来设置维修服务，7天无理由退换货，15天免费换货，满99元包邮，520余家售后网点*/
+        .links>p{
+            font-size: 14px;
+            color: rgb(94,94,94);
+        }
+        .links>a{
+            font-size: 14px;
+            color: rgb(94,94,94);
+            padding-left: 15px;
+        }
+        .links>a:hover{
+            color: rgb(252,80,9);
+        }
+        .shouye_right_child_a_2{
+            cursor: pointer;
+        }
+        .shouye_right_child_a_2{
+            height: 31px;
+            position: absolute;
+            z-index:1000;
+            top: 12px;
+            width: 60px;
+            left: 1056px;
+            font-size: 12px;
+            color:#b0b0b0;
+            overflow: paged-x;
+        }
+        .shouye_right_child_a_2:hover{
+            color: rgb(255,255,255);
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
+
+        /*以下这段代码可以防止登录成功之后用户反复hover用户列表造成无法读取用户信息的问题*/
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
+        /*以下的代码是属于这个网页的代码*/
+        .userCenter{
+            font-size: 12px;
+            color: rgb(166,166,166);
+            float: left;
+            position: absolute;
+            top: 11px;
+            left: 56px;
+        }
+        .userCenterTitle{
+            position: absolute;
+            background-color: rgb(242,242,242);
+            width: 1432px;
+            left: 0;
+            top: 156px;
+            height:1022px;
+        }
+        .userCenter_left_div{
+            background-color: rgb(255,255,255);
+            width: 237px;
+            height: 213px;
+            position: absolute;
+            z-index: 0;
+            top: 39px;
+        }
+        /*
+        以下是左侧栏订单中心的CSS样式
+        */
+        .userCenter_left_div_h3{
+            font: 16px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: black;
+            left: 60px;
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+        }
+        .userCenter_left_div_ul{
+            position: absolute;
+            padding: 0;
+            width: 100px;
+            height: 212px;
+            left: 60px;
+            text-align: left;
+            top: 40px;
+        }
+        .userCenter_left_div_ul li{
+            padding: 0;
+            float: unset;
+            margin-top: 12px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: rgb(105,105,105);
+        }
+        .userCenter_left_div_ul>li:hover{
+            color: rgb(252,80,9);
+        }
+        /*
+       以下是左侧蓝个人中心的css样式
+         */
+        .userCenter_left_div1{
+            background-color: rgb(255,255,255);
+            width: 237px;
+            height: 406px;
+            position: absolute;
+            top: 400px;
+            left: 0;
+        }
+        .userCenter_left_div_ul1 li{
+            padding: 0;
+            float: unset;
+            margin-top: 12px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: rgb(105,105,105);
+        }
+        .userCenter_left_div_ul1{
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+        .userCenter_left_div_ul1>li:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是左侧栏售后服务的样式*/
+        .userCenter_left_div2{
+            position: absolute;
+            background-color: rgb(255,255,255);
+            width: 237px;
+            height: 173px;
+            left: 0;
+            top: 802px;
+        }
+        .userCenter_left_div_h4{
+            font: 16px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: black;
+            left: 60px;
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+        }
+        .userCenter_left_div_ul2{
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+        .userCenter_left_div_ul2 > li:hover{
+            color: rgb(252,80,9);
+        }
+        .userCenter_left_div_ul2 li{
+            padding: 0;
+            float: unset;
+            margin-top: 12px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: rgb(105,105,105);
+        }
+        /*以下是账户管理的样式*/
+        .userCenter_left_div3{
+            position: absolute;
+            width: 237px;
+            height: 162px;
+            background-color: rgb(255,255,255);
+            left: 0;
+            top: 974px;
+        }
+        .userCenter_left_div_h5{
+            font: 16px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: black;
+            left: 60px;
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+        }
+        .userCenter_left_div_ul3{
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+        .userCenter_left_div_ul3>li:hover{
+            color: rgb(252,80,9);
+        }
+        .userCenter_left_div_ul3 li{
+            padding: 0;
+            float: unset;
+            margin-top: 12px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            color: rgb(105,105,105);
+        }
+        .personalCenter{
+            background-color: rgb(255,255,255);
+            width: 978px;
+            height: 677px;
+            position: absolute;
+            left: 246px;
+            top: 196px;
+        }
+        .personalCenterImg{
+            width: 150px;
+            height: 150px;
+            border-radius: 150px;
+            position: absolute;
+            top: 62px;
+            left: 48px;
+        }
+        .personalCenter_h2{
+            position: absolute;
+            top: 80px;
+            left: 220px;
+        }
+        .personalCenter_p{
+            position: absolute;
+            left: 220px;
+            top: 122px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .personalCenter_a{
+            position: absolute;
+            left: 220px;
+            top: 170px;
+            color: rgb(252,80,9);
+            font: 12px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .personalCenter_a:hover{
+            cursor: pointer;
+        }
+        .personalCenter_right{
+            position: absolute;
+
+        }
+        .personalCenter_right_ul{
+            float: unset;
+            position: absolute;
+            width: 250px;
+            left: 755px;
+            top: 212px;
+        }
+        .personalCenter_right_ul>li{
+            float: unset;
+            padding: 0;
+            margin-top: 12px;
+
+        }
+        .personalCenter_right_ul_li0{
+            color: rgb(98,98,98);
+           font:  14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .personalCenter_right_ul_li0>a{
+            color: rgb(117,190,8);
+        }
+        .personalCenter_right_ul_li1{
+            color: rgb(98,98,98);
+            font:  14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .personalCenter_right_ul_li2{
+            color: rgb(98,98,98);
+            font:  14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .Underscore{
+            width: 884px;
+            height: 1px;
+            background-color: rgb(217,217,217);
+            position: absolute;
+            top: 458px;
+            left: 292px;
+        }
+        /*以下是关于待支付订单的样式*/
+        .userCenter_1{
+            width: 100px;
+            height: 100px;
+        }
+
+        .userCenter_3{
+            width: 100px;
+            height: 100px;
+        }
+        .userCenter_4{
+            width: 100px;
+            height: 100px;
+        }
+        .userCenter_pay{
+            position: absolute;
+            top: 515px;
+            left: 298px;
+        }
+        .userCenter_1_h3{
+            position: absolute;
+            top: 0px;
+            width: 140px;
+            left: 122px;
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_1_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_1_a1{
+            position: absolute;
+            width: 120px;
+            top:50px;
+            left: 122px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_1_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是待收货的订单的样式*/
+        .userCenter_2{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 406px;
+            top: 0;
+        }
+        .userCenter_2_h3{
+            position: absolute;
+            left: 528px;
+            width: 160px;
+            top: 0;
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_2_a1{
+            position: absolute;
+            width: 120px;
+            top:50px;
+            left: 528px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_2_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_2_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是待评价商品数的样式*/
+        .userCenter_3{
+            position: absolute;
+            top: 160px;
+        }
+        .userCenter_3_h3{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 166px;
+            position: absolute;
+            width: 160px;
+            left: 124px;
+        }
+        .userCenter_3_a1{
+            position: absolute;
+            width: 120px;
+            top:216px;
+            left: 122px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_3_h3>a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_3_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        /*以下是喜欢的商品的样式*/
+        .userCenter_4{
+            position: absolute;
+            top: 160px;
+            left: 406px;
+        }
+        .userCenter_4_h3{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 166px;
+            position: absolute;
+            width: 160px;
+            left: 528px;
+        }
+        .userCenter_4_a1{
+            position: absolute;
+            width: 120px;
+            top:216px;
+            left: 528px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .userCenter_4_a1:hover{
+            color: rgb(252,80,9);
+            cursor: pointer;
+        }
+        .userCenter_4_h3>a{
+            color: rgb(252,80,9);
+        }
+        /*以下是设置个人中心那个栏目样式颜色用的*/
+        .userCenter_left_div_ul_li_a{
+            color: rgb(252,80,9);
+        }
+        .userCenter_left_div_ul_li_a:hover{
+            cursor: pointer;
+        }
+        /**/
+        .shouye_left_a_1:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="shouye_div_bg" >
+    <ul  class="shouye_left">
+        <li id="shouye_left_a_1" class="shouye_left_a_1">小米商城</li>
+        <li>MIUI</li>
+        <li>IoT</li>
+        <li>云服务</li>
+        <li>金融</li>
+        <li>有品</li>
+        <li>小爱开放平台</li>
+        <li>企业团购</li>
+        <li>资质证照</li>
+        <li>协议规则</li>
+        <li>下载app</li>
+        <li>智能生活</li>
+        <li>Select Location</li>
+        <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
+        <li id="shouye_right_child_a_3">注册</li>
+        <li>消息通知</li>
+        <div id="shoppingCart">
+            <li>
+                <img src="../../resources/upload/iconfont-cart.jpg">
+            </li>
+            <li id="iconfont-cart">购物车</li>
+        </div>
+    </ul>
+</div>
+<div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
+</div>
+<div class = "shouye_div_bg_1">
+</div>
+<div class="hidden1">
+    <ul id="title_left_right_scoroll" class="title_left">
+        <li >
+            <img id="xiaomi_title" class="xiaomi_title_left" src="../../resources/upload/xiaomi_title_left.jpg">
+        </li>
+        <li>
+            <img  class="xiaomi_title1" src="../../resources/upload/title.gif">
+        </li>
+    </ul>
+    <ul id="web-liubai" class="liubai">
+        <li class="xiaomishouji" id="xiaomishouji_bigest">小米手机
+        </li>
+        <li>Redmi&nbsp;红米</li>
+        <li>电视</li>
+        <li>笔记本</li>
+        <li>家电</li>
+        <li>路由器</li>
+        <li>智能硬件</li>
+        <li>服务</li>
+        <li>社区</li>
+    </ul>
+    <ul>
+        <li class="search_position">
+            <input class="search" placeholder="搜索您想要的" style="outline: none">
+        </li>
+        <li>
+            <img id="search_img_js" class="search_img" src="../../resources/upload/search.png">
+        </li>
+    </ul>
+</div>
+<div class="userCenterTitle">
+    <div class="userCenter">
+        首页&nbsp;/&nbsp;个人中心
+    </div>
+    <div class="userCenter_left_div">
+        <h3 class="userCenter_left_div_h3">订单中心</h3>
+        <ul class="userCenter_left_div_ul">
+            <li>我的订单</li>
+            <li>评价晒单</li>
+            <li>话费充值订单</li>
+            <li>以旧换新订单</li>
+        </ul>
+    </div>
+</div>
+<div class="userCenter_left_div1">
+    <h3 class="userCenter_left_div_h3">个人中心</h3>
+    <ul class="userCenter_left_div_ul1">
+        <li><a class="userCenter_left_div_ul_li_a">我的个人中心</a></li>
+        <li>消息通知</li>
+        <li>购买资格</li>
+        <li>现金账户</li>
+        <li>小米礼品卡</li>
+        <li>现金券</li>
+        <li>喜欢的商品</li>
+        <li>优惠券</li>
+        <li>收货地址</li>
+        <li>红包</li>
+    </ul>
+</div>
+<div class="userCenter_left_div2">
+    <h3 class="userCenter_left_div_h4">售后服务</h3>
+    <ul class="userCenter_left_div_ul2">
+        <li>服务记录</li>
+        <li>申请服务</li>
+        <li>领取快递报销</li>
+    </ul>
+</div>
+<div class="userCenter_left_div3">
+    <h3 class="userCenter_left_div_h5">账户管理</h3>
+    <ul class="userCenter_left_div_ul3">
+        <li>个人信息</li>
+        <li>修改密码</li>
+    </ul>
+</div>
+<div>
+    <div class="personalCenter">
+        <h2 class="personalCenter_h2">苏涛</h2>
+        <p  class="personalCenter_p">晚上好～～</p>
+        <a id="personalCenter_a" class="personalCenter_a">修改个人信息>(完善)</a>
+        <img class="personalCenterImg" src="../../resources/upload/programmer.jpg">
+    </div>
+    <div class="personalCenter_right">
+        <ul class="personalCenter_right_ul">
+            <li class="personalCenter_right_ul_li0">账户安全：<a>较高</a></li>
+            <li class="personalCenter_right_ul_li1">绑定手机：178******89</li>
+            <li class="personalCenter_right_ul_li2">绑定邮箱：wi****6@o******.com</li>
+        </ul>
+    </div>
+    <div class="Underscore"></div>
+    <div class="userCenter_pay">
+        <div>
+            <img  class="userCenter_1" src="../../resources/upload/userCenter_1.png">
+            <h3 class="userCenter_1_h3">待支付的订单&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a id="userCenter_1_a1" class="userCenter_1_a1">查看待支付订单&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_2" src="../../resources/upload/userCenter_2.png">
+            <h3 class="userCenter_2_h3">待收货的订单&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_2_a1">查看待收获订单&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_3" src="../../resources/upload/userCenter_3.png">
+            <h3 class="userCenter_3_h3">待评价商品数&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_3_a1">查看待评价商品&nbsp;></a>
+        </div>
+        <div>
+            <img class="userCenter_4" src="../../resources/upload/userCenter_4.png">
+            <h3 class="userCenter_4_h3">喜欢的商品&nbsp;:&nbsp;&nbsp;<a>0</a></h3>
+            <a class="userCenter_4_a1">查看喜欢的商品></a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    /*$(document).ready---当文档激活完成之后函数*/
+    $(document).ready(function(){
+        $('#search_img_js').on({
+            mouseover : function (){
+                $(this).attr('src','../../resources/upload/search1.png')
+            },
+            mouseout :function (){
+                $(this).attr('src','../../resources/upload/search.png')
+            }
+        });
+    });
+    $(document).ready(function(){
+        $('#xiaomi_title').on({
+            mouseover : function(){
+                $(this).attr('src','../../resources/upload/xiaomi_home.jpg');
+            },
+            mouseout :function (){
+                $(this).attr('src','../../resources/upload/xiaomi_title_left.jpg');
+            }
+        });
+    });
+</script>
+<script>
+    setTimeout(function(){
+        $.ajax(
+            {
+                url:"/admin/test",
+                /*向后端传输数据的方法*/
+                type:"get",
+                /*向后端传输数据的类型*/
+                dataType:"json",
+                success:function (result){
+                    a = result.sessionData.toString();
+                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    $("#shouye_right_child_a_3").hide();
+                    //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
+                    $("#shouye_right_child_a_2").mouseenter(function(){
+                        $("#shouye_right_child_a_2").append(
+                            "<table id=\"shouye_user_down\" class=\"shouye_user_down\">\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li0\" class=\"shouye_user_down_li0\">个人中心</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li1\" class=\"shouye_user_down_li1\">评价晒单</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li2\" class=\"shouye_user_down_li2\">我的喜欢</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li3\" class = \"shouye_user_down_li3\">小米账户</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
+                            "            </tr>\n" +
+                            "        </table>"
+                        );
+                        $("#shouye_user_down_li0").mousedown(function(){
+                            window.location.href='/user/center';
+                        });
+                    })
+                },
+                error:function (){
+                    console.log("false");
+                },
+            })
+    },1);
+    $(function(){
+        $("#shouye_left_a_1").click(function(){
+            window.location.href='/admin/index';
+        })
+    })
+</script>
+<script>
+    $(function(){
+        $("#personalCenter_a").click(function(){
+            window.location.href = '/user/accountManagement';
+        })
+    })
+    </script>
+<script>
+    $(function(){
+        $("#userCenter_1_a1").click(function(){
+            window.location.href='/pendingOrder/orderInformation';
+        })
+    })
+    </script>
+<script>
+    $(function (){
+        $("#shoppingCart").click(function (){
+            window.location.href='/orderlist/confirmOrder';
+        })
+    })
+</script>
+</body>
+</html>

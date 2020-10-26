@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.UserCenterMapper">
+    <resultMap id="BaseResultMap" type="com.imooc.entity.AdminUser">
+        <id column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
+        <result column="shipping_address" jdbcType="VARCHAR" property="address"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="telephone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+
+    </resultMap>
+
+    <update id="changePassword" parameterType="com.imooc.entity.AdminUser">
+        update adminuser
+        <set>
+        <if test="passWord != null">
+         pass_word = #{passWord,jdbcType=VARCHAR}
+        </if>
+        </set>
+         where user_name = #{userName,jdbcType=VARCHAR}
+    </update>
+</mapper>

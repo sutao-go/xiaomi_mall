@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台系统登录</title>
+    <style>
+        .background{
+            background-color: rgb(245,245,245);
+            width: 100%;
+            height: 1000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box{
+            width:856px;
+            height: 546px;
+            background-color: rgb(255,255,255);
+            position: absolute;
+            top: 134px;
+            left: 302px;
+        }
+        .box2{
+            width: 48px;
+            height: 48px;
+            background-color: rgb(255,103,0);
+            border-radius: 5px;
+            position: absolute;
+            left: 404px;
+            top: 26px;
+        }
+        .xiaomititle{
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 9px;
+            left: 9px;
+        }
+        .login{
+            font-family: Helvetica,arial,"MI Lan Pro","Hiragino Sans GB","PingFang SC","Microsoft YaHei","微軟正黑體","儷黑 Pro",sans-serif;
+            font-size: 22px;
+            width: 140px;
+            position: absolute;
+            left: -42px;
+            top: 63px;
+        }
+        .account_number{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            position: absolute;
+            top: 100px;
+            left: -183px;
+            font-size: 14px;
+            color: black;
+            outline: none;
+        }
+        .password{
+            width: 346px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            border: 1px rgb(217,217,217) solid;
+            position: absolute;
+            top: 166px;
+            left: -183px;
+            font-size: 14px;
+            color: black;
+            outline: none;
+        }
+        .loginaccount{
+            width: 353px;
+            height: 48px;
+            border-radius: 0;
+            margin-left: 31px;
+            color: white;
+            position: absolute;
+            top: 232px;
+            left: -183px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            background-color: rgb(255,103,0);
+        }
+        .loginaccount:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="box">
+        <div class="box2">
+            <img class="xiaomititle" src="../../resources/upload/xiaomititle.png">
+            <div class="login">小米后台登录</div>
+            <input id="account_number" class="account_number" placeholder="邮箱/手机号码/小米ID"
+                   onfocus="this.placeholder=''"
+                   onblur="this.placeholder='邮箱/手机号码/小米ID'"
+                   maxlength="20"
+            >
+            <input id="password" class="password" placeholder="密码"
+                   onfocus="this.placeholder=''"
+                   onblur="this.placeholder='密码'"
+                   maxlength="20"
+            >
+            <button id="loginaccount" class="loginaccount"
+            >登录</button>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#loginaccount").click(function (){
+                var data ={};
+                data.accountnumber = $("#account_number").val();
+                data.password = $("#password").val();
+                $.ajax(
+                    {
+                        url:"/backendLogin/login",
+                        /*向后端传输数据的方法*/
+                        type:"post",
+                        /*向后端传输数据的类型*/
+                        dataType:"json",
+                        /*向后端传输的数据*/
+                        data: {
+                            /*用k-v键值对*/
+                            accountnumber:data.accountnumber,
+                            password:data.password
+                        },
+                        success:function (result) {
+                            if (result.resultCode == 200){
+                                window.location.href = '/backendLogin/index';
+                            }
+
+                        },
+                        error:function (){
+                            swal("登录后台失败");
+                        },
+                    })
+            })
+
+        })
+    </script>
+</body>
+</html>

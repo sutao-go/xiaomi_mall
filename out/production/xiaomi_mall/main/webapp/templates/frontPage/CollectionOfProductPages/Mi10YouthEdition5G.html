@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../resources/static/frontPage/head.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/head2.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/indexbody.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/frontPage/indexbody2.css" type="text/css">
+    <link rel="stylesheet" href="../../../resources/static/swiper/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /*以下这些代码主要是用来设置维修服务，7天无理由退换货，15天免费换货，满99元包邮，520余家售后网点*/
+        .popular_div_parent{
+            background-color: rgb(242,242,242);
+            height: 642px;
+            margin-top: -16px;
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+        .footer_headline_ul1 li{
+            font-weight: 400;
+            color: rgb(108,108,108);
+            margin-right: 46px;
+            margin-left: 76px;
+        }
+        .footer_headline_div{
+            width: 1440px;
+            height: 78px;
+            background-color: rgb(255,255,255);
+            margin-left: -8px;
+            margin-top: -16px;
+            border-bottom: 1px rgb(217,217,217) solid;
+        }
+        .footer_headline_ul1 li:hover{
+            color: rgb(252,80,9);
+        }
+        .footer_headline_ul1>li img{
+            height: 24px;
+            width: 24px;
+            margin-right: 10px;
+            padding-top: -40px;
+        }
+        .footer_headline_ul1_li_img{
+            position: absolute;
+            margin-top: -50px;
+            left: 106px;
+        }
+        .footer_headline_ul1_li_img1{
+            position: absolute;
+            margin-top: -50px;
+            left: 344px;
+        }
+        .footer_headline_ul1_li_img2{
+            position: absolute;
+            margin-top: -50px;
+            left: 606px;
+        }
+        .footer_headline_ul1_li_img3{
+            position: absolute;
+            margin-top: -50px;
+            left: 844px;
+        }
+        .footer_headline_ul1_li_img4{
+            position: absolute;
+            margin-top: -50px;
+            left: 1070px;
+        }
+        .footer_headline_left{
+            position: absolute;
+            z-index: 1;
+            width: 106px;
+            height: 3px;
+            margin-top: -1px;
+            margin-left: -8px;
+            background-color: rgb(255,255,255);
+        }
+        .footer_headline_right{
+            position: absolute;
+            z-index: 1;
+            width: 208px;
+            height: 3px;
+            margin-top: -1px;
+            margin-left: 1224px;
+            margin-right: -8px;
+            background-color: rgb(255,255,255);
+        }
+        /*以上这些代码主要是用来设置维修服务，7天无理由退换货，15天免费换货，满99元包邮，520余家售后网点*/
+        .links{
+            margin-left: 100px;
+        }
+        .links>p{
+            font-size: 14px;
+            color: rgb(94,94,94);
+        }
+        .links>a{
+            font-size: 14px;
+            color: rgb(94,94,94);
+            padding-left: 15px;
+        }
+        .links>a:hover{
+            color: rgb(252,80,9);
+        }
+        .shouye_right_child_a_2{
+            height: 28px;
+            position: absolute;
+            z-index:1000;
+            top: 14px;
+            width: 60px;
+            /*
+            此处的left减少了50px
+            */
+            left: 1016px;
+            font-size: 12px;
+            color:#b0b0b0;
+            overflow: paged-x;
+            cursor: pointer;
+        }
+        .xiaomi10_title{
+            font-size: 20px;
+            border-top:1px solid black ;
+            height: 60px;
+            margin-top:116px;
+            width: 1435px;
+            margin-left: -10px;
+            box-shadow: 5px 5px 10px silver;
+        }
+        .xiaomi10_title_ul1{
+            position: absolute;
+            top: 130px;
+        }
+        .xiaomi10_title_ul1_li0{
+            position: absolute;
+            font-size: 18px;
+            padding-bottom: 0;
+            padding-top: 0;
+            top: 26px;
+            width: 190px;
+        }
+        .xiaomi10_title_ul1_li1{
+            position: absolute;
+            font-size: 12px;
+            width: 100px;
+            left: 205px;
+            border-left: 1px solid black;
+            padding-top: 0;
+            padding-bottom: 0;
+            line-height: 25px;
+            top: 26px;
+            border-left: 1px solid rebeccapurple;
+        }
+
+        .xiaomi10_title_ul1_li2{
+            position: absolute;
+            margin-left: 13px;
+            width: 100px;
+            font-size: 14px;
+            left: 326px;
+            padding-bottom: 0;
+            padding-top: 0;
+            top: 26px;
+            line-height: 25px;
+            border-left: 1px solid black;
+        }
+        .xiaomi10_title_ul1_li1:hover{
+            color: rgb(252,80,9);
+        }
+        .xiaomi10_title_ul1_li2:hover{
+            color: rgb(252,80,9);
+        }
+        .xiaomi10_title_ul2>li{
+
+            font-size: 14px;
+            margin-left: 24px;
+            padding-bottom: 0;
+            padding-top: 0;
+            line-height: 25px;
+        }
+        .xiaomi10_title_ul2>li:hover{
+            color: rgb(252,80,9);
+        }
+        .xiaomi10_title_ul2{
+            position: absolute;
+            left: 757px;
+            top: 156px;
+        }
+        .xiaomi10_title_ul2_li0{
+            position: absolute;
+            top:0;
+            width: 30px;
+            left: 219px;
+            border-right: 1px black solid;
+        }
+        .xiaomi10_title_ul2_li1{
+            position: absolute;
+            top:0;
+            left: 272px;
+            width: 30px;
+            border-right: 1px solid black;
+        }
+        .xiaomi10_title_ul2_li2{
+            position: absolute;
+            top:0;
+            left: 223px;
+            width: 90px;
+            border-right: 1px black solid;
+        }
+        .xiaomi10_title_ul2_li3{
+            position: absolute;
+            top:0;
+            left: 334px;
+            width: 60px;
+            border-right: black 1px solid;
+        }
+        .xiaomi10_title_ul2_li4{
+            position: absolute;
+            top:0;
+            left: 415px;
+            width: 60px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-right: 1px black solid;
+        }
+        .xiaomi10_title_ul2_li5{
+            position: absolute;
+            top:0;
+            left: 500px;
+            width: 60px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .hide{
+            position: absolute;
+            background-color: rgb(255,255,255);
+            height: 10px;
+            width: 200px;
+            top: 195px;
+            left: 220px;
+        }
+        .hide2{
+            position: absolute;
+            background-color: rgb(255,255,255);
+            height: 10px;
+            width: 300px;
+            top: 169px;
+            left: 110px;
+        }
+        .hide3{
+            position: absolute;
+            background-color: rgb(255,255,255);
+            height: 10px;
+            width: 400px;
+            top: 170px;
+            left: 910px;
+        }
+        .hide4{
+            position: absolute;
+            height: 10px;
+            width: 400px;
+            top: 196px;
+            left: 910px;
+            background-color: rgb(255,255,255);
+        }
+        .swiper-container {
+            width: 560px;
+            height: 560px;
+            position: absolute;
+            top: 240px;
+
+        }
+        .swiper-slide>img{
+            width: 560px;
+            height: 560px;
+        }
+        .xiaomi10_body_a{
+            position: absolute;
+            left: 632px;
+            top: 242px;
+            font-size: 22px;
+        }
+        .xiaomi10_body_p_a0{
+            color: rgb(252,80,9);
+            font-size: 14px;
+        }
+        .xiaomi10_body_p_a1{
+            color: rgb(189,189,189);
+            font-size: 14px;
+        }
+        .xiaomi10_body_p0{
+            position: absolute;
+            top: 264px;
+            width: 596px;
+            left: 630px;
+        }
+        .xiaomi10_body_p1{
+            position: absolute;
+            top: 345px;
+            width: 596px;
+            left: 630px;
+            color: rgb(252,80,9);
+        }
+        .xiaomi10_body_p2{
+            position: absolute;
+            top: 373px;
+            width: 596px;
+            left: 630px;
+            color: rgb(252,80,9);
+        }
+        .xiaomi10_body_div1{
+            background-color: black;
+            position: absolute;
+            width: 602px;
+            height: 1px;
+            top: 430px;
+            left: 630px;
+        }
+        .xiaomi10_body_div3{
+            position: absolute;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 38px;
+            left: 32px;
+            width: 250px;
+
+        }
+        .xiaomi10_body_div2{
+            position: absolute;
+            background-color: rgb(247,247,249);
+            left: 630px;
+            width: 614px;
+            height: 146px;
+            top: 462px;
+        }
+        .xiaomi10_body_div4{
+            position: absolute;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 38px;
+            left: 538px;
+            width: 250px;
+        }
+        .xiaomi10_body_div5{
+            position: absolute;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            top: 86px;
+            left: 32px;
+            font-size: 24px;
+            color: rgb(252,80,9);
+        }
+        .addToShopping{
+            position: absolute;
+            background-color: #ff6700;
+            outline: none;
+            width: 300px;
+            height: 54px;
+            left: 630px;
+            top: 637px;
+            border: none;
+        }
+        .addToShopping:hover{
+            background-color: rgb(212,89,24);
+            cursor: pointer;
+        }
+        .like{
+            background-color: rgba(175,175,175,0.8);
+            width: 144px;
+            height: 54px;
+            position: absolute;
+            outline: none;
+            border: none;
+            top: 637px;
+            left: 940px;
+        }
+        .like:hover{
+            background-color: rgb(177,177,177);
+            cursor: pointer;
+        }
+        .heart{
+            position: absolute;
+            top: 24px;
+            left: 32px;
+        }
+        /**
+        处理个人中心的css样式的
+         */
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down{
+            position: absolute;
+            top: -134px;
+            color: rgb(242,242,242);
+            width: 60px;
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
+        .shouye_left_a_1:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="shouye_div_bg">
+    <ul  class="shouye_left">
+        <li id="shouye_left_a_1" class="shouye_left_a_1">小米商城</li>
+        <li>MIUI</li>
+        <li>IoT</li>
+        <li>云服务</li>
+        <li>金融</li>
+        <li>有品</li>
+        <li>小爱开放平台</li>
+        <li>企业团购</li>
+        <li>资质证照</li>
+        <li>协议规则</li>
+        <li>下载app</li>
+        <li>智能生活</li>
+        <li>Select Location</li>
+        <li class="shouye_right_child_1" id="shouye_right_child_a_1">&nbsp;</li>
+        <li id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录</li>
+        <li id="shouye_right_child_a_3" >注册</li>
+        <li>消息通知</li>
+        <div id="shoppingCart">
+            <li>
+                <img src="../../resources/upload/iconfont-cart.jpg">
+            </li>
+            <li id="iconfont-cart">购物车</li>
+        </div>
+    </ul>
+</div>
+<div class = "shouye_div_bg_1">
+</div>
+<!--以上是头条的前端代码-->
+<div class="hidden1">
+    <ul id="title_left_right_scoroll" class="title_left">
+        <li >
+            <img id="xiaomi_title" class="xiaomi_title_left" src="../../../resources/upload/xiaomi_title_left.jpg">
+        </li>
+        <li>
+            <img  class="xiaomi_title1" src="../../../resources/upload/title.gif">
+        </li>
+    </ul>
+    <ul id="web-liubai" class="liubai">
+        <li class="xiaomishouji" id="xiaomishouji_bigest">小米手机
+        </li>
+        <li>Redmi&nbsp;红米</li>
+        <li>电视</li>
+        <li>笔记本</li>
+        <li>家电</li>
+        <li>路由器</li>
+        <li>智能硬件</li>
+        <li>服务</li>
+        <li>社区</li>
+    </ul>
+    <ul>
+        <li class="search_position">
+            <input class="search" placeholder="搜索您想要的" style="outline: none">
+        </li>
+        <li>
+            <img id="search_img_js" class="search_img" src="../../../resources/upload/search.png">
+        </li>
+    </ul>
+</div>
+<!--小米商城首页的轮播图-->
+<div class="xiaomi10_title">
+    <ul class="xiaomi10_title_ul1">
+        <li class="xiaomi10_title_ul1_li0">小米10&nbsp;青春版&nbsp;5G</li>
+        <li class="xiaomi10_title_ul1_li1">小米10&nbsp;Pro</li>
+    </ul>
+    <ul class="xiaomi10_title_ul2">
+        <li class="xiaomi10_title_ul2_li0">概述</li>
+        <li class="xiaomi10_title_ul2_li1">参数</li>
+        <li class="xiaomi10_title_ul2_li3">F码通道</li>
+        <li class="xiaomi10_title_ul2_li4">咨询客服</li>
+        <li class="xiaomi10_title_ul2_li5">用户评价</li>
+    </ul>
+</div>
+<div class="hide"></div>
+<div class="hide2"></div>
+<div class="hide3"></div>
+<div class="hide4"></div>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="../../../resources/upload/xiaomi_youth1.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="../../../resources/upload/xiaomi_youth2.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="../../../resources/upload/xiaomi_youth3.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="../../../resources/upload/xiaomi_youth4.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="../../../resources/upload/xiaomi_youth5.jpg">
+        </div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+
+<div class="xiaomi10_body">
+    <a class="xiaomi10_body_a">小米10&nbsp;青春版&nbsp;5G</a>
+    <p class="xiaomi10_body_p0">
+        <a class="xiaomi10_body_p_a0">「购机最高享6期分期免息。碎屏保/延保5折优惠」
+        </a>
+        <a class="xiaomi10_body_p_a1">
+            向往的生活同款/ 50倍潜望式超远变焦 / 双模5G / 骁龙765G处理器 / 三星AMOLED原色屏 / 180Hz采样率 / 4160mAh大电池 / 多功能NFC / 红外遥控器
+        </a>
+    </p>
+    <p class="xiaomi10_body_p1">
+        小米自营
+    </p>
+    <p class="xiaomi10_body_p2">
+        2199 元
+    </p>
+</div>
+<div class="xiaomi10_body_div1"></div>
+<div class="xiaomi10_body_div2">
+    <div class="xiaomi10_body_div3">Redmi K30 至尊纪念版 8GB+128GB 极夜黑</div>
+    <div class="xiaomi10_body_div4">2199元</div>
+    <div class="xiaomi10_body_div5">总计：2199元</div>
+</div>
+<button id="addToShopping" class="addToShopping">加入购物车</button>
+<button class="like" ><img class="heart" src="../../../resources/upload/heart.png">喜欢</button>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<script type="text/javascript" src="../../../resources/static/jquery/jquery.min.js">
+</script>
+<script type="text/javascript">
+    /*$(document).ready---当文档激活完成之后函数*/
+    $(document).ready(function(){
+        $('#search_img_js').on({
+            mouseover : function (){
+                $(this).attr('src','../../resources/upload/search1.png')
+            },
+            mouseout :function (){
+                $(this).attr('src','../../resources/upload/search.png')
+            }
+        });
+    });
+    $(document).ready(function(){
+        $('#xiaomi_title').on({
+            mouseover : function(){
+                $(this).attr('src','../../resources/upload/xiaomi_home.jpg');
+            },
+            mouseout :function (){
+                $(this).attr('src','../../resources/upload/xiaomi_title_left.jpg');
+            }
+        });
+    });
+    $(function (){
+        $("#shouye_left_a_1").click(function (){
+            window.location.href='/admin/index';
+        })
+    })
+</script>
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+        /*autoplay:true,*/
+        //如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        //如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    setTimeout(function(){
+        $.ajax(
+            {
+                url:"/admin/test",
+                /*向后端传输数据的方法*/
+                type:"get",
+                /*向后端传输数据的类型*/
+                dataType:"json",
+                success:function (result){
+                    a = result.sessionData.toString();
+                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    $("#shouye_right_child_a_3").hide();
+                    $("#shouye_right_child_a_2").click(function(){
+                        window.location.href='/admin/user';
+                    });
+                    //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
+                    $("#shouye_right_child_a_2").mouseenter(function(){
+                        $("#shouye_right_child_a_2").append(
+                            "<table id=\"shouye_user_down\" class=\"shouye_user_down\">\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li0\" class=\"shouye_user_down_li0\">个人中心</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li1\" class=\"shouye_user_down_li1\">评价晒单</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li2\" class=\"shouye_user_down_li2\">我的喜欢</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li3\" class = \"shouye_user_down_li3\">小米账户</td>\n" +
+                            "            </tr>\n" +
+                            "            <tr class=\"shouye_user_down_tr\">\n" +
+                            "                <td id=\"shouye_user_down_li4\" class=\"shouye_user_down_li4\">退出登录</td>\n" +
+                            "            </tr>\n" +
+                            "        </table>"
+                        );
+                        $("#shouye_user_down_li0").mousedown(function(){
+                            window.location.href='/user/center';
+                        });
+                    })
+                },
+                error:function (){
+                    console.log("false");
+                },
+            })
+    },1);
+    $(function (){
+        $("#shouye_left_a_1").click(function (){
+            window.location.href='/admin/index';
+        })
+    });
+    $(function (){
+        $("#shouye_right_child_a_2").click(function (){
+            window.location.href='/admin/login';
+        })
+    });
+    $(function (){
+        $("#addToShopping").click(function (){
+            var data ={};
+            data.phoneName= "小米10 青春版 5G";
+            data.price = "2199";
+            console.log(data.phoneName);
+            $.ajax({
+                url:"/orderlist/xiaomi10youth",
+                type:"post",
+                dataType: "json",
+                data: {
+                    /*用k-v键值对*/
+                    phoneName:data.phoneName,
+                    price:data.price
+                },
+                success:function (){
+                    swal("添加成功");
+                },
+                error:function (){
+                    swal("添加失败");
+                }
+            })
+        })
+    });
+</script>
+<script>
+    $(function (){
+        $("#shoppingCart").click(function (){
+            window.location.href='/orderlist/QueryProductInformation';
+        })
+    })
+</script>
+</body>
+</html>

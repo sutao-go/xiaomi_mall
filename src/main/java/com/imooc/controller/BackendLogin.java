@@ -66,12 +66,24 @@ public class BackendLogin {
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/index")
+    @ResponseBody
     public Map<String,String> index(
             @RequestParam Map<String,String> info,
             HttpSession session,
             HttpServletResponse response,
             HttpServletRequest request
     )throws Exception{
+        Object name =info.get("ProductDescription");
+        String ProductDescription = name.toString();
+        Object name2 = info.get("CommodityPrice");
+        String CommodityPrice = name2.toString();
+        Object name3 =info.get("CommoditySellingPrice");
+        String CommoditySellingPrice = name3.toString();
+        Object name4 = info.get("CommodityInventory");
+        String CommodityInventory = name4.toString();
+        Object name5 =info.get("ProductLabel");
+        String ProductLabel = name.toString();
+
         return info;
     }
 }

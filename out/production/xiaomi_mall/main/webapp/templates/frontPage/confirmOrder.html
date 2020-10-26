@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .shoppingCart{
+            font: 28px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            left: 202px;
+            position: absolute;
+            top: 6px;
+        }
+        .xiaomi_title_left{
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            left: 108px;
+            top: 26px;
+        }
+        .title{
+            background-color: rgb(255,255,255);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            border-bottom:2px solid rgb(237,113,46) ;
+        }
+        .shouye_right_child_a_2{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 44px;
+            position: absolute;
+            left: 1268px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered{
+            font-size: 12px;
+            background-color: rgb(255,255,255);
+            width: 24px;
+            position: absolute;
+            left: 1310px;
+            top: 44px;
+            color: rgb(189,189,189);
+        }
+        .registered:hover{
+            color: rgb(237,113,46);
+        }
+        .shouye_right_child_a_2:hover{
+            color: rgb(237,113,46);
+        }
+        #shouye_right_child_a_2:hover > .shouye_user_down{
+            position: absolute;
+            font-size: 12px;
+            float:left;
+            top: 30px;
+            left: 0;
+            z-index:1000;
+            color: black;
+            width: 60px;
+            background-color: rgb(255,255,255);
+        }
+        .shouye_user_down_tr:hover td{
+            color: rgb(252,80,9);
+            background-color: rgb(242,242,242);
+        }
+        .hide{
+            background-color: rgb(189,189,189);
+            height: 16px;
+            width: 1px;
+            position: absolute;
+            left: 1300px;
+            top: 44px;
+        }
+        .shouye_right_child_a_2:hover{
+            cursor: pointer;
+        }
+        .registered:hover{
+            cursor: pointer;
+        }
+        .background{
+            background-color: rgb(245,245,245);
+            width: 100%;
+            height: 1200px;
+            position: absolute;
+            top: 100px;
+        }
+        .shippingAddress{
+            width: 80px;
+            font-size: 18px;
+            position: absolute;
+            left: 28px;
+            top: 52px;
+        }
+        .background2{
+            width: 1226px;
+            height: 1089px;
+            position: absolute;
+            z-index: 100;
+            background: rgb(255,255,255);
+            top: 56px;
+            left: 108px;
+        }
+        .chooseShippingAddress{
+            position: absolute;
+            background: rgb(255,255,255);
+            width: 270px;
+            height: 180px;
+            left: 26px;
+            top: 92px;
+            border:1px rgb(224,224,224) solid;
+        }
+        .chooseShippingAddress:hover{
+            border:1px rgb(193,193,193) solid;
+        }
+        .Recipient{
+            font: 18px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            left: 20px;
+            top: 10px;
+            position: absolute;
+        }
+        .phoneNumber{
+            top: 56px;
+            left: 24px;
+            position: absolute;
+        }
+        .shippingAddress2{
+            position: absolute;
+            left: 24px;
+            top: 78px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            width: 200px;
+        }
+        #resetbutton{
+            position: absolute;
+            left: 342px;
+            top: 386px;
+            outline: none;
+            background-color: rgb(255,255,255);
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            color:rgb(252,80,9);
+            font:14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+            box-shadow: none;
+            z-index: 1000;
+        }
+        .settlementGoods{
+            position: absolute;
+            z-index: 1000;
+            top: 494px;
+            left: 133px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .productsAndCoupons{
+            position: absolute;
+            z-index: 1000;
+            top: 454px;
+            font-size: 18px;
+            left: 133px;
+        }
+        .numberOfProducts{
+            position: absolute;
+            z-index: 1000;
+            top: 494px;
+            left: 701px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .settlementAmount{
+            position: absolute;
+            z-index: 1000;
+            color: #ff6701;
+            top: 494px;
+            left: 1001px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+        }
+        .line{
+            background-color:rgb(224,224,224);
+            height: 1px;
+            width: 1178px;
+            z-index: 1000;
+            top: 546px;
+            left: 133px;
+            position: absolute;
+        }
+        .deliveryMethod{
+            position: absolute;
+            z-index: 1000;
+            font-size:18px ;
+            top: 578px;
+            left: 133px;
+        }
+        .freeShipping{
+            top: 584px;
+            left: 283px;
+            position: absolute;
+            z-index: 1000;
+            color: #ff6700;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .line2{
+            background-color:rgb(224,224,224);
+            height: 1px;
+            width: 1178px;
+            z-index: 1000;
+            top: 644px;
+            left: 133px;
+            position: absolute;
+        }
+        .returnToShoppingCart{
+            background-color: rgb(255,255,255);
+            border: 1px solid rgb(176,176,176);
+            color: rgb(176,176,176);
+            width: 160px;
+            height: 40px;
+            text-align: center;
+            left: 958px;
+            padding-top: 10px;
+            position: absolute;
+            z-index: 1000;
+            top: 664px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .returnToShoppingCart:hover{
+            cursor: pointer;
+        }
+        .toSettle{
+            background-color: #ff6700;
+            color: white;
+            width: 160px;
+            height: 40px;
+            text-align: center;
+            left: 1150px;
+            padding-top: 10px;
+            position: absolute;
+            z-index: 1000;
+            top: 664px;
+            font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+        }
+        .toSettle:hover{
+            cursor: pointer;
+        }
+    </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
+    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../resources/static/bootstrap/css/bootstrap.min.css">
+    <script src="../../resources/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="title">
+    <h2 class="shoppingCart">我的购物车</h2>
+    <img id="xiaomi_title" class="xiaomi_title_left" src="../../resources/upload/xiaomi_title_left.jpg">
+   <!-- <div id="shouye_right_child_a_2" class="shouye_right_child_a_2">登录
+    </div>
+    <div class="registered">注册</div>-->
+    <div class="hide"></div>
+    <div class="background">
+        <div class="background2">
+        <div class="shippingAddress">
+            收货地址
+        </div >
+            <!--以下信息需要从数据库中查询-->
+            <div id="chooseShippingAddress" class="chooseShippingAddress">
+                <!--<h6 id="Recipient" class="Recipient">苏涛</h6>
+                <p id="phoneNumber" class="phoneNumber">155****6752</p>
+                <a id="shippingAddress2" class="shippingAddress2">四川资阳市雁江区雁江镇台阳路石油小区108号</a>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="productsAndCoupons">商品以及优惠券</div>
+&lt;!&ndash;以下信息需要从数据库中查询&ndash;&gt;
+<div id="shoppingInformation">-->
+<!--<div id="settlementGoods" class="settlementGoods"><img class="img" src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1552376822.09637089.jpg?thumb=1&w=60&h=60">小米路由器4A千兆版</div>
+<div id="numberOfProducts" class="numberOfProducts">129元*1</div>
+<div id="settlementAmount"  class="settlementAmount">129元</div>-->
+</div>
+<!--以上信息需要从数据库中查询-->
+<div class="line"></div>
+<div class="deliveryMethod">配送方式</div>
+<div class="freeShipping">包邮</div>
+<div class="line2"></div>
+<div id="returnToShoppingCart" class="returnToShoppingCart">返回购物车</div>
+<div id="toSettle" class="toSettle">去结算</div>
+<!--<div class="invoice">发票</div>-->
+<button id="resetbutton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    修改
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    修改地址
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>收件人</div>
+                <input id="recipient">
+                <div>收件地址</div>
+                <input id="shippingAddress">
+                <div>收件人手机号码</div>
+                <input id="phoneNumber1">
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button id="change" type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $("#returnToShoppingCart").click(function (){
+        window.location.href='/orderlist/QueryProductInformation/';
+    });
+    $("#toSettle").click(function (){
+    });
+    $("#chooseShippingAddress").click(function (){
+        document.getElementById("chooseShippingAddress").style.borderColor="rgb(237,113,46)";
+    });
+    $("#toSettle").click(function (){
+        window.location.href='/orderlist/alipay';
+    });
+</script>
+<script>
+    $.ajax(
+        {
+            url:"/user/checkOutTheShoppingCart",
+            type:"post",
+            dataType:"json",
+            success:function (info){
+                var address = info.address;
+                var nickname = info.nickname;
+                var phoneNumber = info.phoneNumber;
+                $("#chooseShippingAddress").append(
+                    "<h6 id=\"Recipient\" class=\"Recipient\"></h6>\n" +
+                    "                <p id=\"phoneNumber\" class=\"phoneNumber\"></p>\n" +
+                    "                <a id=\"shippingAddress2\" class=\"shippingAddress2\"></a>"
+                );
+                document.getElementById("Recipient").innerHTML=nickname;
+                document.getElementById("phoneNumber").innerHTML=phoneNumber;
+                document.getElementById("shippingAddress2").innerHTML=address;
+            },
+            error:function (){
+                console.log("出错了");
+            }
+        }
+    );
+
+</script>
+<!--一个砍掉的功能-->
+<!--<script>
+    $.ajax(
+        {
+            url:"/user/settlementProductList",
+            type: "post",
+            dataType: "json",
+            success:function (info){
+                var imgurl = info.imgurl0;
+                var price = info.price0;
+                var productName =info.productName0;
+                var quantity = info.quantity0;
+                console.log(quantity);
+                $("#shoppingInformation").append(
+                    "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n"+
+                    "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n"+
+                    "<div id=\"settlementAmount\"  class=\"settlementAmount\"></div>"
+                );
+                $("#img").attr('src',imgurl);
+                document.getElementById("settlementGoods").innerHTML = productName;
+                document.getElementById("numberOfProducts").innerHTML = price+"元*"+quantity;
+                document.getElementById("settlementAmount").innerHTML = price;
+            },
+            error:function (info){
+            }
+        });
+</script>-->
+<script>
+    $("#change").click(function (){
+        var data ={};
+        data.shippingAddress = $("#shippingAddress").val();
+        data.recipient = $("#recipient").val();
+        data.phoneNumber1 = $("#phoneNumber1").val();
+        $.ajax(
+            {
+                url:"/user/modifyShippingAddress",
+                type:"post",
+                dataType:"json",
+                data:{
+                    shippingAddress:data.shippingAddress,
+                    recipient:data.recipient,
+                    phoneNumber1:data.phoneNumber1
+                },
+                success:function(result){
+                    if(result.resultCode == 200){
+                        window.location.href='/orderlist/confirmOrder';
+                    }if (result.resultCode == 500){
+                        swal("程序可能出错了");
+                    }
+                },
+                error:function (){
+                        swal("修改失败");
+                }
+            }
+        )
+    });
+</script>
+</body>
+</html>
