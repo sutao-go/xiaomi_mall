@@ -1,28 +1,54 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/test.js"></script>
+    <title>文件上传</title>
+    <style>
+        .myBtn{
+            padding: 5px 10px;
+            background: rgb(92,184,92);
+            color: white;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<table class="table table-hover ">
-    <tr>
-        <td>sdfsdafsda</td>
-        <td>sdfadfsafasd</td>
-    </tr>
-    <tr>
-        <td>sdfsdafsda</td>
-        <td>sdfadfsafasd</td>
-    </tr>
-    <tr>
-        <td>sdfsdafsda</td>
-        <td>sdfadfsafasd</td>
-    </tr>
-</table>
+<input type="file" id="file" style="display: none" onchange="upload(this)">
+<button class="myBtn" onclick="fileBtn()">
+    上传文件
+</button>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<img src="" id="img" style="width: 200px">
+<script>
+    function fileBtn() {
+        document.getElementById('file').click()
+    }
 
+    function upload(file) {
+        let img = document.getElementById('img')
+        let formData = new FormData()
+        let temp = file.files[0]
+        if (temp){
+            formData.append('file',temp)
+            img.src = window.URL.createObjectURL(temp)
+            $.ajax({
+                url:"/backendLogin/addimg",
+                type:"POST",
+                data: formData,
+                processData: false, // 告诉jQuery不要去处理发送的数据
+                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                success: function(result){
+                    alert(result);
+                }
+            })
+        }
+    }
+</script>
 </body>
 </html>

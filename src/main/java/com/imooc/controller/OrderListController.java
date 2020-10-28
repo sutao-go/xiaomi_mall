@@ -1219,8 +1219,6 @@ public class OrderListController {
      */
     @RequestMapping(method = RequestMethod.GET,value = "/QueryProductInformation")
     public String shoppingCart(){
-
-
         return "templates/frontPage/ShoppingCart";
     }
 

@@ -1,279 +1,278 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../../resources/static/layui/css/layui.css">
-    <style>
-    .CommodityInformationEditing{
-        font-size: 1.25rem;
-        position: absolute;
-        left: 559px;
-        top: 17px;
-    }
-    .CommodityInformationEditing_div{
-        width: 100%;
-        height: 54px;
-        border-top: #0000FF 4px solid;
-        background-color: rgb(255,255,255);
-        border-radius: 10px 10px 0 0 ;
-        border-bottom: 2px rgb(223,223,223) solid;
-    }
-    .ProductName{
-        width: 560px;
-        height: 28px;
-        position: absolute;
-        top: 62px;
-        left: 30px;
-    }
-    .ProductDescription{
-        width: 560px;
-        height: 28px;
-        top: 62px;
-        left: 645px;
-        position: absolute;
-    }
-    .CommodityPrice{
-        width: 560px;
-        height: 28px;
-        top: 100px;
-        left: 645px;
-        position: absolute;
-    }
-    .CommoditySellingPrice{
-        width: 560px;
-        height: 28px;
-        top: 100px;
-        left: 30px;
-        position: absolute;
-    }
-    .CommodityInventory{
-        width: 560px;
-        height: 28px;
-        top: 138px;
-        left: 30px;
-        position: absolute;
-    }
-    .ProductLabel{
-        width: 560px;
-        height: 28px;
-        top: 138px;
-        left: 645px;
-        position: absolute;
-    }
-    .editor{
-        position: absolute;
-        top: 180px;
-        left: 30px;
-        width: 1178px;
-    }
-    .SaveGoods{
-        height: 40px;
-        width: 92px;
-        position: absolute;
-        top: 1010px;
-        left: 1088px;
-        background-color: rgb(23,162,184);
-        border: none;
-        color: white;
-        border-radius: 5px;
-    }
-    .SaveGoods:hover{
-        cursor: pointer;
-    }
-    .CommodityOnAndOffShelves_dd{
-        background-color: rgb(0,150,136);
-    }
-    .CommodityOnAndOffShelves{
-        color: white;
-    }
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .title{
+            width: 1452px;
+            height: 60px;
+            background-color: rgb(35,38,46);
+        }
+        .background{
+            color: rgb(0,150,136);
+            font-size: 16px;
+            position: absolute;
+            left: 52px;
+            top: 21px;
+        }
+        .leftColumn{
+            width: 202px;
+            height:1060px;
+            display: table;
+            background-color: rgb(57,61,73);
+        }
+        .aboutUsers{
+            position: absolute;
+            top: 82px;
+            color: white;
+            left: 20px;
+        }
+        .Carousel{
+            position: absolute;
+            top: 116px;
+            width: 202px;
+            height: 46px;
+            background-color: rgb(0,150,136);
+            border: none;
+            outline: none;
+        }
+        .Carousel_a{
+            position: absolute;
+            left: 18px;
+            top: 12px;
+            color: rgba(255,255,255,.7);
+        }
+        .Carousel>p{
+            color: white;
+        }
+        .title2{
+            position: absolute;
+            width: 1250px;
+            left: 202px;
+            top: 60px;
+        }
+        #resetbutton{
+            position: absolute;
+            left: 1376px;
+            top: 672px;
+            width: 76px;
+            height: 40px;
 
+        }
+        .add_p{
+            position: absolute;
+            top: 8px;
+            left: 20px;
+        }
+        .myBtn{
+            padding: 5px 10px;
+            background: rgb(92,184,92);
+            color: white;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
     <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">小米商城后台</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <!--<ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>
-        </ul>-->
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    曾小贤
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">退出</a></li>
-        </ul>
+<body>
+    <div class="title">
+        <div class="background">小米商城后台</div>
     </div>
-
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">产品管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;">轮播图设置</a>
-                        </dd>
-                        <dd id = "CommodityOnAndOffShelves_dd" class="CommodityOnAndOffShelves_dd">
-                            <a id = "CommodityOnAndOffShelves" class="CommodityOnAndOffShelves" href="javascript:;">商品上下架</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;">商品的分类</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">关于商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">商品新增</a></dd>
-                        <dd><a href="javascript:;">订单管理</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
-                <li class="layui-nav-item"><a href="">修改密码</a></li>
-            </ul>
+    <div class="leftColumn"></div>
+    <div class="aboutUsers">关于用户</div>
+    <button type="button" class="Carousel"><p class="Carousel_a">轮播图更新</p></button>
+    <div class="title2">
+        <div class="card-body">
+            <div class="card-body">
+                <table id="jqGrid" class="table table-bordered">
+                </table>
+                <div id="jqGridPager"></div>
+            </div>
         </div>
     </div>
-    <div id="layui-body" class="layui-body">
-        <div class="CommodityInformationEditing_div">
-            <input id="ProductName" class="ProductName" placeholder="*请输入商品的名称(必填)"/>
-            <input id="ProductDescription" class="ProductDescription" placeholder="*请输入商品简介（100字以内）"/>
-            <input id="CommodityPrice" class="CommodityPrice" placeholder="*请输入商品价格"/>
-            <input id="CommoditySellingPrice" class="CommoditySellingPrice" placeholder="*请输入商品售卖价"/>
-            <input id="CommodityInventory" class="CommodityInventory" placeholder="*请输入商品库存数">
-            <input id="ProductLabel" class="ProductLabel" placeholder="*请输入商品小标签">
-            <h3 class="CommodityInformationEditing">商品信息编辑</h3>
-        </div>
-        <div class="editor">
-        <textarea id="editor_id" class="editor_id" name="content" style="width:100%;height:1000px;">
-        </textarea>
-            <button id="SaveGoods" class="SaveGoods">保存商品</button>
-        </div>
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
-        <!--<div class="invoice">发票</div>-->
-        <!--<button id="resetbutton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            修改
-        </button>
-        &lt;!&ndash; 模态框（Modal） &ndash;&gt;
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            修改地址
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div>收件人</div>
-                        <input id="recipient">
-                        <div>收件地址</div>
-                        <input id="shippingAddress">
-                        <div>收件人手机号码</div>
-                        <input id="phoneNumber1">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"  class="btn btn-default" data-dismiss="modal">
-                            关闭
-                        </button>
-                        <button id="change" type="button" class="btn btn-primary">
-                            提交更改
-                        </button>
-                    </div>
-                </div>&lt;!&ndash; /.modal-content &ndash;&gt;
-            </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;
-        </div>--><!-- /.modal -->
-<script src="../../resources/static/layui/layui.js"></script>
-<script src="../../resources/static/kindeditor/kindeditor-all.js"></script>
-<script src="../../resources/static/kindeditor/lang/zh-CN.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript" src="../../../resources/static/jquery/jquery.min.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-    });
-</script>
-<script>
-    KindEditor.ready(function(K) {
-        window.editor = K.create('#editor_id');
-    });
-    var options = {
-        cssPath : '/css/index.css',
-        filterMode : true
-    };
-    var editor = K.create('textarea[name="content"]', options);
-    // 取得HTML内容
-    html = editor.html();
-    // 同步数据后可以直接取得textarea的value
-    editor.sync();
-    html = document.getElementById('editor_id').value; // 原生API
-    html = $('#editor_id').val(); // jQuery
-
-    // 设置HTML内容
-    editor.html('HTML内容');
-    KindEditor.options.filterMode = false;
-</script>
+    <button id="resetbutton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        <p class="add_p">修改</p>
+    </button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加轮播图
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="file" id="file" style="display: none" onchange="upload(this)">
+                    <button id="myBtn" class="myBtn" onclick="fileBtn()">
+                        上传文件
+                    </button>
+                    <img src="" id="img" style="width: 200px">
+                    <div>添加时间</div>
+                    <div id="show_time0" style="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button id="change" type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
+        <script>
+            //这里就一句话就可以显示时间，但不是我想要的最理想结果
+            setInterval("show_time0.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+        </script>
     <script>
-        $(function (){
-            $("#SaveGoods").click(function (){
-                var data ={};
-                data.ProductName = $("#ProductName").val();
-                data.ProductDescription = $("#ProductDescription").val();
-                data.CommodityPrice = $("#CommodityPrice").val();
-                data.CommoditySellingPrice = $("#CommoditySellingPrice").val();
-                data.CommodityInventory = $("#CommodityInventory").val();
-                data.ProductLabel = $("#ProductLabel").val();
-                $.ajax(
-                    {
-                        url:"/backendLogin/index",
-                        type:"post",
-                        dataType:"json",
-                        data:{
-                            ProductName:data.ProductName,
-                            ProductDescription:data.ProductDescription,
-                            CommodityPrice:data.CommodityPrice,
-                            CommoditySellingPrice:data.CommoditySellingPrice,
-                            CommodityInventory:data.CommodityInventory,
-                            ProductLabel:data.ProductLabel
-                        },
-                        success:function (result){
+        $(function () {
+            $("#jqGrid").jqGrid({
+                <!--数据类型-->
+                datatype: "json",
+                <!--请求数据的地址-->
+                url: '/backendLogin/editPicture',
+                <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
+                <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
+                <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
+                colModel: [
+                    {label:'轮播图', name: 'carouselAddress', index: 'carouselAddress', width: 320,formatter: coverImageFormatter},
+                    {label:'轮播图位置', name: 'carouselName', index: 'carouselName', width: 880}
+                ],
+                height: 560,
+                rowNum: 10,
+                rowList:[10,20,50],
+                styleUI: 'Bootstrap',
+                loadtext: '信息读取中...',
+                <!--如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'-->
+                rownumbers: false,
+                <!--如果rownumbers为true，则可以设置column的宽度-->
+                rownumWidth: 400,
+                <!--如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth-->
+                autowidth: true,
+                <!--定义是否可以多选-->
+                multiselect: true,
+                <!--pager是加入分页器-->
+                pager: "#jqGridPager",
+                jsonReader: {
+                    root: "data.list",
+                    page: "data.currPage",
+                    total: "data.totalPage",
+                    records: "data.totalCount"
+                },
 
-                        },
-                        error:function (){
-
-                        }
+                gridComplete: function () {
+                    //隐藏grid底部滚动条
+                    $("#jqGrid").closest("ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+                },
+                onSelectRow: function(id){
+                    if(id && id!==lastSel){
+                        jQuery('#grid_id').restoreRow(lastSel);
+                        lastSel=id;
+                        console.log("xxxx"+id);
                     }
-                );
-            })
+                    jQuery('#grid_id').editRow(id, true);
+                },
+            });
+            function coverImageFormatter(cellvalue) {
+                return "<img src='" + cellvalue + "' height=\"116\" width=\"320\" alt='coverImage'/>";
+            }
         });
 
     </script>
+        <script>
+
+
+            /*function upload(file) {
+                let img = document.getElementById('img')
+                let formData = new FormData()
+                let temp = file.files[0]
+                if (temp){
+                    formData.append('file',temp);
+                    img.src = window.URL.createObjectURL(temp);
+                        /!*var data ={};
+                        data.formData = formData;
+                        data.id = getSelectedRowWithoutAlert();*!/
+                        $.ajax({
+                            url:"/backendLogin/addimg",
+                            type:"POST",
+                            data: formData,
+                            processData: false, // 告诉jQuery不要去处理发送的数据
+                            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                            success: function(result){
+                                alert(result);
+                            }
+                        });
+                }
+            }*/
+            function fileBtn() {
+                document.getElementById('file').click()
+            }
+            function upload(file) {
+                let img = document.getElementById('img')
+                let formData = new FormData()
+                let temp = file.files[0]
+                if (temp) {
+                    formData.append('file', temp)
+                    img.src = window.URL.createObjectURL(temp)
+                    $.ajax({
+                        url: "/backendLogin/addimg",
+                        type: "post",
+                        data: formData,
+                        processData: false, // 告诉jQuery不要去处理发送的数据
+                        contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error:function (result){
+                            alert(result);
+                        }
+                    })
+                }
+            }
+
+        </script>
+        <script>
+            /*选择一条记录*/
+            function getSelectedRowWithoutAlert() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.getGridParam("selrow");
+                if (!rowKey) {
+                    return;
+                }
+                var selectedIDs = grid.getGridParam("selarrrow");
+                if (selectedIDs.length > 1) {
+                    return;
+                }
+                return selectedIDs[0];
+            }
+            /*选择多条记录*/
+            function getSelectedRows() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.getGridParam("selrow");
+                if (!rowKey) {
+                    swal("请选择一条记录", {
+                        icon: "warning",
+                    });
+                    return;
+                }
+                return grid.getGridParam("selarrrow");
+            }
+        </script>
 </body>
 </html>
