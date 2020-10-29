@@ -15,8 +15,8 @@ public class AdminUserCarouselImpl implements AdminUserCarouselService {
     AdminUserCarouselMapper adminUserCarouselMapper;
 
     @Override
-    public int updateCarousel(String showFilePath, String userName) {
-        return adminUserCarouselMapper.updateCarousel(showFilePath,userName);
+    public int updateCarousel(String Path, String id) {
+        return adminUserCarouselMapper.updateCarousel(Path,id);
     }
 
     @Override

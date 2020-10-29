@@ -196,30 +196,6 @@
 
     </script>
         <script>
-
-
-            /*function upload(file) {
-                let img = document.getElementById('img')
-                let formData = new FormData()
-                let temp = file.files[0]
-                if (temp){
-                    formData.append('file',temp);
-                    img.src = window.URL.createObjectURL(temp);
-                        /!*var data ={};
-                        data.formData = formData;
-                        data.id = getSelectedRowWithoutAlert();*!/
-                        $.ajax({
-                            url:"/backendLogin/addimg",
-                            type:"POST",
-                            data: formData,
-                            processData: false, // 告诉jQuery不要去处理发送的数据
-                            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-                            success: function(result){
-                                alert(result);
-                            }
-                        });
-                }
-            }*/
             function fileBtn() {
                 document.getElementById('file').click()
             }
@@ -230,19 +206,46 @@
                 if (temp) {
                     formData.append('file', temp)
                     img.src = window.URL.createObjectURL(temp)
-                    $.ajax({
-                        url: "/backendLogin/addimg",
-                        type: "post",
-                        data: formData,
-                        processData: false, // 告诉jQuery不要去处理发送的数据
-                        contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-                        success: function (result) {
-                            alert(result);
-                        },
-                        error:function (result){
-                            alert(result);
-                        }
+
+
+                        $.ajax({
+                            url: "/backendLogin/addimg",
+                            type: "post",
+                            data:formData,
+                            processData: false, //告诉jQuery不要去处理发送的数据
+                            contentType: false, //告诉jQuery不要去设置Content-Type请求头
+                            success: function (result) {
+                                swal(result);
+                            },
+                            error:function (result){
+                                swal(result);
+                            }
+                        })
+                    $("#change").click(function (){
+                        var data ={};
+                        data.id = getSelectedRowWithoutAlert();
+                        console.log(data.id);
+                        $.ajax({
+                            url: "/backendLogin/changeid",
+                            type: "post",
+                            dataType:"json",
+                            data: {
+                                id:data.id
+                            },
+                            success: function (result) {
+                                /*if (result.resultCode=200){
+                                    swal("修改轮播图成功");
+                                }*/
+                                window.location.href='/backendLogin/index';
+                            },
+                            error:function (result){
+                                if (result.resultCode=405){
+                                    swal("修改轮播图失败");
+                                }
+                            }
+                        });
                     })
+
                 }
             }
 

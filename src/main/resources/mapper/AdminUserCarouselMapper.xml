@@ -11,10 +11,10 @@
     <update id="updateCarousel">
             update adminusercarousel
             <set>
-                carousel_address = #{carouselAddress,jdbcType=VARCHAR}
+                carousel_address = #{Path,jdbcType=VARCHAR}
             </set>
             where
-            carousel_name = #{carouselName,jdbcType = VARCHAR}
+            carousel_name = #{id,jdbcType = VARCHAR}
     </update>
 
     <select id="findCarousel" resultMap="BaseResultMap" parameterType="com.imooc.entity.Carousel">

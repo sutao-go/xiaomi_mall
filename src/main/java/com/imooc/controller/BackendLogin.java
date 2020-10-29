@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,8 @@ public class BackendLogin {
 
     @Autowired
     AdminUserCarouselService adminUserCarouselService;
-
+    //展示路径
+    public String showFilePath =null;
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public String login() {
         return "templates/backgroundPage/BackgroundLogin";
@@ -74,37 +76,70 @@ public class BackendLogin {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/index")
+    @RequestMapping(method = RequestMethod.GET,value = "/carousel")
     public String index(){
-        return "templates/backgroundPage/BackgroundIndex";
+        return "templates/backgroundPage/BackgroundCarousel";
     }
 
     /**
-     *这个的主要作用是用来修改轮播图用的
+     *这个的主要作用是用来上传轮播图并且修改路径用的
      * @param file
      */
     @RequestMapping(method = RequestMethod.POST, value = "/addimg")
+    @ResponseBody
     public String uploadFile(
             @RequestParam("file") MultipartFile file
     ) {
             String fileName = file.getOriginalFilename();
-            /*String path = "C:/Users/Admin/IdeaProjects/xiaomi_mall/src/main/webapp/resources/upload/";73*/
-            String path = "C:/test/";
+            String path = "C:/Users/Admin/IdeaProjects/xiaomi_mall/src/main/webapp/resources/upload/";
+            /*String path = "C:/test/";*/
             File newFile = new File(path + fileName);
-            String showFile = newFile.toString().substring(8);
-            String showFilePath ="../../resources/upload/"+showFile;
+            String showFile = newFile.toString().substring(73);
+            showFilePath ="../../resources/upload/"+showFile;
             System.out.println(showFilePath);
-            /*String userName = request.getSession().getAttribute("userName").toString();
-            int updateCarousel = adminUserCarouselService.updateCarousel(showFilePath,userName);*/
         try {
             file.transferTo(newFile);
-            return "成功";
+            return "上传照片成功";
         }
         catch (Exception e){
             e.printStackTrace();
-            return "失败";
+            return "上传图片失败";
         }
     }
+
+    /**
+     * 这个是用来修改轮数据库中播图用的
+     * @param info
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/changeid")
+    @ResponseBody
+    public Map<String,String> changeId(
+            @RequestParam Map<String,String> info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    )throws Exception{
+        Object name =info.get("id");
+        String id = name.toString();
+        System.out.println(id);
+        System.out.println("恭喜您获取到了路径:"+showFilePath);
+        String Path = showFilePath;
+        int updateCarousel = adminUserCarouselService.updateCarousel(Path,id);
+        System.out.println("数据库数据"+updateCarousel);
+        if (updateCarousel == 1){
+            info.put("resultCode","200");
+            return  info;
+        }else {
+            info.put("resultCode","405");
+            return info;
+        }
+    };
+
     /**
      * 这个是将后端数据库中的轮播图数据读取到后台
      * @param request
@@ -148,4 +183,39 @@ public class BackendLogin {
         list.clear();
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/findimg")
+    @ResponseBody
+    public Map<String,String> findImg(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request,
+            HttpSession session
+    )throws Exception{
+        String allCarousel=null;
+        List findCarousel = adminUserCarouselService.findCarousel(allCarousel);
+        String a =findCarousel.toString();
+        JSONArray jsonArray = JSONArray.fromObject(findCarousel);
+        int data = findCarousel.size();
+        for (int i = 0;i<findCarousel.size();i++){
+            String Data = jsonArray.get(i).toString().substring(0);
+            JSONObject jsonObject = JSONObject.fromObject(Data);
+            String a1 = jsonObject.toString();
+            list.add(a1);
+        }
+        System.out.println(list);
+        response.getWriter().write(list.toString());
+        list.clear();
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/sales")
+    public String Sales(){
+        return "templates/backgroundPage/BackgroundCommodityManagement";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/sales")
+    @ResponseBody
+    public Map<String,String> Sales1(){
+        return null;
+    }
 }

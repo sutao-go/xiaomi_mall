@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface AdminUserCarouselMapper {
-    int updateCarousel(String showFilePath, String userName);
+
+    int updateCarousel(@Param("Path")String Path,@Param("id")String id);
 
     List<Carousel> findCarousel(@Param("allCarousel")String allCarousel);
 }

@@ -468,19 +468,19 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_1.jpg">
+                <img id="1" class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_1.jpg">
             </div>
-            <div class="swiper-slide">
-                <img class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_2.jpg">
+            <div  class="swiper-slide">
+                <img id="2" class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_2.jpg">
             </div>
-            <div class="swiper-slide">
-                <img class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_3.jpg">
+            <div  class="swiper-slide">
+                <img id="3" class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_3.jpg">
             </div>
-            <div class="swiper-slide">
-                <img class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_4.jpg">
+            <div  class="swiper-slide">
+                <img id="4" class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_4.jpg">
             </div>
-            <div class="swiper-slide">
-                <img class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_5.jpg">
+            <div  class="swiper-slide">
+                <img id="5" class="swiper_lunbo" src="../../resources/upload/xiaomi_lunbo_5.jpg">
             </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -1017,5 +1017,22 @@
         })
     });
 </script>
+    <script>
+        $(function (){
+            $.ajax({
+                url: "/backendLogin/findimg",
+                type: "post",
+                dataType: "json",
+                success:function (result){
+                    var obj = result;
+                        document.getElementById("1").src=obj[0]["carouselAddress"];
+                    document.getElementById("2").src=obj[1]["carouselAddress"];
+                    document.getElementById("3").src=obj[2]["carouselAddress"];
+                    document.getElementById("4").src=obj[3]["carouselAddress"];
+                    document.getElementById("5").src=obj[4]["carouselAddress"];
+                },
+            })
+        })
+    </script>
 </body>
 </html>
