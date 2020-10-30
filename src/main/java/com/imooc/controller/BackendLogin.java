@@ -1,8 +1,10 @@
 package com.imooc.controller;
 
 import com.imooc.entity.AdminUser;
+import com.imooc.entity.SalesManagement;
 import com.imooc.service.AdminUserCarouselService;
 import com.imooc.service.AdminUserService;
+import com.imooc.service.ProductInformationService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class BackendLogin {
 
     @Autowired
     AdminUserCarouselService adminUserCarouselService;
+
+    @Autowired
+    ProductInformationService productInformationService;
     //展示路径
     public String showFilePath =null;
     @RequestMapping(method = RequestMethod.GET, value = "/login")
@@ -214,8 +219,55 @@ public class BackendLogin {
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/sales")
-    @ResponseBody
-    public Map<String,String> Sales1(){
+    public Map<String,String> Sales1(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )throws Exception
+    {
         return null;
+    }
+
+    /**
+     * 将后台数据库销售商品的数据显示在前端
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/sales/list")
+    public void SalesList(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )throws Exception{
+        String allProduct=null;
+        List<SalesManagement>findCarousel = productInformationService.findProduct(allProduct);
+        String a =findCarousel.toString();
+        System.out.println(a);
+        JSONArray jsonArray = JSONArray.fromObject(findCarousel);
+        int data = findCarousel.size();
+        for (int i = 0;i<findCarousel.size();i++){
+            String Data = jsonArray.get(i).toString().substring(0);
+            JSONObject jsonObject = JSONObject.fromObject(Data);
+            String a1 = jsonObject.toString();
+            list.add(a1);
+        }
+        JSONArray jsonArray1 = JSONArray.fromObject(list);
+        String change = jsonArray1.toString();
+        String page = request.getParameter("page"); // 取得当前页数,注意这是jqgrid自身的参数
+        String rows = request.getParameter("rows"); // 取得每页显示行数，,注意这是jqgrid自身的参数
+        int totalCount = 1; // 总记录数(应根据数据库取得，在此只是模拟)
+        int totalPage = totalCount % Integer.parseInt(rows) == 0 ? totalCount
+                / Integer.parseInt(rows) : totalCount / Integer.parseInt(rows)
+                + 1; // 计算总页数
+        int index = (Integer.parseInt(page) - 1) * Integer.parseInt(rows); // 开始记录数
+        int pageSize = Integer.parseInt(rows);
+        // 以下模拟构造JSON数据对象
+        String json = "{data: {"+"totalCount:" + totalCount + ", pageSize: " + pageSize
+                + ", totalPage: " + totalPage + ", list: "+change+"}}";
+        JSONObject testjson = JSONObject.fromObject(json);
+        String change1 =testjson.toString();
+        System.out.println("响应到前端的json:"+change1);
+        response.getWriter().write(change1);
+        //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长的问题
+        list.clear();
     }
 }

@@ -7,6 +7,9 @@ public class SalesManagement {
     public String pictureAddress;
     //商品销售状态
     public String salesStatus;
+    //商品的序号
+    public String serialNumber;
+
     public String getProductName() {
         return productName;
     }
@@ -20,7 +23,7 @@ public class SalesManagement {
     }
 
     public void setPictureAddress(String pictureAddress) {
-        pictureAddress = pictureAddress;
+        this.pictureAddress = pictureAddress;
     }
 
     public String getSalesStatus() {
@@ -28,15 +31,24 @@ public class SalesManagement {
     }
 
     public void setSalesStatus(String salesStatus) {
-        salesStatus = salesStatus;
+        this.salesStatus = salesStatus;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     @Override
     public String toString() {
         return "SalesManagement{" +
                 "productName='" + productName + '\'' +
-                ", PictureAddress='" + pictureAddress + '\'' +
-                ", SalesStatus='" + salesStatus + '\'' +
+                ", pictureAddress='" + pictureAddress + '\'' +
+                ", salesStatus='" + salesStatus + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
                 '}';
     }
 }

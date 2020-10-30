@@ -140,7 +140,7 @@
     </div>
 </div>
 <button class="Sales">上架商品</button>
-<button class="Prohibit">下架商品</button>
+<button id="Prohibit" class="Prohibit">下架商品</button>
     <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
@@ -157,13 +157,13 @@
             <!--数据类型-->
             datatype: "json",
             <!--请求数据的地址-->
-            url: '/backendLogin/Sales',
+            url: '/backendLogin/sales/list',
             <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
             <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
             <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
             colModel: [
-                {label:'商品名称', name: 'productName', index: 'productName', width: 400,formatter: coverImageFormatter},
-                {label:'商品图片', name: 'pictureAddress', index: 'pictureAddress', width: 400},
+                {label:'商品名称', name: 'productName', index: 'productName', width: 400},
+                {label:'商品图片', name: 'pictureAddress', index: 'pictureAddress', width: 400,formatter: coverImageFormatter},
                 {label:'销售状态', name: 'salesStatus', index: 'salesStatus', width: 400}
             ],
             height: 560,
@@ -198,14 +198,66 @@
                     lastSel=id;
                     console.log("xxxx"+id);
                 }
-                jQuery('#grid_id').editRow(id, true);
+                jQuery('#grid_id').editRow(id,true);
             },
         });
         function coverImageFormatter(cellvalue) {
-            return "<img src='" + cellvalue + "' height=\"116\" width=\"320\" alt='coverImage'/>";
+            return "<img src='" + cellvalue + "' height=\"116\" width=\"116\" alt='coverImage'/>";
         }
     });
 
+</script>
+<script>
+    /*选择一条记录*/
+    function getSelectedRowWithoutAlert() {
+        var grid = $("#jqGrid");
+        var rowKey = grid.getGridParam("selrow");
+        if (!rowKey) {
+            return;
+        }
+        var selectedIDs = grid.getGridParam("selarrrow");
+        if (selectedIDs.length > 1) {
+            return;
+        }
+        return selectedIDs[0];
+    }
+    /*选择多条记录*/
+    function getSelectedRows() {
+        var grid = $("#jqGrid");
+        var rowKey = grid.getGridParam("selrow");
+        if (!rowKey) {
+            swal("请选择一条记录", {
+                icon: "warning",
+            });
+            return;
+        }
+        return grid.getGridParam("selarrrow");
+    }
+</script>
+<script>
+    $(function (){
+        $("#Prohibit").click(function (){
+            var data ={};
+            data.id = getSelectedRowWithoutAlert();
+            console.log(data.id);
+            $.ajax({
+                url: "/backendLogin/sales",
+                type: "post",
+                dataType:"json",
+                data: {
+                    id:data.id
+                },
+                success: function (result) {
+
+                },
+                error:function (result){
+                    if (result.resultCode=405){
+                        swal("修改轮播图失败");
+                    }
+                }
+            });
+        })
+    })
 </script>
 </body>
 </html>
