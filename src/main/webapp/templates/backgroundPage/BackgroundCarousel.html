@@ -106,6 +106,15 @@
             border: none;
             outline: none;
         }
+        .changePassword{
+            position: absolute;
+            top: 248px;
+            width: 202px;
+            height: 46px;
+            background-color: rgb(57,61,73);
+            border: none;
+            outline: none;
+        }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
     <!--jqgrid的css-->
@@ -135,6 +144,12 @@
         <p class="Carousel_a">账号管理</p>
     </button>
     <div class="management">账号管理</div>
+    <button
+            id="changePassword"
+            type="button"
+            class="changePassword">
+        <p class="Carousel_a">修改密码</p>
+    </button>
     <div class="title2">
         <div class="card-body">
             <div class="card-body">
@@ -280,7 +295,7 @@
                                 /*if (result.resultCode=200){
                                     swal("修改轮播图成功");
                                 }*/
-                                window.location.href='/backendLogin/index';
+                                window.location.href='/backendLogin/carousel';
                             },
                             error:function (result){
                                 if (result.resultCode=405){
@@ -329,7 +344,12 @@
                 $("#accountManagement").click(function (){
                     window.location.href='/backendLogin/accountManagement';
                 })
-            })
+            });
+            $(function (){
+                $("#changePassword").click(function (){
+                    window.location.href='/backendLogin/password';
+                })
+            });
         </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.imooc.config;
 
+import com.imooc.interceptor.BackendInterceptorConfiguration;
 import com.imooc.interceptor.FrontEndSystemAuthenticationInterceptor;
 import com.imooc.interceptor.PayIntercepter;
 import com.imooc.interceptor.PersonalCenterIntercepter;
@@ -28,6 +29,8 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
     private PersonalCenterIntercepter personalCenterIntercepter;
     @Autowired
     private PayIntercepter payIntercepter;
+    @Autowired
+    private BackendInterceptorConfiguration backendInterceptorConfiguration;
     @Override
     public void addFormatters(FormatterRegistry formatterRegistry) {
 
@@ -90,6 +93,9 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
                 .addPathPatterns("/user/**");
         registry.addInterceptor(payIntercepter)
                 .addPathPatterns("/orderlist/**");
+        registry.addInterceptor(backendInterceptorConfiguration)
+                .addPathPatterns("/backendLogin/**")
+                .excludePathPatterns("/backendLogin/login");
 
     }
 

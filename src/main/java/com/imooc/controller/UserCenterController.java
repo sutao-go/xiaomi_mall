@@ -57,22 +57,22 @@ public class UserCenterController {
     @RequestMapping(method = RequestMethod.POST,value = "/accountManagement")
     @ResponseBody
     public Map<String,String> changePassword(
-            @RequestParam Map<String,String> data,
+            @RequestParam Map<String,String> info,
             HttpServletResponse response,
             HttpServletRequest request,
             HttpSession session
             ){
-        Object name =data.get("oldPassword");
+        Object name =info.get("oldPassword");
         String oldPassword = name.toString();
-        Object name1 =data.get("newPassword1");
+        Object name1 =info.get("newPassword1");
         String passWord = name1.toString();
-        Object name2 =data.get("newPassword2");
+        Object name2 =info.get("newPassword2");
         String newPassword2 = name2.toString();
         if (oldPassword.length() != 0 && passWord.length() != 0 && newPassword2.length() != 0){
             //登录成功之后通过session来获取账号
             Object attribute = request.getSession().getAttribute("userName");
             String userName = attribute.toString();
-            String a = adminUserService.find(userName).toString();
+            String a = adminUserService.find(userName).toString().substring(9);
             //将获取到的账号和密码发往后端的数据库中进行比对
             //将获取到的数据先转换成为jsonobject
             JSONObject b = JSONObject.fromObject(a);
@@ -86,7 +86,8 @@ public class UserCenterController {
                        //如果两次输入的新密码一致就更改后台数据库中的密码
                        System.out.println("开始修改密码");
                        userCenterService.changePassword(userName,passWord);
-
+                       info.put("resultCode","200");
+                        return info;
                    }else{
                        //如果不一致执行以下的代码
                    }
@@ -94,7 +95,7 @@ public class UserCenterController {
                 System.out.println("false");
             }
         }
-        return data;
+       return null;
     }
 
     /**
