@@ -14,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 这个模块主要是后端人员对前端的一些操作
+ * 比如像商品上下架，用户账号的封禁，轮播图的更新等
+ */
 @Controller
 @RequestMapping("/backendLogin")
 public class BackendLogin {
@@ -38,22 +39,21 @@ public class BackendLogin {
 
     @Autowired
     ProductInformationService productInformationService;
+
     //展示路径
     public String showFilePath =null;
+
+    List<String> list=new ArrayList<>();
+    /**
+     * 实现后台登录页面的跳转的
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public String login() {
         return "templates/backgroundPage/BackgroundLogin";
     }
-    List<String> list=new ArrayList<>();
-    /**
-     * 实现后台登录页面的跳转的
-     * @param info
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     @ResponseBody
     public Map<String, String> doPostXiaomi10(
@@ -218,13 +218,62 @@ public class BackendLogin {
         return "templates/backgroundPage/BackgroundCommodityManagement";
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/sales")
-    public Map<String,String> Sales1(
+    /**
+     * 这个是用来下架前端商城中的商品的
+     * @param info
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/sales/prohibit")
+    @ResponseBody
+    public Map<String,String> prohibit(
+            @RequestParam Map<String,String> info,
             HttpServletRequest request,
             HttpServletResponse response
     )throws Exception
     {
-        return null;
+        Object name =info.get("id");
+        String id = name.toString();
+        String status = "下架了";
+        System.out.println(id);
+        int changeSalesStatus = productInformationService.changeSalesStatus(id,status);
+        if(changeSalesStatus == 1){
+            info.put("resultCode","200");
+            return info;
+        }else {
+            info.put("resultCode","405");
+            return info;}
+    }
+    /**
+     * 这个是用来上架前端商城中的商品的
+     * @param info
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/sales")
+    @ResponseBody
+    public Map<String,String> sales(
+            @RequestParam Map<String,String> info,
+            HttpServletRequest request,
+            HttpServletResponse response
+    )throws Exception
+    {
+        Object name =info.get("id");
+        String id = name.toString();
+        String status = "销售中";
+        System.out.println(id);
+        int changeSalesStatus = productInformationService.changeSalesStatus(id,status);
+        if(changeSalesStatus == 1){
+            info.put("resultCode","200");
+            return info;
+        }else {
+            info.put("resultCode","405");
+            return info;
+        }
     }
 
     /**
@@ -269,5 +318,188 @@ public class BackendLogin {
         response.getWriter().write(change1);
         //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长的问题
         list.clear();
+    }
+
+    /**
+     * 更改商品销售状态
+     * @param info
+     * @param response
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/getStatus")
+    @ResponseBody
+    public Map<String,String> getStatus(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request
+    )throws Exception{
+        Object name = info.get("productName");
+        String productName = name.toString();
+        Object findStatus  = productInformationService.findStatus(productName);
+        JSONObject jsonObject = JSONObject.fromObject(findStatus);
+        String a = jsonObject.getString("salesStatus");
+        if (a.equals("销售中")){
+            info.put("resultCode","200");
+            return info;
+        }if(a.equals("下架了")){
+            info.put("resultCode","201");
+            return info;
+        }else {
+            info.put("resultCode","202");
+            return info;
+        }
+    }
+
+    /**
+     * 跳转到账号管理页面
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/accountManagement")
+    public String accountManagement(){
+        return "templates/backgroundPage/BackgroundAccountManagement";
+    }
+
+    /**
+     * 将后台中关于用户账户的信息传输到前端页面中去
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/accountManagement/list")
+    public void accountManagement1(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )throws Exception{
+        String userName=null;
+        String userStatus=null;
+        List<SalesManagement>findCarousel = adminUserService.findUserStatus(userName,userStatus);
+        String a =findCarousel.toString();
+        System.out.println(a);
+        JSONArray jsonArray = JSONArray.fromObject(findCarousel);
+        int data = findCarousel.size();
+        for (int i = 0;i<findCarousel.size();i++){
+            String Data = jsonArray.get(i).toString().substring(0);
+            JSONObject jsonObject = JSONObject.fromObject(Data);
+            String a1 = jsonObject.toString();
+            list.add(a1);
+        }
+        JSONArray jsonArray1 = JSONArray.fromObject(list);
+        String change = jsonArray1.toString();
+        String page = request.getParameter("page"); // 取得当前页数,注意这是jqgrid自身的参数
+        String rows = request.getParameter("rows"); // 取得每页显示行数，,注意这是jqgrid自身的参数
+        int totalCount = 1; // 总记录数(应根据数据库取得，在此只是模拟)
+        int totalPage = totalCount % Integer.parseInt(rows) == 0 ? totalCount
+                / Integer.parseInt(rows) : totalCount / Integer.parseInt(rows)
+                + 1; // 计算总页数
+        int index = (Integer.parseInt(page) - 1) * Integer.parseInt(rows); // 开始记录数
+        int pageSize = Integer.parseInt(rows);
+        // 以下模拟构造JSON数据对象
+        String json = "{data: {"+"totalCount:" + totalCount + ", pageSize: " + pageSize
+                + ", totalPage: " + totalPage + ", list: "+change+"}}";
+        JSONObject testjson = JSONObject.fromObject(json);
+        String change1 =testjson.toString();
+        System.out.println("响应到前端的json:"+change1);
+        response.getWriter().write(change1);
+        //以下这个代码主要是用来防止当用户不断刷新前端页面的时候，list中会不停的增长的问题
+        list.clear();
+    }
+
+    /**
+     * 封禁账号
+     * @param info
+     * @param response
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/disableAccount")
+    @ResponseBody
+    public Map<String,String> disableAccount(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request
+    )throws Exception{
+        Object name = info.get("id");
+        String id = name.toString();
+        String disableAccount = "禁用";
+        int changeStatus = adminUserService.changeUserStatus(disableAccount,id);
+        if (changeStatus == 1){
+            info.put("resultCode","200");
+            return info;
+        }else {
+            info.put("redultCode","202");
+            return info;
+        }
+    }
+
+    /**
+     * 解封账号
+     * @param info
+     * @param response
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/unban")
+    @ResponseBody
+    public Map<String,String> unban(
+            @RequestParam Map<String,String> info,
+            HttpServletResponse response,
+            HttpServletRequest request
+    )throws Exception{
+        Object name = info.get("id");
+        String id = name.toString();
+        String disableAccount = "正常";
+        int changeStatus = adminUserService.changeUserStatus(disableAccount,id);
+        if (changeStatus == 1){
+            info.put("resultCode","200");
+            return info;
+        }else {
+            info.put("redultCode","202");
+            return info;
+        }
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/password")
+    public String password(){
+        return  "templates/backgroundPage/BackgroundChangePassword";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/password")
+    @ResponseBody
+    public Map<String,String> password1(
+            @RequestParam Map<String,String> info,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session
+    ){
+        Object name = info.get("password");
+        String password = name.toString();
+        Object name1 = info.get("newpassword");
+        String newpassword = name1.toString();
+        Object name2= info.get("newpassword2");
+        String newpassword2= name2.toString();
+        String userName = request.getSession().getAttribute("userName").toString();
+        if (userName != null){
+            if (newpassword.equals(newpassword2)){
+                int result  = adminUserService.changePassword(newpassword,userName);
+                if (result == 1){
+                    info.put("resultCode","200");
+                    return info;
+                }else {
+                    info.put("resultCode","202");
+                    return info;
+                }
+            }else {
+                info.put("resultCode","203");
+                return info;
+            }
+
+        }else {
+            info.put("resultCode","204");
+            return info;
+        }
+
     }
 }

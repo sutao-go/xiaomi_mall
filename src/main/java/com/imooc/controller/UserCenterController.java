@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
+/**
+ * 这个模块主要是用来实现当用户登录成功之后结算商品修改自己账号密码的
+ * 一系列的操作
+ */
 @Controller
 @RequestMapping("/user")
 public class UserCenterController {

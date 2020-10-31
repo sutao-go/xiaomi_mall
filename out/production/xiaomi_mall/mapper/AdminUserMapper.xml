@@ -4,9 +4,11 @@
     <resultMap id="BaseResultMap" type="com.imooc.entity.AdminUser">
         <id column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="serial_number" jdbcType="VARCHAR" property="serialNumber"/>
     </resultMap>
     <sql id="BaseResult_list">
-        user_name,pass_word
+        user_name,pass_word,status
     </sql>
 
     <select id="login" resultMap="BaseResultMap" >
@@ -36,4 +38,27 @@
         and
         pass_word = #{password,jdbcType=VARCHAR}
     </select>
+
+    <select id="findUserStatus" resultMap="BaseResultMap" parameterType="com.imooc.entity.AdminUser">
+        select user_name,status
+        from adminuser
+    </select>
+
+    <update id="changeUserStatus">
+        update adminuser
+        <set>
+            status = #{disableAccount,jdbcType=VARCHAR}
+        </set>
+        where
+        serial_number = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="changePassword">
+        update administrator
+        <set>
+            pass_word = #{newpassword,jdbcType=VARCHAR}
+        </set>
+        where
+            user_name = #{userName,jdbcType=VARCHAR}
+    </update>
 </mapper>

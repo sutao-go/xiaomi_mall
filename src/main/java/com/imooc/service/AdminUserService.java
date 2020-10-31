@@ -1,6 +1,9 @@
 
 package com.imooc.service;
 import com.imooc.entity.AdminUser;
+import com.imooc.entity.SalesManagement;
+
+import java.util.List;
 
 public interface AdminUserService {
     /**
@@ -22,5 +25,11 @@ public interface AdminUserService {
     AdminUser find(String userName);
 
     AdminUser findAdministrator(String userName, String password);
+
+    List<SalesManagement> findUserStatus(String userName, String userStatus);
+
+    int changeUserStatus(String disableAccount,String id);
+
+    int changePassword(String newpassword, String userName);
 }
 

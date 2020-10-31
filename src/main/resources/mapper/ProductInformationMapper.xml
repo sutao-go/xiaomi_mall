@@ -15,4 +15,23 @@
         select product_name,product_address,sales_status,serial_number
         from adminuserproductinformation
     </select>
+
+    <update id="changeSalesStatus">
+        update
+        adminuserproductinformation
+        <set>
+            sales_status  = #{status,jdbcType=VARCHAR}
+        </set>
+        where
+            serial_number = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findStatus" resultMap="BaseResultMap" parameterType="com.imooc.entity.SalesManagement">
+        select
+        sales_status
+        from
+        adminuserproductinformation
+        where
+        product_name = #{productName,jdbcType=VARCHAR}
+    </select>
 </mapper>

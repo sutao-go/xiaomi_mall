@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 这个模块主要是用来处理前端用户的操作的
+ * 比如像：用户购买商品等等的操作
+ */
 @Controller
 @RequestMapping("/orderlist")
 public class OrderListController {

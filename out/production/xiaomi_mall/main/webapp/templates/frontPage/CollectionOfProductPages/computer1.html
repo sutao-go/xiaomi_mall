@@ -640,5 +640,32 @@
         })
     })
 </script>
+<script>
+    var data={};
+    data.productName = "15.6四核i716G独显512G";
+    $.ajax({
+        url:"/backendLogin/getStatus",
+        type:"post",
+        dataType: "json",
+        data: {
+            /*用k-v键值对*/
+            productName:data.productName
+        },
+        success:function (result){
+            if (result.resultCode == 200){
+                $("#addToShopping").attr("disabled",false);//移除disabled属性
+            }if(result.resultCode == 201){
+                $("#addToShopping").attr("disabled",true);
+                document.getElementById('addToShopping').innerHTML='商品已下架';
+            }if(result.resultCode == 202){
+                swal("您的程序出现错误了---销售状态这个功能出现错误1");
+            }
+        },
+        error:function (){
+            swal("您的程序出现错误了---销售状态这个功能出现错误2");
+        }
+    })
+
+</script>
 </body>
 </html>

@@ -224,8 +224,18 @@
                         if(result.resultCode == 204){
                             swal("验证码错误");
                         }
+                        if (result.resultCode ==203){
+                            swal("账号密码错误");
+                        }
                         if(result.resultCode == 202){
                             swal("账号密码错误");
+                        }if (result.resultCode == 303){
+                            swal("很抱歉，您的账户被禁用，请联系管理人员")
+                        }if (result.resultCode == 205){
+                            swal("程序出现错误");
+                        }
+                        if (result.resultCode == 404){
+                            swal("请输入账号密码");
                         }
                     },
                     error:function (){
@@ -271,5 +281,6 @@
     })
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
 </html>

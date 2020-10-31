@@ -6,34 +6,49 @@ public class AdminUser {
     //用户密码
     private String passWord;
     //用户重新设置之后的密码
-    private String newPassword;
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    public String getNewPassword() {
-        return newPassword;
-    }
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
+    private String serialNumber;
+    //身份状态
+    private String status;
+
     public String getUserName() {
         return userName;
     }
-    public void setUserId(String userName) {
+
+    public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public String getPassWord() {
         return passWord;
     }
+
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "{" +
+        return "AdminUser{" +
                 "userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
-                ", newPassword='" + newPassword + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

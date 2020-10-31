@@ -85,7 +85,6 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/login")
                 .excludePathPatterns("/admin/kaptcha")
-                .excludePathPatterns("/admin/index")
                 .excludePathPatterns("/admin/plugins/**");
         registry.addInterceptor(personalCenterIntercepter)
                 .addPathPatterns("/user/**");

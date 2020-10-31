@@ -193,6 +193,12 @@
             border: 1px solid #ff6700;
         }
     </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+    <!--jqgrid的css-->
+    <link href="//cdn.bootcss.com/jqgrid/4.6.0/css/ui.jqgrid.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="title">
@@ -214,11 +220,37 @@
         <div class="paymentBody_div0">选择以下支付方式付款
         </div>
         <div class="paymentBody_div1"><b>支付平台</b></div>
-            <div class="paymentBody_ul_li0"><img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9a4f743d0bdb5c048ad9803914a4ea83.jpg"></div>
-            <div class="paymentBody_ul_li1"><img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/c66f98cff8649bd5ba722c2e8067c6ca.jpg"></div>
-            <div class="paymentBody_ul_li2"><img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ead8cd015b07ca9f363ef9b6dd5e8e2.jpg"></div>
-            <div class="paymentBody_ul_li3"><img src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9fcf10ba01a57b7d08d38b6f4ff3dfa8.jpg"></div>
+            <div  class="paymentBody_ul_li0"><img id="paymentBody_ul_li0" src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9a4f743d0bdb5c048ad9803914a4ea83.jpg"></div>
+            <div  class="paymentBody_ul_li1"><img id="paymentBody_ul_li1" src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/c66f98cff8649bd5ba722c2e8067c6ca.jpg"></div>
+            <div  class="paymentBody_ul_li2"><img id="paymentBody_ul_li2"src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ead8cd015b07ca9f363ef9b6dd5e8e2.jpg"></div>
+            <div  class="paymentBody_ul_li3"><img id="paymentBody_ul_li3" src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9fcf10ba01a57b7d08d38b6f4ff3dfa8.jpg"></div>
     </div>
     <div class="line1"></div>
+    <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(function (){
+            $("#paymentBody_ul_li3").mousedown(function (){
+                window.location.href='/orderlist/alipay';
+            })
+        });
+        $(function (){
+            $("#paymentBody_ul_li1").mousedown(function (){
+                swal("目前暂时只支持支付宝支付");
+            })
+        });
+        $(function (){
+            $("#paymentBody_ul_li2").mousedown(function (){
+                swal("目前暂时只支持支付宝支付");
+            })
+        });
+        $(function (){
+            $("#paymentBody_ul_li0").mousedown(function (){
+                swal("目前暂时只支持支付宝支付");
+            })
+        });
+    </script>
 </body>
+
+
 </html>

@@ -74,6 +74,38 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .CommodityManagement{
+            position: absolute;
+            top: 162px;
+            width: 202px;
+            height: 46px;
+            background-color: rgb(57,61,73);
+            border: none;
+            outline: none;
+        }
+        .management{
+            position: absolute;
+            left: 300px;
+            height: 50px;
+            font-size: 20px;
+            width: 1250px;
+            top: 60px;
+            background-color: rgb(255,255,255);
+            left: 202px;
+            text-align: center;
+            border-top: rgb(0,123,255) 2px solid;
+            border-bottom: rgb(223,223,223) 2px solid;
+            border-radius: 5px 5px 0 0;
+        }
+        .accountManagement{
+            position: absolute;
+            top: 202px;
+            width: 202px;
+            height: 46px;
+            background-color: rgb(57,61,73);
+            border: none;
+            outline: none;
+        }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
     <!--jqgrid的css-->
@@ -90,6 +122,19 @@
     <div class="leftColumn"></div>
     <div class="aboutUsers">关于用户</div>
     <button type="button" class="Carousel"><p class="Carousel_a">轮播图更新</p></button>
+    <button id="CommodityManagement"
+            type="button"
+            class="CommodityManagement">
+        <p class="Carousel_a">商品管理</p>
+    </button>
+    <div class="management">商品管理</div>
+    <button
+            id="accountManagement"
+            type="button"
+            class="accountManagement">
+        <p class="Carousel_a">账号管理</p>
+    </button>
+    <div class="management">账号管理</div>
     <div class="title2">
         <div class="card-body">
             <div class="card-body">
@@ -275,6 +320,16 @@
                 }
                 return grid.getGridParam("selarrrow");
             }
+        </script>
+        <script>
+            $(function (){
+                $("#CommodityManagement").click(function (){
+                    window.location.href='/backendLogin/sales';
+                });
+                $("#accountManagement").click(function (){
+                    window.location.href='/backendLogin/accountManagement';
+                })
+            })
         </script>
 </body>
 </html>

@@ -54,7 +54,7 @@
             top: 162px;
             width: 202px;
             height: 46px;
-            background-color: rgb(0,150,136);
+            background-color: rgb(57,61,73);
             border: none;
             outline: none;
         }
@@ -78,7 +78,16 @@
             top: 110px;
             width: 1250px;
         }
-        .Sales{
+        .accountManagement{
+            position: absolute;
+            top: 202px;
+            width: 202px;
+            height: 46px;
+            background-color: rgb(0,150,136);
+            border: none;
+            outline: none;
+        }
+        .disableAccount{
             width: 112px;
             height: 40px;
             position: absolute;
@@ -90,10 +99,10 @@
             border-radius: 10px;
             color: white;
         }
-        .Sales:hover{
+        .disableAccount:hover{
             background-color: rgba(40,167,69,0.9);
         }
-        .Prohibit{
+        .Unban{
             width: 112px;
             height: 40px;
             position:absolute;
@@ -105,17 +114,8 @@
             border-radius: 10px;
             color: white;
         }
-        .Prohibit:hover{
+        .Unban:hover{
             background-color: rgba(220,53,69,0.9);
-        }
-        .accountManagement{
-            position: absolute;
-            top: 202px;
-            width: 202px;
-            height: 46px;
-            background-color: rgb(57,61,73);
-            border: none;
-            outline: none;
         }
     </style>
     <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
@@ -138,13 +138,12 @@
         class="CommodityManagement">
     <p class="Carousel_a">商品管理</p>
 </button>
-<div class="management">商品管理</div>
 <button
-        id="accountManagement"
         type="button"
         class="accountManagement">
     <p class="Carousel_a">账号管理</p>
 </button>
+<div class="management">账号管理</div>
 <div class="title2">
     <div class="card-body">
         <div class="card-body">
@@ -154,32 +153,31 @@
         </div>
     </div>
 </div>
-<button id="Sales" class="Sales">上架商品</button>
-<button id="Prohibit" class="Prohibit">下架商品</button>
-    <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
-    <script>
-        $(function (){
-            $("#Carousel").click(function (){
-                window.location.href='/backendLogin/carousel';
-            })
+<button id="disableAccount" class="disableAccount">禁用账号</button>
+<button id="Unban" class="Unban">解除禁用</button>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.bootcss.com/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
+<script>
+    $(function (){
+        $("#Carousel").click(function (){
+            window.location.href='/backendLogin/carousel';
         })
-    </script>
+    })
+</script>
 <script>
     $(function () {
         $("#jqGrid").jqGrid({
             <!--数据类型-->
             datatype: "json",
             <!--请求数据的地址-->
-            url: '/backendLogin/sales/list',
+            url: '/backendLogin/accountManagement/list',
             <!--jqgrid主要通过下面的索引信息与后台传过来的值对应-->
             <!--colModel具体就是你想要再页面显示的内容，name是后端返回字段的名称-->
             <!--常用到的属性：name 列显示的名称；index 传到服务器端用来排序用的列名称；width 列宽度；align 对齐方式；sortable 是否可以排序-->
             colModel: [
-                {label:'商品名称', name: 'productName', index: 'productName', width: 400},
-                {label:'商品图片', name: 'pictureAddress', index: 'pictureAddress', width: 400,formatter: coverImageFormatter},
-                {label:'销售状态', name: 'salesStatus', index: 'salesStatus', width: 400}
+                {label:'账号', name: 'userName', index: 'userName', width: 400},
+                {label:'身份状态', name: 'status', index: 'status', width: 400}
             ],
             height: 560,
             rowNum: 10,
@@ -216,11 +214,7 @@
                 jQuery('#grid_id').editRow(id,true);
             },
         });
-        function coverImageFormatter(cellvalue) {
-            return "<img src='" + cellvalue + "' height=\"116\" width=\"116\" alt='coverImage'/>";
-        }
     });
-
 </script>
 <script>
     /*选择一条记录*/
@@ -251,36 +245,12 @@
 </script>
 <script>
     $(function (){
-        $("#Prohibit").click(function (){
+        $("#disableAccount").click(function (){
             var data ={};
             data.id = getSelectedRowWithoutAlert();
             console.log(data.id);
             $.ajax({
-                url: "/backendLogin/sales/prohibit",
-                type: "post",
-                dataType:"json",
-                data: {
-                    id:data.id
-                },
-                success: function (result) {
-                        if (result.resultCode == 200){
-                            window.location.href='/backendLogin/sales';
-                        }
-                },
-                error:function (result){
-                    if (result.resultCode=405){
-                        swal("下架商品失败");
-                    }
-                }
-            });
-        });
-
-        $("#Sales").click(function (){
-            var data ={};
-            data.id = getSelectedRowWithoutAlert();
-            console.log(data.id);
-            $.ajax({
-                url: "/backendLogin/sales",
+                url: "/backendLogin/disableAccount",
                 type: "post",
                 dataType:"json",
                 data: {
@@ -288,13 +258,33 @@
                 },
                 success: function (result) {
                     if (result.resultCode == 200){
-                       window.location.href='/backendLogin/sales';
+                        window.location.href='/backendLogin/accountManagement';
+                    }
+                },
+                error:function (){
+                        swal("封禁账户失败");
+                }
+            });
+        });
+
+        $("#Unban").click(function (){
+            var data ={};
+            data.id = getSelectedRowWithoutAlert();
+            console.log(data.id);
+            $.ajax({
+                url: "/backendLogin/unban",
+                type: "post",
+                dataType:"json",
+                data: {
+                    id:data.id
+                },
+                success: function (result) {
+                    if (result.resultCode == 200){
+                        window.location.href='/backendLogin/accountManagement';
                     }
                 },
                 error:function (result){
-                    if (result.resultCode=405){
-                        swal("上架商品失败");
-                    }
+                        swal("解封账号失败");
                 }
             });
         });
@@ -302,10 +292,9 @@
 </script>
 <script>
     $(function (){
-        $("#accountManagement").click(function (){
-            window.location.href='/backendLogin/accountManagement';
+        $("#CommodityManagement").click(function (){
+            window.location.href='/backendLogin/sales';
         })
-
     })
 </script>
 </body>

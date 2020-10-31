@@ -4,6 +4,7 @@ import com.imooc.entity.AdminUser;
 import com.imooc.service.AdminUserService;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
+import net.sf.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
-/**
+/**这个模块主要是用来处理比如像用户登录页面等的一系列操作
  * @author sutao
  */
 @Controller
@@ -50,46 +51,64 @@ public class AdminController {
             HttpServletRequest request,
             HttpSession session
             ) throws Exception {
-        Object name =info.get("accountnumber");
+        Object name = info.get("accountnumber");
         String userName = name.toString();
-        Object name1 =info.get("password");
+        Object name1 = info.get("password");
         String passWord = name1.toString();
-        Object name2 =info.get("kaptcha");
+        Object name2 = info.get("kaptcha");
         String kaptcha = name2.toString();
-        if (StringUtils.isEmpty(userName)){
-            info.put("resultCode","100");
-        }if (StringUtils.isEmpty(kaptcha)){
-            info.put("resultCode","100");
+        if (StringUtils.isEmpty(userName)) {
+            info.put("resultCode", "100");
+        }
+        if (StringUtils.isEmpty(kaptcha)) {
+            info.put("resultCode", "100");
         }
         if (StringUtils.isEmpty(passWord)) {
-            info.put("resultCode","100");
+            info.put("resultCode", "100");
         }
-        if(userName.length() != 0 && passWord.length() != 0 && kaptcha.length() != 0){
-                if (kaptcha.equals(verifyCode)){
-                    AdminUser user = adminUserService.login(userName,passWord);
-                    if (user != null){
-                        String a = adminUserService.find(userName).toString();
-                        /*这个是通过mybatis从数据库中取出来的数据{userName='123456', passWord='1234567'}*/
-                        JSONObject b = JSONObject.fromObject(a);
-                        String name3 = b.getString("userName");
-                        String password = b.getString("passWord");
-                        Cookie cookie = new Cookie("userName",name3);
-                        cookie.setMaxAge(60*60*24);
-                        response.addCookie(cookie);
-                        request.getSession().setAttribute("userName",name3);
-                        Object attribute = request.getSession().getAttribute("userName");
-                        sessionData = attribute.toString();
+        if (userName.length() != 0 && passWord.length() != 0 && kaptcha.length() != 0) {
+            if (kaptcha.equals(verifyCode)) {
+                //查询用户是否存在
+                AdminUser user = adminUserService.login(userName, passWord);
+                //如果用户存在
+                if (user != null) {
+                    String a = adminUserService.find(userName).toString();
+                    /*这个是通过mybatis从数据库中取出来的数据{userName='123456', passWord='1234567'}*/
+                    String b = a.substring(9);
+                    JSONObject jsonObject = JSONObject.fromObject(b);
+                    System.out.println(jsonObject);
+                    String userName1 = jsonObject.getString("userName");
+                    sessionData = userName1;
+                    String passWord1 = jsonObject.getString("passWord");
+                    String status  = jsonObject.getString("status");
+                    if (userName1.equals(userName) &&
+                        passWord.equals(passWord1) &&
+                        status.equals("正常")
+                    ){
+                        request.getSession().setAttribute("userName",userName1);
+                        System.out.println(verifyCode);
                         info.put("resultCode","200");
+                        return info;
+                    }if (userName1.equals(userName) && passWord.equals(passWord1) && status.equals("禁用")){
+                        info.put("resultCode","303");
+                        return info;
                     }else{
                         info.put("resultCode","202");
+                        return info;
                     }
                 }else{
-                    info.put("resultCode","204");
+                    info.put("resultCode","203");
+                    return info;
                 }
+            }else{
+                info.put("resultCode","204");
+                return info;
+            }
         }else{
-            System.out.println("AdminController的"+"/login"+"出大问题了");
+            info.put("resultCode","404");
+            return info;
         }
-        return info;
+
     }
     /**
      *
@@ -162,6 +181,7 @@ public class AdminController {
     ) throws Exception {
             session.setAttribute("userName", sessionData);
             String a = session.getAttribute("userName").toString();
+            System.out.println(a);
             info.put("sessionData",a);
             return info;
     }

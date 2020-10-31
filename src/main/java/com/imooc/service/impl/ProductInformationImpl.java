@@ -16,4 +16,14 @@ public class ProductInformationImpl implements ProductInformationService {
     public List<SalesManagement> findProduct(String allProduct) {
         return productInformationMapper.findProduct(allProduct);
     }
+
+    @Override
+    public int changeSalesStatus(String id,String status) {
+        return productInformationMapper.changeSalesStatus(id,status);
+    }
+
+    @Override
+    public Object findStatus(String productName) {
+        return productInformationMapper.findStatus(productName);
+    }
 }
