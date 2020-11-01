@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact name="xiaomi_mall:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/xiaomi_mall_jar</output-path>
+    <root id="root">
+      <element id="archive" name="xiaomi_mall.jar">
+        <element id="module-output" name="xiaomi_mall" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.bootcss.com_jqgrid_4.6.0_js_i18n_grid.locale-en.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.bootcss.com_jqgrid_4.6.0_js_jquery.jqGrid.min.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.staticfile.org_jquery_2.1.1_jquery.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_unpkg.com_sweetalert_dist_sweetalert.min.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.bootcss.com_jqueryui_1.12.0-rc.2_jquery-ui.css" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_bootstrap@3.3.7_dist_css_bootstrap-theme.css" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_bootstrap@3.3.7_dist_css_bootstrap.css" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_bootstrap@3.3.7_dist_js_bootstrap.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.staticfile.org_twitter-bootstrap_3.3.7_css_bootstrap.css" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.staticfile.org_twitter-bootstrap_3.3.7_js_bootstrap.js" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/__cdn.bootcss.com_jqgrid_4.6.0_css_ui.jqgrid.css" />
+        <element id="dir-copy" path="$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_unpkg.com_swiper_swiper-bundle.js" />
+      </element>
+      <element id="library" level="module" name="JUnit4" module-name="xiaomi_mall" />
+      <element id="library" level="project" name="aopalliance-1.0" />
+    </root>
+  </artifact>
+</component>

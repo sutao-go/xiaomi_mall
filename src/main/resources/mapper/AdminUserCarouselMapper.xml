@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.imooc.mapper.AdminUserCarouselMapper">
-    <resultMap id="BaseResultMap" type="com.imooc.entity.Carousel">
+<mapper namespace="coom.imooc.mapper.AdminUserCarouselMapper">
+    <resultMap id="BaseResultMap" type="coom.imooc.entity.Carousel">
         <id column="carousel_name" jdbcType="VARCHAR" property="carouselName" />
         <result column="carousel_address" jdbcType="VARCHAR" property="carouselAddress"/>
     </resultMap>
@@ -17,7 +17,7 @@
             carousel_name = #{id,jdbcType = VARCHAR}
     </update>
 
-    <select id="findCarousel" resultMap="BaseResultMap" parameterType="com.imooc.entity.Carousel">
+    <select id="findCarousel" resultMap="BaseResultMap" parameterType="coom.imooc.entity.Carousel">
             select
             *
             from

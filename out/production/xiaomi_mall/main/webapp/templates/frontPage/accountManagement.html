@@ -162,6 +162,7 @@
         </div>
     </div>
     <script type="text/javascript" src="../../resources/static/jquery/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $("#determine").click(function(){
@@ -179,8 +180,10 @@
                             newPassword1:data.newPassword1,
                             newPassword2:data.newPassword2
                         },
-                        success:function(){
-                            console.log("修改密码成功");
+                        success:function(result){
+                            if (result.resultCode == 200){
+                                swal("修改密码成功");
+                            }
                         }
 
                     }
