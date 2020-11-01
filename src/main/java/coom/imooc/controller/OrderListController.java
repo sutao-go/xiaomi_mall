@@ -2,8 +2,6 @@ package coom.imooc.controller;
 
 import coom.imooc.entity.OrderList;
 import coom.imooc.service.AdminUserShoppingCartService;
-import com.sun.deploy.net.HttpRequest;
-import com.sun.deploy.net.HttpResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +52,8 @@ public class OrderListController {
      */
     @RequestMapping(method = RequestMethod.POST,value = "/orderInformation")
     public String getOrderInformation(
-            HttpResponse response,
-            HttpRequest request
+            HttpServletResponse response,
+            HttpServletRequest request
     )throws Exception{
         return null;
     }
