@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="coom.imooc.mapper.AdminUserMapper">
-    <resultMap id="BaseResultMap" type="coom.imooc.entity.AdminUser">
+<mapper namespace="com.imooc.mapper.AdminUserMapper">
+    <resultMap id="BaseResultMap" type="com.imooc.entity.AdminUser">
         <id column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
@@ -19,16 +19,16 @@
         and pass_word = #{passWord,jdbcType=VARCHAR}
     </select>
 
-    <select id="insert" parameterType="coom.imooc.entity.AdminUser" resultMap="BaseResultMap">
+    <select id="insert" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
     insert into adminuser(user_name,pass_word)
     values (#{userName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR})
     </select>
 
-    <select id="find" parameterType="coom.imooc.entity.AdminUser" resultMap="BaseResultMap">
+    <select id="find" parameterType="com.imooc.entity.AdminUser" resultMap="BaseResultMap">
         select * from adminuser where user_name = #{userName,jdbcType=VARCHAR}
     </select>
 
-    <select id="findAdministrator" resultMap="BaseResultMap" parameterType="coom.imooc.entity.AdminUser">
+    <select id="findAdministrator" resultMap="BaseResultMap" parameterType="com.imooc.entity.AdminUser">
         select
         user_name,pass_word
         from
@@ -39,7 +39,7 @@
         pass_word = #{password,jdbcType=VARCHAR}
     </select>
 
-    <select id="findUserStatus" resultMap="BaseResultMap" parameterType="coom.imooc.entity.AdminUser">
+    <select id="findUserStatus" resultMap="BaseResultMap" parameterType="com.imooc.entity.AdminUser">
         select user_name,status
         from adminuser
     </select>
