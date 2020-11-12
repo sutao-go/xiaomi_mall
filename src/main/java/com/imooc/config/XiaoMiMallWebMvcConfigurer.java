@@ -87,7 +87,7 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加一个拦截器，拦截以/admin为前缀的url路径（后台登陆拦截）
-        registry.addInterceptor(frontEndSystemAuthenticationInterceptor)
+        /*registry.addInterceptor(frontEndSystemAuthenticationInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/login")
                 .excludePathPatterns("/admin/kaptcha");
@@ -97,7 +97,7 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
                 .addPathPatterns("/orderlist/**");
         registry.addInterceptor(backendInterceptorConfiguration)
                 .addPathPatterns("/backendLogin/**")
-                .excludePathPatterns("/backendLogin/login");
+                .excludePathPatterns("/backendLogin/login");*/
 
     }
 
@@ -118,6 +118,7 @@ public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/upload/");
     }
 
     @Override
