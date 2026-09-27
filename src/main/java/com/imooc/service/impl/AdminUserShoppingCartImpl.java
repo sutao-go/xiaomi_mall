@@ -1,5 +1,7 @@
 package com.imooc.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imooc.entity.OrderList;
 import com.imooc.mapper.AdminUserShoppingCartMapper;
 import com.imooc.service.AdminUserShoppingCartService;
@@ -83,13 +85,21 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     @Override
     @Transactional(readOnly = true)
     public int countCart(String userName) {
-        Integer count = adminUserShoppingCartMapper.countCart(userName);
-        return count == null ? 0 : count;
+        // 用 LambdaQueryWrapper 替代 XML 里的 select count(1)：字段写错会在编译期发现
+        LambdaQueryWrapper<OrderList> query = new LambdaQueryWrapper<OrderList>()
+                .eq(OrderList::getConsumer, userName);
+        Long count = adminUserShoppingCartMapper.selectCount(query);
+        return count == null ? 0 : count.intValue();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<OrderList> queryProductInformationPage(String userName, int offset, int pageSize) {
-        return adminUserShoppingCartMapper.queryProductInformationPage(userName, offset, pageSize);
+        // Page 的 current 从 1 开始，由 offset 反推；分页插件（MybatisPlusConfig）会真正追加 LIMIT
+        int current = pageSize <= 0 ? 1 : (offset / pageSize) + 1;
+        Page<OrderList> page = new Page<>(current, pageSize);
+        LambdaQueryWrapper<OrderList> query = new LambdaQueryWrapper<OrderList>()
+                .eq(OrderList::getConsumer, userName);
+        return adminUserShoppingCartMapper.selectPage(page, query).getRecords();
     }
 }

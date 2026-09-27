@@ -2,6 +2,7 @@
 package com.imooc.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.imooc.entity.SalesManagement;
 import com.imooc.service.AdminUserService;
 import com.imooc.mapper.AdminUserMapper;
@@ -30,7 +31,12 @@ public class AdminUserImpl implements AdminUserService {
     }
     @Override
     public AdminUser find(String userName){
-        return adminUserMapper.find(userName);
+        // 用 LambdaQueryWrapper 替代 XML 里的 select * from adminuser where user_name=?
+        // 好处：字段名由方法引用（AdminUser::getUserName）表达，改字段名时编译期就会报错
+        LambdaQueryWrapper<AdminUser> query = new LambdaQueryWrapper<AdminUser>()
+                .eq(AdminUser::getUserName, userName)
+                .last("limit 1");
+        return adminUserMapper.selectOne(query);
     }
 
     @Override

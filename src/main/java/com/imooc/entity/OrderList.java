@@ -1,19 +1,23 @@
 package com.imooc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 
 /** 对应数据库表 adminusershoppingcart */
 @TableName("adminusershoppingcart")
 public class OrderList {
+    @TableField("user_name")
     public String consumer;
     //商品名称
     public String productName;
     //单价
     public String price;
     //商品数量(小记)
+    @TableField("numbers_of_products")
     public Integer quantity;
     //图片的路径
+    @TableField("img")
     public String imgurl;
 
 

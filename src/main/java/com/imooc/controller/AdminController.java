@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import com.google.code.kaptcha.Producer;
+import com.imooc.common.CaptchaUtil;
 import com.imooc.common.BizException;
 import com.imooc.common.Result;
 import com.imooc.common.ResultCode;
@@ -47,9 +47,6 @@ public class AdminController {
 
     @Autowired
     private AdminUserService adminUserService;
-
-    @Autowired
-    private Producer kaptchaProducer;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -137,7 +134,7 @@ public class AdminController {
      */
     @GetMapping("/kaptcha")
     public void kaptcha(HttpServletResponse response, HttpSession session) throws Exception {
-        String text = kaptchaProducer.createText();
+        String text = CaptchaUtil.createText(4);
         SessionUtil.setKaptcha(session, text);
 
         response.setHeader("Cache-Control", "no-store");
@@ -145,7 +142,7 @@ public class AdminController {
         response.setDateHeader("Expires", 0);
         response.setContentType("image/jpeg");
 
-        BufferedImage image = kaptchaProducer.createImage(text);
+        BufferedImage image = CaptchaUtil.createImage(text);
         try (ServletOutputStream out = response.getOutputStream()) {
             ImageIO.write(image, "jpg", out);
         }
