@@ -353,12 +353,12 @@
                     "                <p id=\"phoneNumber\" class=\"phoneNumber\"></p>\n" +
                     "                <a id=\"shippingAddress2\" class=\"shippingAddress2\"></a>"
                 );
-                document.getElementById("Recipient").innerHTML=nickname;
-                document.getElementById("phoneNumber").innerHTML=phoneNumber;
-                document.getElementById("shippingAddress2").innerHTML=address;
+                // 收货信息由用户输入，改用 textContent 输出，避免存储型 XSS
+                document.getElementById("Recipient").textContent=nickname;
+                document.getElementById("phoneNumber").textContent=phoneNumber;
+                document.getElementById("shippingAddress2").textContent=address;
             },
             error:function (){
-                console.log("出错了");
             }
         }
     );
@@ -376,16 +376,15 @@
                 var price = info.price0;
                 var productName =info.productName0;
                 var quantity = info.quantity0;
-                console.log(quantity);
                 $("#shoppingInformation").append(
                     "<div id=\"settlementGoods\" class=\"settlementGoods\"><img id=\"img\" class=\"img\"></div>\n"+
                     "<div id=\"numberOfProducts\" class=\"numberOfProducts\"></div>\n"+
                     "<div id=\"settlementAmount\"  class=\"settlementAmount\"></div>"
                 );
                 $("#img").attr('src',imgurl);
-                document.getElementById("settlementGoods").innerHTML = productName;
-                document.getElementById("numberOfProducts").innerHTML = price+"元*"+quantity;
-                document.getElementById("settlementAmount").innerHTML = price;
+                document.getElementById("settlementGoods").textContent = productName;
+                document.getElementById("numberOfProducts").textContent = price+"元*"+quantity;
+                document.getElementById("settlementAmount").textContent = price;
             },
             error:function (info){
             }

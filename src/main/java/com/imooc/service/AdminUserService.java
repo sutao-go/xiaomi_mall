@@ -26,6 +26,11 @@ public interface AdminUserService {
 
     AdminUser findAdministrator(String userName, String password);
 
+    /**
+     * 仅按用户名查询后台管理员（修改密码时用于校验旧密码）
+     */
+    AdminUser findAdminByName(String userName);
+
     List<SalesManagement> findUserStatus(String userName, String userStatus);
 
     int changeUserStatus(String disableAccount,String id);

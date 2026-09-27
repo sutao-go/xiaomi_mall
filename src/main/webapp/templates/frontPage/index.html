@@ -891,7 +891,7 @@
                 dataType:"json",
                 success:function (result){
                     a = result.sessionData.toString();
-                            document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                            document.getElementById("shouye_right_child_a_2").textContent = "欢迎您"+a;
                             $("#shouye_right_child_a_3").hide();
                             $("#shouye_right_child_a_2").click(function(){
                                 window.location.href='/admin/user';
@@ -923,7 +923,6 @@
                             })
                 },
                 error:function (){
-                    console.log("false");
                 },
             })
     },1);
@@ -942,7 +941,6 @@
         $(function (){
             var a = document.getElementById("shouye_right_child_a_2");
             var b = a.innerHTML;
-            console.log("这是b的值"+b);
         });
 </script>
     <script>

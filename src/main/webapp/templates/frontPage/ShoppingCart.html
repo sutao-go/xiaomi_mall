@@ -178,7 +178,7 @@
                 dataType:"json",
                 success:function (result){
                     a = result.sessionData.toString();
-                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    document.getElementById("shouye_right_child_a_2").textContent = "欢迎您"+a;
                     $("#shouye_right_child_a_3").hide();
                     $("#shouye_right_child_a_2").click(function(){
                         window.location.href='/admin/user';
@@ -210,7 +210,6 @@
                     })
                 },
                 error:function (){
-                    console.log("false");
                 },
             }
             );
@@ -280,7 +279,6 @@
                 if(id && id!==lastSel){
                     jQuery('#grid_id').restoreRow(lastSel);
                     lastSel=id;
-                    console.log("xxxx"+id);
                 }
                 jQuery('#grid_id').editRow(id, true);
             },

@@ -575,7 +575,7 @@
                 dataType:"json",
                 success:function (result){
                     a = result.sessionData.toString();
-                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    document.getElementById("shouye_right_child_a_2").textContent = "欢迎您"+a;
                     $("#shouye_right_child_a_3").hide();
                     $("#shouye_right_child_a_2").click(function(){
                         window.location.href='/admin/user';
@@ -607,7 +607,6 @@
                     })
                 },
                 error:function (){
-                    console.log("false");
                 },
             })
     },1);
@@ -627,7 +626,6 @@
             var data ={};
             data.phoneName= "Redmi 红米电视 70英寸";
             data.price = "3199";
-            console.log(data.phoneName);
             $.ajax({
                 url:"/orderlist/RedmiSmartTVX70",
                 type:"post",
@@ -637,9 +635,7 @@
                     phoneName:data.phoneName,
                     price:data.price
                 },
-                success:function (){
-                    swal("添加成功");
-                },
+                success: function (res) { if (res && res.code === 200) { swal("添加成功"); } else { swal((res && res.msg) || "添加失败，请先登录"); } },
                 error:function (){
                     swal("添加失败");
                 }
@@ -670,7 +666,7 @@
                 $("#addToShopping").attr("disabled",false);//移除disabled属性
             }if(result.resultCode == 201){
                 $("#addToShopping").attr("disabled",true);
-                document.getElementById('addToShopping').innerHTML='商品已下架';
+                document.getElementById('addToShopping').textContent='商品已下架';
             }if(result.resultCode == 202){
                 swal("您的程序出现错误了---销售状态这个功能出现错误1");
             }

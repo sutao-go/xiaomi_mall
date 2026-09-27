@@ -1,236 +1,161 @@
 package com.imooc.controller;
+
 import com.google.code.kaptcha.Producer;
+import com.imooc.common.BizException;
+import com.imooc.common.Result;
+import com.imooc.common.ResultCode;
+import com.imooc.common.SessionUtil;
 import com.imooc.entity.AdminUser;
 import com.imooc.service.AdminUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import net.sf.json.JSONObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.io.*;
 import java.util.Map;
-/**这个模块主要是用来处理比如像用户登录页面等的一系列操作
+import java.util.regex.Pattern;
+
+/**
+ * 前台用户：登录 / 注册 / 验证码 / 退出
+ * <p>
+ * 重构要点：
+ * 1. 删除 Controller 可变成员变量（原 verifyCode / sessionData 会被所有请求共享）
+ * 2. 删除后门接口 /admin/test（原接口可劫持任意用户会话）
+ * 3. 验证码改存 session 且一次性消费（原存字段，可无限复用暴破）
+ * 4. 密码改用 BCrypt 校验（原明文比对）
+ * 5. 页面跳转改为重定向到静态资源（原手工拷贝文件流，160+ 处重复代码）
+ *
  * @author sutao
  */
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
-    String verifyCode;
-    String sessionData;
+
+    /** 用户名规则：2-20 位中英文/数字/下划线，防止存储型 XSS */
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_\\u4e00-\\u9fa5]{2,20}$");
+
     @Autowired
     private AdminUserService adminUserService;
+
     @Autowired
     private Producer kaptchaProducer;
 
-    @RequestMapping(method = RequestMethod.GET,
-            value = "/index")
-    public void index(
-            HttpServletResponse response
-    ) throws IOException {
-        ClassPathResource resource = new ClassPathResource("/main/webapp/templates/frontPage/index.html");
-        InputStream in = resource.getInputStream();
-        // 创建输出流
-        OutputStream out = response.getOutputStream();
-        // 缓存区
-        byte buffer[] = new byte[1024];
-        int len = 0;
-        // 循环将输入流中的内容读取到缓冲区中
-        while ((len = in.read(buffer)) > 0) {
-            out.write(buffer, 0, len);
-        }
-        // 关闭
-        in.close();
-        out.close();
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @RequestMapping(method=RequestMethod.GET,
-            value="/login")
-    public void login(
-            HttpServletResponse response
-    ) throws IOException {
-        ClassPathResource resource = new ClassPathResource("/main/webapp/templates/frontPage/login_page.html");
-        InputStream in = resource.getInputStream();
-        // 创建输出流
-        OutputStream out = response.getOutputStream();
-        // 缓存区
-        byte buffer[] = new byte[1024];
-        int len = 0;
-        // 循环将输入流中的内容读取到缓冲区中
-        while ((len = in.read(buffer)) > 0) {
-            out.write(buffer, 0, len);
-        }
-        // 关闭
-        in.close();
-        out.close();
-    }
-
-    @RequestMapping(method = RequestMethod.POST,value="/login")
-    @ResponseBody
-    public Map<String,String> login1(
-            @RequestParam Map<String,String> info,
-            HttpServletRequest request
-            ) throws Exception {
-        Object name = info.get("accountnumber");
-        String userName = name.toString();
-        Object name1 = info.get("password");
-        String passWord = name1.toString();
-        Object name2 = info.get("kaptcha");
-        String kaptcha = name2.toString();
-        if (StringUtils.isEmpty(userName)) {
-            info.put("resultCode", "100");
-        }
-        if (StringUtils.isEmpty(kaptcha)) {
-            info.put("resultCode", "100");
-        }
-        if (StringUtils.isEmpty(passWord)) {
-            info.put("resultCode", "100");
-        }
-        if (userName.length() != 0 && passWord.length() != 0 && kaptcha.length() != 0) {
-            if (kaptcha.equals(verifyCode)) {
-                //查询用户是否存在
-                AdminUser user = adminUserService.login(userName, passWord);
-                //如果用户存在
-                if (user != null) {
-                    String a = adminUserService.find(userName).toString();
-                    /*这个是通过mybatis从数据库中取出来的数据{userName='123456', passWord='1234567'}*/
-                    String b = a.substring(9);
-                    JSONObject jsonObject = JSONObject.fromObject(b);
-                    System.out.println(jsonObject);
-                    String userName1 = jsonObject.getString("userName");
-                    sessionData = userName1;
-                    String passWord1 = jsonObject.getString("passWord");
-                    String status  = jsonObject.getString("status");
-                    if (userName1.equals(userName) &&
-                        passWord.equals(passWord1) &&
-                        status.equals("正常")
-                    ){
-                        request.getSession().setAttribute("userName",userName1);
-                        System.out.println(verifyCode);
-                        info.put("resultCode","200");
-                        return info;
-                    }if (userName1.equals(userName) && passWord.equals(passWord1) && status.equals("禁用")){
-                        info.put("resultCode","303");
-                        return info;
-                    }else{
-                        info.put("resultCode","202");
-                        return info;
-                    }
-                }else{
-                    info.put("resultCode","203");
-                    return info;
-                }
-            }else{
-                info.put("resultCode","204");
-                return info;
-            }
-        }else{
-            info.put("resultCode","404");
-            return info;
-        }
-
-    }
     /**
-     *
-     * @return
-     * 跳转页面用的
+     * 首页（原实现为手工输出 html 流）
      */
-    @RequestMapping(method = RequestMethod.GET ,value="/registered")
-    public void userRegistered(
-            HttpServletResponse response
-    ) throws IOException {
-        ClassPathResource resource = new ClassPathResource("/main/webapp/templates/frontPage/registered.html");
-        InputStream in = resource.getInputStream();
-        // 创建输出流
-        OutputStream out = response.getOutputStream();
-        // 缓存区
-        byte buffer[] = new byte[1024];
-        int len = 0;
-        // 循环将输入流中的内容读取到缓冲区中
-        while ((len = in.read(buffer)) > 0) {
-            out.write(buffer, 0, len);
-        }
-        // 关闭
-        in.close();
-        out.close();
+    @GetMapping("/index")
+    public String index() {
+        return "redirect:/templates/frontPage/index.html";
     }
+
     /**
-     * 注册用户用的
+     * 登录页
      */
-    @RequestMapping(method = RequestMethod.POST,value = "/registered")
-    @ResponseBody
-    public  Map<String, String> registered(
-            @RequestParam Map<String,String> info,
-            HttpServletResponse response,
-            HttpSession session
-    ){
-        Object name =info.get("accountnumber");
-        String userName = name.toString();
-        Object name1 = info.get("password");
-        String passWord = name1.toString();
-        if (userName.length() != 0 && passWord.length() != 0){
-                AdminUser user = adminUserService.registered(userName,passWord);
-                info.put("resultCode","206");
-        }else{
-            info.put("resultCode","208");
-        }
-        return info;
+    @GetMapping("/login")
+    public String loginPage() {
+        return "redirect:/templates/frontPage/login_page.html";
     }
+
     /**
-     *
-     * @param response
-     * @param request
-     * @throws Exception
-     * 搞定验证码用的
+     * 用户登录
      */
-    @RequestMapping("/kaptcha")
-    public String  getKaptchaImage(HttpServletResponse response, HttpServletRequest request)
-            throws Exception{
-            byte[] captchaOutputStream = null;
-            ByteArrayOutputStream imgOutputStream = new ByteArrayOutputStream();
-            //生产验证码字符串并保存到session中
-             verifyCode = kaptchaProducer.createText();
-            request.getSession().setAttribute("verifyCode",verifyCode);
-            BufferedImage challenge = kaptchaProducer.createImage(verifyCode);
-            ImageIO.write(challenge,"jpg",imgOutputStream);
-            captchaOutputStream = imgOutputStream.toByteArray();
-            response.setHeader("Cache-Control","no-store");
-            response.setHeader("Parama","no-Cache");
-            response.setDateHeader("Expires",0);
-            response.setContentType("image/jpeg");
-            ServletOutputStream responseOutputStream = response.getOutputStream();
-            responseOutputStream.write(captchaOutputStream);
-            responseOutputStream.flush();
-            responseOutputStream.close();
-            return verifyCode;
-    }
-
-
-    @RequestMapping(method = RequestMethod.GET ,value = "/test")
+    @PostMapping("/login")
     @ResponseBody
-    public Map<String,String> test(
-            @RequestParam Map<String,String> info,
-            HttpSession session
-    ) throws Exception {
-            session.setAttribute("userName", sessionData);
-            String a = session.getAttribute("userName").toString();
-            System.out.println(a);
-            info.put("sessionData",a);
-            return info;
+    public Result<Void> login(@RequestParam Map<String, String> info, HttpSession session) {
+        String userName = info.get("accountnumber");
+        String passWord = info.get("password");
+        String kaptcha = info.get("kaptcha");
+
+        if (StringUtils.isAnyBlank(userName, passWord, kaptcha)) {
+            throw new BizException(ResultCode.PARAM_ERROR, "账号、密码、验证码不能为空");
+        }
+        // 验证码一次性消费，校验后立即失效
+        if (!SessionUtil.verifyKaptcha(session, kaptcha)) {
+            throw new BizException(ResultCode.KAPTCHA_ERROR);
+        }
+
+        AdminUser user = adminUserService.find(userName);
+        if (user == null || !passwordEncoder.matches(passWord, user.getPassWord())) {
+            // 不区分“用户不存在/密码错误”，避免账号枚举
+            throw new BizException(ResultCode.PARAM_ERROR, "账号或密码错误");
+        }
+        if ("禁用".equals(user.getStatus())) {
+            throw new BizException(ResultCode.ACCOUNT_DISABLED);
+        }
+        SessionUtil.setUserName(session, user.getUserName());
+        return Result.ok();
     }
 
+    /**
+     * 注册页
+     */
+    @GetMapping("/registered")
+    public String registeredPage() {
+        return "redirect:/templates/frontPage/registered.html";
+    }
 
+    /**
+     * 用户注册
+     */
+    @PostMapping("/registered")
+    @ResponseBody
+    public Result<Void> registered(@RequestParam Map<String, String> info) {
+        String userName = StringUtils.trimToEmpty(info.get("accountnumber"));
+        String passWord = info.get("password");
 
+        if (!USERNAME_PATTERN.matcher(userName).matches()) {
+            throw new BizException(ResultCode.PARAM_ERROR, "用户名为 2-20 位字母、数字、下划线或中文");
+        }
+        if (StringUtils.length(passWord) < 6) {
+            throw new BizException(ResultCode.PARAM_ERROR, "密码至少 6 位");
+        }
+        if (adminUserService.find(userName) != null) {
+            throw new BizException(ResultCode.CONFLICT, "该账号已被注册");
+        }
+        // 入库前 BCrypt 加密，杜绝明文存储
+        adminUserService.registered(userName, passwordEncoder.encode(passWord));
+        return Result.ok();
+    }
 
+    /**
+     * 验证码图片（文本存入 session，不落 Controller 字段）
+     */
+    @GetMapping("/kaptcha")
+    public void kaptcha(HttpServletResponse response, HttpSession session) throws Exception {
+        String text = kaptchaProducer.createText();
+        SessionUtil.setKaptcha(session, text);
 
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("image/jpeg");
 
+        BufferedImage image = kaptchaProducer.createImage(text);
+        try (ServletOutputStream out = response.getOutputStream()) {
+            ImageIO.write(image, "jpg", out);
+        }
+    }
+
+    /**
+     * 退出登录
+     */
+    @PostMapping("/logout")
+    @ResponseBody
+    public Result<Void> logout(HttpSession session) {
+        SessionUtil.logout(session);
+        return Result.ok();
+    }
 }

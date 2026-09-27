@@ -131,14 +131,16 @@
                             accountnumber:data.accountnumber,
                             password:data.password
                         },
+                        /* 后端统一返回 {code, msg, data} */
                         success:function (result) {
-                            if (result.resultCode == 200){
+                            if (result && result.code === 200){
                                 window.location.href = '/backendLogin/carousel';
+                                return;
                             }
-
+                            swal((result && result.msg) || "登录后台失败");
                         },
                         error:function (){
-                            swal("登录后台失败");
+                            swal("网络异常，请稍后重试");
                         },
                     })
             })

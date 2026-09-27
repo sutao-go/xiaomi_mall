@@ -39,6 +39,11 @@ public class AdminUserImpl implements AdminUserService {
     }
 
     @Override
+    public AdminUser findAdminByName(String userName) {
+        return adminUserMapper.findAdminByName(userName);
+    }
+
+    @Override
     public List<SalesManagement> findUserStatus(String userName, String userStatus) {
         return adminUserMapper.findUserStatus(userName,userStatus);
     }

@@ -461,7 +461,7 @@
                 dataType:"json",
                 success:function (result){
                     a = result.sessionData.toString();
-                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    document.getElementById("shouye_right_child_a_2").textContent = "欢迎您"+a;
                     $("#shouye_right_child_a_3").hide();
                     $("#shouye_right_child_a_2").click(function(){
                         window.location.href='/user/center';
@@ -493,7 +493,6 @@
                     })
                 },
                 error:function (){
-                    console.log("false");
                 },
             })
     },1);

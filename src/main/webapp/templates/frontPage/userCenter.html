@@ -615,7 +615,7 @@
                 dataType:"json",
                 success:function (result){
                     a = result.sessionData.toString();
-                    document.getElementById("shouye_right_child_a_2").innerHTML = "欢迎您"+a;
+                    document.getElementById("shouye_right_child_a_2").textContent = "欢迎您"+a;
                     $("#shouye_right_child_a_3").hide();
                     //这个地方可以用append解决登录成功之后hover的问题，用了我一天时间啊，太菜了！！！
                     $("#shouye_right_child_a_2").mouseenter(function(){
@@ -644,7 +644,6 @@
                     })
                 },
                 error:function (){
-                    console.log("false");
                 },
             })
     },1);

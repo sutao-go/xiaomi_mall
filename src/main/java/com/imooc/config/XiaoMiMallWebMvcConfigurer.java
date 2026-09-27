@@ -1,133 +1,57 @@
 package com.imooc.config;
 
-import com.imooc.interceptor.FrontEndSystemAuthenticationInterceptor;
-import com.imooc.interceptor.BackendInterceptorConfiguration;
-import com.imooc.interceptor.FrontEndSystemAuthenticationInterceptor;
-import com.imooc.interceptor.PayIntercepter;
-import com.imooc.interceptor.PersonalCenterIntercepter;
+import com.imooc.interceptor.AdminLoginInterceptor;
+import com.imooc.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.validation.MessageCodesResolver;
-import org.springframework.validation.Validator;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.*;
-
-import java.util.List;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 搞定拦截器
- * */
-
-
+ * Web MVC 配置
+ * <p>
+ * 修复：原 addInterceptors() 中 4 个拦截器的注册代码被整体注释，导致后台接口完全无鉴权。
+ * 这里恢复并采用“白名单放行、其余拦截”的模式。
+ */
 @Configuration
-public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer{
+public class XiaoMiMallWebMvcConfigurer implements WebMvcConfigurer {
+
+    /** 无需登录即可访问的路径 */
+    private static final String[] WHITELIST = {
+            "/admin/login",
+            "/admin/registered",
+            "/admin/kaptcha",
+            "/backendLogin/login"
+    };
 
     @Autowired
-    private FrontEndSystemAuthenticationInterceptor frontEndSystemAuthenticationInterceptor;
+    private LoginInterceptor loginInterceptor;
+
     @Autowired
-    private PersonalCenterIntercepter personalCenterIntercepter;
-    @Autowired
-    private PayIntercepter payIntercepter;
-    @Autowired
-    private BackendInterceptorConfiguration backendInterceptorConfiguration;
-    @Override
-    public void addFormatters(FormatterRegistry formatterRegistry) {
-
-    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> list) {
-
-    }
-
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> list) {
-
-    }
-
-    @Override
-    public Validator getValidator() {
-        return null;
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer contentNegotiationConfigurer) {
-
-    }
-
-    @Override
-    public void configureAsyncSupport(AsyncSupportConfigurer asyncSupportConfigurer) {
-
-    }
-
-    @Override
-    public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {
-
-    }
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> list) {
-
-    }
-
-    @Override
-    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> list) {
-
-    }
-
-    @Override
-    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> list) {
-
-    }
+    private AdminLoginInterceptor adminLoginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 添加一个拦截器，拦截以/admin为前缀的url路径（后台登陆拦截）
-        /*registry.addInterceptor(frontEndSystemAuthenticationInterceptor)
-                .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/login")
-                .excludePathPatterns("/admin/kaptcha");
-        registry.addInterceptor(personalCenterIntercepter)
-                .addPathPatterns("/user/**");
-        registry.addInterceptor(payIntercepter)
-                .addPathPatterns("/orderlist/**");
-        registry.addInterceptor(backendInterceptorConfiguration)
+        // 前台用户相关接口：必须登录
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/admin/**", "/user/**", "/orderlist/**", "/cart/**")
+                .excludePathPatterns(WHITELIST);
+
+        // 后台管理接口：必须管理员登录（只放行登录接口本身）
+        registry.addInterceptor(adminLoginInterceptor)
                 .addPathPatterns("/backendLogin/**")
-                .excludePathPatterns("/backendLogin/login");*/
-
+                .excludePathPatterns("/backendLogin/login");
     }
 
-    @Override
-    public MessageCodesResolver getMessageCodesResolver() {
-        return null;
-    }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry viewControllerRegistry) {
-
-    }
-
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry viewResolverRegistry) {
-
-    }
-
+    /**
+     * 运行时上传目录映射（与 BackendLogin.UPLOAD_DIR 保持一致），
+     * 使上传成功的图片可通过 /resources/upload/xxx.png 访问
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/upload/");
-    }
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer defaultServletHandlerConfigurer) {
-
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry corsRegistry) {
-
+        String uploadDir = System.getProperty("user.dir") + "/upload/";
+        registry.addResourceHandler("/resources/upload/**")
+                .addResourceLocations("file:" + uploadDir);
     }
 }

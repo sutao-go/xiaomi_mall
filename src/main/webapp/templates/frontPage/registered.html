@@ -167,7 +167,6 @@
             var data ={};
             data.accountnumber = $("#account_number").val();
             data.password = $("#password").val();
-            console.log(data.password);
             $.ajax(
                 {
                     url:"/admin/registered",
@@ -181,13 +180,16 @@
                         accountnumber:data.accountnumber,
                         password:data.password
                     },
+                    /* 后端统一返回 {code, msg, data}：code=200 为成功，其余用 msg 提示 */
                     success:function (result) {
-                        if(result.resultCode == 206){
+                        if(result && result.code === 200){
                             swal("恭喜您注册成功");
+                            return;
                         }
+                        swal((result && result.msg) || "很遗憾您注册失败了");
                     },
                     error:function (){
-                            swal("很遗憾您注册失败了");
+                        swal("网络异常，请稍后重试");
                     },
                 })
         })
@@ -206,7 +208,6 @@
                 var far ={};
                 far.password = $("#password").val();
                 var s = far.password.toString();
-                console.log("点击"+s);
                 if (s.length == 0){
                     swal("请输入密码");
                 }
@@ -215,7 +216,6 @@
                 var far ={};
                 far.accountnumber = $("#account_number").val();
                 var s = far.accountnumber.toString();
-                console.log("点击"+s);
                 if (s.length == 0){
                     swal("请输入账号");
                 }

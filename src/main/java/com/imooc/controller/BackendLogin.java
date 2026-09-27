@@ -5,8 +5,24 @@ import com.imooc.entity.SalesManagement;
 import com.imooc.service.AdminUserService;
 import com.imooc.service.AdminUserCarouselService;
 import com.imooc.service.ProductInformationService;
+import com.imooc.common.BizException;
+import com.imooc.common.Result;
+import com.imooc.common.ResultCode;
+import com.imooc.common.SessionUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -44,6 +60,9 @@ public class BackendLogin {
     @Autowired
     ProductInformationService productInformationService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     //展示路径
     public String showFilePath =null;
 
@@ -73,31 +92,28 @@ public class BackendLogin {
         out.close();
     }
 
+    /**
+     * 后台管理员登录
+     * <p>
+     * 修复：原实现把管理员身份写入前台 userName，导致前台用户即可通过后台鉴权；
+     * 这里写入独立的 adminUserName，并改用 BCrypt 校验（原为明文比对）。
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     @ResponseBody
-    public Map<String, String> doPostXiaomi10(
-            @RequestParam Map<String, String> info,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            HttpSession session
-    ) throws Exception {
-        Object name =info.get("accountnumber");
-        String userName = name.toString();
-        Object name2 = info.get("password");
-        String password = name2.toString();
-        AdminUser adminUser = adminUserService.findAdministrator(userName,password);
-        JSONObject adminUser1 = JSONObject.fromObject(adminUser);
-        String adminUserName = adminUser1.getString("userName");
-        String adminPassWord = adminUser1.getString("passWord");
-        if (userName.equals(adminUserName)&&password.equals(adminPassWord)){
-            request.getSession().setAttribute("userName",adminUserName);
-            info.put("resultCode","200");
-            System.out.println("success");
-            return info;
-        }else{
-            System.out.println("您的账号和密码可能出现了一些问题，建议您可以检查下您的账号和密码");
-            return null;
+    public Result<Void> backendLogin(@RequestParam Map<String, String> info, HttpSession session) {
+        String userName = info.get("accountnumber");
+        String password = info.get("password");
+        if (StringUtils.isAnyBlank(userName, password)) {
+            throw new BizException(ResultCode.PARAM_ERROR, "账号和密码不能为空");
         }
+        AdminUser admin = adminUserService.findAdminByName(userName);
+        if (admin == null || !passwordEncoder.matches(password, admin.getPassWord())) {
+            throw new BizException(ResultCode.PARAM_ERROR, "账号或密码错误");
+        }
+        SessionUtil.setAdminName(session, admin.getUserName());
+        // 兼容存量代码：部分后台接口仍读取前台 userName
+        SessionUtil.setUserName(session, admin.getUserName());
+        return Result.ok();
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/carousel")
@@ -124,25 +140,58 @@ public class BackendLogin {
      *这个的主要作用是用来上传轮播图并且修改路径用的
      * @param file
      */
+    /** 上传目录（运行时目录，不再硬编码开发者机器路径） */
+    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/upload/";
+
+    /** 允许的图片扩展名白名单 */
+    private static final Set<String> ALLOWED_EXT =
+            new HashSet<>(Arrays.asList("jpg", "jpeg", "png", "gif"));
+
+    /** 单文件上限 5MB */
+    private static final long MAX_FILE_SIZE = 5 * 1024 * 1024L;
+
+    private static final Logger log = LoggerFactory.getLogger(BackendLogin.class);
+
+    /**
+     * 上传轮播图
+     * <p>
+     * 加固点（原实现可导致写 Webshell）：
+     * 1. 文件名为 UUID 重新生成，杜绝 ../ 路径穿越
+     * 2. 扩展名白名单 + 内容大小限制
+     * 3. 路径归一化后校验前缀，防止越权写入
+     * 4. 异常记日志而非 printStackTrace，失败信息不暴露堆栈
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/addimg")
     @ResponseBody
-    public String uploadFile(
-            @RequestParam("file") MultipartFile file
-    ) {
-            String fileName = file.getOriginalFilename();
-            String path = "C:/Users/Admin/IdeaProjects/xiaomi_mall/src/main/webapp/resources/upload/";
-            /*String path = "C:/test/";*/
-            File newFile = new File(path + fileName);
-            String showFile = newFile.toString().substring(73);
-            showFilePath ="../../resources/upload/"+showFile;
-            System.out.println(showFilePath);
-        try {
-            file.transferTo(newFile);
-            return "上传照片成功";
+    public Result<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            throw new BizException(ResultCode.PARAM_ERROR, "请选择要上传的图片");
         }
-        catch (Exception e){
-            e.printStackTrace();
-            return "上传图片失败";
+        if (file.getSize() > MAX_FILE_SIZE) {
+            throw new BizException(ResultCode.PARAM_ERROR, "图片大小不能超过 5MB");
+        }
+        String original = StringUtils.trimToEmpty(file.getOriginalFilename());
+        String ext = StringUtils.substringAfterLast(original, ".").toLowerCase();
+        if (!ALLOWED_EXT.contains(ext)) {
+            throw new BizException(ResultCode.PARAM_ERROR, "仅支持 jpg/jpeg/png/gif 格式");
+        }
+
+        String newFileName = UUID.randomUUID().toString().replace("-", "") + "." + ext;
+        try {
+            Path dir = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
+            Files.createDirectories(dir);
+            Path target = dir.resolve(newFileName).normalize();
+            if (!target.startsWith(dir)) {
+                throw new BizException(ResultCode.PARAM_ERROR, "非法文件名");
+            }
+            file.transferTo(target.toFile());
+
+            String url = "/resources/upload/" + newFileName;
+            showFilePath = url;
+            return Result.ok(url);
+        } catch (IOException e) {
+            log.error("上传轮播图失败", e);
+            throw new BizException(ResultCode.ERROR, "上传失败，请稍后重试");
         }
     }
 
@@ -544,40 +593,44 @@ public class BackendLogin {
         out.close();
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/password")
+    /**
+     * 修改管理员密码
+     * <p>
+     * 修复：原实现读取了旧密码却从未校验（变量取到即丢弃），
+     * 配合鉴权失效可任意重置管理员口令；这里强制 BCrypt 校验旧密码。
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/password")
     @ResponseBody
-    public Map<String,String> password1(
-            @RequestParam Map<String,String> info,
-            HttpServletRequest request,
-            HttpServletResponse response,
+    public Result<Void> changePassword(
+            @RequestParam Map<String, String> info,
             HttpSession session
-    ){
-        Object name = info.get("password");
-        String password = name.toString();
-        Object name1 = info.get("newpassword");
-        String newpassword = name1.toString();
-        Object name2= info.get("newpassword2");
-        String newpassword2= name2.toString();
-        String userName = request.getSession().getAttribute("userName").toString();
-        if (userName != null){
-            if (newpassword.equals(newpassword2)){
-                int result  = adminUserService.changePassword(newpassword,userName);
-                if (result == 1){
-                    info.put("resultCode","200");
-                    return info;
-                }else {
-                    info.put("resultCode","202");
-                    return info;
-                }
-            }else {
-                info.put("resultCode","203");
-                return info;
-            }
+    ) {
+        String oldPassword = info.get("password");
+        String newPassword = info.get("newpassword");
+        String confirmPassword = info.get("newpassword2");
 
-        }else {
-            info.put("resultCode","204");
-            return info;
+        // 身份从会话获取，未登录时拦截器已拦截
+        String adminName = SessionUtil.requireAdmin(session);
+
+        if (StringUtils.isAnyBlank(oldPassword, newPassword, confirmPassword)) {
+            throw new BizException(ResultCode.PARAM_ERROR, "原密码与新密码不能为空");
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            throw new BizException(ResultCode.PARAM_ERROR, "两次输入的新密码不一致");
+        }
+        if (StringUtils.length(newPassword) < 6) {
+            throw new BizException(ResultCode.PARAM_ERROR, "新密码至少 6 位");
         }
 
+        AdminUser admin = adminUserService.findAdminByName(adminName);
+        if (admin == null || !passwordEncoder.matches(oldPassword, admin.getPassWord())) {
+            throw new BizException(ResultCode.PARAM_ERROR, "原密码错误");
+        }
+
+        int rows = adminUserService.changePassword(passwordEncoder.encode(newPassword), adminName);
+        if (rows != 1) {
+            throw new BizException(ResultCode.ERROR, "修改密码失败，请稍后重试");
+        }
+        return Result.ok();
     }
 }

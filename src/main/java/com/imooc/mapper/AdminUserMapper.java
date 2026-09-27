@@ -22,6 +22,8 @@ public interface AdminUserMapper {
 
     AdminUser findAdministrator(@Param("userName")String userName,@Param("password")String password);
 
+    AdminUser findAdminByName(@Param("userName")String userName);
+
     List<SalesManagement> findUserStatus(String userName, String userStatus);
 
     /**

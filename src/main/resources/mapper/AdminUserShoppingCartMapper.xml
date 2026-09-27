@@ -82,4 +82,33 @@
         and
         product_name = #{productName1,jdbcType=VARCHAR}
     </update>
+
+    <!--
+        原子 upsert：一条 SQL 完成“有则累加、无则插入”，
+        替代原 Controller 里 先 SELECT 判断 -> 再 UPDATE/INSERT 的读-改-写（并发会丢更新）。
+        前置条件：adminusershoppingcart 需有 (user_name, product_name) 唯一索引，
+        可执行：ALTER TABLE adminusershoppingcart ADD UNIQUE KEY uk_user_product (user_name, product_name);
+    -->
+    <insert id="upsertShoppingCart">
+        insert into adminusershoppingcart(user_name,product_name,price,numbers_of_products)
+        values (#{consumer,jdbcType=VARCHAR},
+                #{productName,jdbcType=VARCHAR},
+                #{price,jdbcType=VARCHAR},
+                #{quantity,jdbcType=INTEGER})
+        on duplicate key update
+            numbers_of_products = numbers_of_products + #{quantity,jdbcType=INTEGER}
+    </insert>
+
+    <select id="countCart" resultType="java.lang.Integer">
+        select count(1)
+        from adminusershoppingcart
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryProductInformationPage" resultMap="BaseResultMap">
+        select user_name,product_name,price,numbers_of_products
+        from adminusershoppingcart
+        where user_name = #{userName,jdbcType=VARCHAR}
+        limit #{offset}, #{pageSize}
+    </select>
 </mapper>

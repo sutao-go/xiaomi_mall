@@ -258,8 +258,8 @@ $(document).ready(function (){
             type:"post",
             dataType:"json",
             success:function (result){
-                document.getElementById("amountsPayable").innerHTML=result.realTotalAmount+"元";
-                document.getElementById("amountsPayable1").innerHTML=result.realTotalAmount+"元";
+                document.getElementById("amountsPayable").textContent=result.realTotalAmount+"元";
+                document.getElementById("amountsPayable1").textContent=result.realTotalAmount+"元";
             },
             error:function (){
 

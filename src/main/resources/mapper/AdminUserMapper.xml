@@ -39,6 +39,15 @@
         pass_word = #{password,jdbcType=VARCHAR}
     </select>
 
+    <select id="findAdminByName" resultMap="BaseResultMap">
+        select
+        user_name,pass_word
+        from
+        administrator
+        where
+        user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
     <select id="findUserStatus" resultMap="BaseResultMap" parameterType="com.imooc.entity.AdminUser">
         select user_name,status
         from adminuser

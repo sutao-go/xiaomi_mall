@@ -73,4 +73,26 @@ public interface AdminUserShoppingCartMapper {
                             @Param("userName")String userName,
                           @Param("productName1")String productName1
                          );
+
+    /**
+     * 加入购物车（原子 upsert）：已存在则数量累加，不存在则插入。
+     * 依赖 adminusershoppingcart(user_name, product_name) 唯一索引，
+     * 用于替代原“先查后写”导致的并发丢更新。
+     */
+    int upsertShoppingCart(@Param("consumer") String consumer,
+                           @Param("productName") String productName,
+                           @Param("price") String price,
+                           @Param("quantity") Integer quantity);
+
+    /**
+     * 购物车条目总数（真分页用）
+     */
+    int countCart(@Param("userName") String userName);
+
+    /**
+     * 分页查询购物车
+     */
+    List<OrderList> queryProductInformationPage(@Param("userName") String userName,
+                                                @Param("offset") int offset,
+                                                @Param("pageSize") int pageSize);
 }

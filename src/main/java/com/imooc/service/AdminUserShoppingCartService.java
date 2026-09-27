@@ -60,4 +60,20 @@ public interface AdminUserShoppingCartService {
      * @return
      */
     int updateQuantity(String quantity,String userName, String productName1);
+
+    /**
+     * 加入购物车（原子 upsert）：已存在则数量累加，不存在则插入。
+     * 替代原“先查后写”，避免并发丢更新。
+     */
+    int addToCart(String consumer, String productName, String price, Integer quantity);
+
+    /**
+     * 购物车条目总数（真分页）
+     */
+    int countCart(String userName);
+
+    /**
+     * 分页查询购物车
+     */
+    List<OrderList> queryProductInformationPage(String userName, int offset, int pageSize);
 }

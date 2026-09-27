@@ -224,7 +224,6 @@
                 if(id && id!==lastSel){
                     jQuery('#grid_id').restoreRow(lastSel);
                     lastSel=id;
-                    console.log("xxxx"+id);
                 }
                 jQuery('#grid_id').editRow(id,true);
             },
@@ -263,7 +262,6 @@
         $("#disableAccount").click(function (){
             var data ={};
             data.id = getSelectedRowWithoutAlert();
-            console.log(data.id);
             $.ajax({
                 url: "/backendLogin/disableAccount",
                 type: "post",
@@ -285,7 +283,6 @@
         $("#Unban").click(function (){
             var data ={};
             data.id = getSelectedRowWithoutAlert();
-            console.log(data.id);
             $.ajax({
                 url: "/backendLogin/unban",
                 type: "post",

@@ -5,6 +5,7 @@ import com.imooc.mapper.AdminUserShoppingCartMapper;
 import com.imooc.service.AdminUserShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,7 +65,31 @@ public class AdminUserShoppingCartImpl implements AdminUserShoppingCartService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateQuantity(String quantity,String userName, String productName1) {
         return adminUserShoppingCartMapper.updateQuantity(quantity,userName,productName1);
+    }
+
+    /**
+     * 加入购物车：一条原子 upsert SQL 完成“有则累加、无则插入”，
+     * 不再需要“先查数量再更新”的两步操作（原实现并发下会丢更新）。
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int addToCart(String consumer, String productName, String price, Integer quantity) {
+        return adminUserShoppingCartMapper.upsertShoppingCart(consumer, productName, price, quantity);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public int countCart(String userName) {
+        Integer count = adminUserShoppingCartMapper.countCart(userName);
+        return count == null ? 0 : count;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<OrderList> queryProductInformationPage(String userName, int offset, int pageSize) {
+        return adminUserShoppingCartMapper.queryProductInformationPage(userName, offset, pageSize);
     }
 }
