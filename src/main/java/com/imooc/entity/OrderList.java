@@ -1,5 +1,10 @@
 package com.imooc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+
+/** 对应数据库表 adminusershoppingcart */
+@TableName("adminusershoppingcart")
 public class OrderList {
     public String consumer;
     //商品名称

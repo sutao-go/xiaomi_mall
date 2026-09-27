@@ -2,19 +2,17 @@ package com.imooc.interceptor;
 
 import com.imooc.common.BizException;
 import com.imooc.common.ResultCode;
-import com.imooc.common.SessionUtil;
+import com.imooc.common.StpAdminUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * 后台管理员登录拦截器
+ * 后台管理员登录拦截器（基于 Sa-Token 多账号体系）
  * <p>
- * 原 BackendInterceptorConfiguration 校验的是前台 userName，
- * 导致任意前台登录用户即可操作后台；这里改为校验独立的 adminUserName。
+ * 校验的是独立的 admin 账号体系，前台用户登录后无法进入后台。
  */
 @Component
 public class AdminLoginInterceptor implements HandlerInterceptor {
@@ -23,8 +21,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession(false);
-        if (SessionUtil.getAdminName(session) != null) {
+        if (StpAdminUtil.isLogin()) {
             return true;
         }
         if ("GET".equalsIgnoreCase(request.getMethod())) {

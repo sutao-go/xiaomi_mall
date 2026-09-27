@@ -1,6 +1,8 @@
 
 package com.imooc.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.imooc.entity.AdminUser;
 import com.imooc.entity.SalesManagement;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +14,7 @@ import java.util.List;
  * @author sutao
  */
 @Repository
-public interface AdminUserMapper {
+public interface AdminUserMapper extends BaseMapper<AdminUser> {
 
     AdminUser login(@Param("userName") String userName,@Param("passWord") String passWord);
 

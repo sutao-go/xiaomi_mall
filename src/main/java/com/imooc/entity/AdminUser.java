@@ -1,5 +1,10 @@
 package com.imooc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+
+/** 对应数据库表 adminuser */
+@TableName("adminuser")
 public class AdminUser {
     //用户名
     private String userName;

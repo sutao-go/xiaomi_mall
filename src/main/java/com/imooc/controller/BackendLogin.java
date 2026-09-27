@@ -9,6 +9,7 @@ import com.imooc.common.BizException;
 import com.imooc.common.Result;
 import com.imooc.common.ResultCode;
 import com.imooc.common.SessionUtil;
+import com.imooc.common.StpAdminUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,9 +32,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,8 +111,9 @@ public class BackendLogin {
         if (admin == null || !passwordEncoder.matches(password, admin.getPassWord())) {
             throw new BizException(ResultCode.PARAM_ERROR, "账号或密码错误");
         }
-        SessionUtil.setAdminName(session, admin.getUserName());
-        // 兼容存量代码：部分后台接口仍读取前台 userName
+        // 登录态交由 Sa-Token 的后台账号体系（与前台完全隔离）
+        StpAdminUtil.login(admin.getUserName());
+        // 兼容存量代码：部分未重构的后台接口仍从 session 读取 userName
         SessionUtil.setUserName(session, admin.getUserName());
         return Result.ok();
     }

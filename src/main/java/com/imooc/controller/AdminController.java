@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Producer;
 import com.imooc.common.BizException;
 import com.imooc.common.Result;
 import com.imooc.common.ResultCode;
+import cn.dev33.satoken.stp.StpUtil;
 import com.imooc.common.SessionUtil;
 import com.imooc.entity.AdminUser;
 import com.imooc.service.AdminUserService;
@@ -18,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -95,7 +96,8 @@ public class AdminController {
         if ("禁用".equals(user.getStatus())) {
             throw new BizException(ResultCode.ACCOUNT_DISABLED);
         }
-        SessionUtil.setUserName(session, user.getUserName());
+        // 登录态交由 Sa-Token 维护（会话、续期、踢下线等由其托管）
+        StpUtil.login(user.getUserName());
         return Result.ok();
     }
 
@@ -154,8 +156,8 @@ public class AdminController {
      */
     @PostMapping("/logout")
     @ResponseBody
-    public Result<Void> logout(HttpSession session) {
-        SessionUtil.logout(session);
+    public Result<Void> logout() {
+        StpUtil.logout();
         return Result.ok();
     }
 }

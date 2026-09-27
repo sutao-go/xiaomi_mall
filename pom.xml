@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.3.4</version>
         <relativePath/>
     </parent>
 
@@ -15,17 +15,17 @@
     <artifactId>xiaomi_mall</artifactId>
     <version>1.0.0</version>
     <name>xiaomi_mall</name>
-    <description>小米商城 - Spring Boot + MyBatis（重构版）</description>
+    <description>小米商城 - Spring Boot 3 + MyBatis-Plus（学习项目）</description>
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mybatis-starter.version>2.3.1</mybatis-starter.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
     </properties>
 
     <dependencies>
-        <!-- Web -->
+        <!-- Web（Spring Boot 3 起内部包名由 javax.* 变为 jakarta.*） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -37,11 +37,15 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- MyBatis -->
+        <!--
+            MyBatis-Plus：替代原生的 mybatis-spring-boot-starter。
+            Plus 完全兼容原生 MyBatis 用法（现有 Mapper 接口 + XML 不用改也能跑），
+            后续可逐步让 Mapper 继承 BaseMapper、用 LambdaQueryWrapper 简化查询。
+        -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-starter.version}</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- MySQL 驱动 -->
@@ -51,7 +55,13 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- 验证码（原项目已使用 kaptcha，重构后继续提供 /admin/kaptcha） -->
+        <!-- BCrypt 密码加密（仅 crypto 模块，不引入 Spring Security 全套） -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <!-- 验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
@@ -72,10 +82,11 @@
             <classifier>jdk15</classifier>
         </dependency>
 
-        <!-- BCrypt 密码加密（仅 crypto 模块，不引入 Spring Security 全套） -->
+        <!-- Sa-Token 权限认证（替代手写 session + 拦截器） -->
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot3-starter</artifactId>
+            <version>1.39.0</version>
         </dependency>
 
         <!-- 测试 -->

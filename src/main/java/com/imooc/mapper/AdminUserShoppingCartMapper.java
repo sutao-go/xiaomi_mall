@@ -1,5 +1,7 @@
 package com.imooc.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.imooc.entity.OrderList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -7,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdminUserShoppingCartMapper {
+public interface AdminUserShoppingCartMapper extends BaseMapper<OrderList> {
     /**
      * 用户结算购物车中的商品的时候用来显示对应商品的照片的
      * @param userName
