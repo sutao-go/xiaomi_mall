@@ -1,100 +1,29 @@
 package com.imooc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
 import com.imooc.entity.OrderList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+/**
+ * 购物车 Mapper
+ * <p>
+ * 常规 CRUD 由继承的 {@link BaseMapper} 提供（selectList / selectOne / selectCount /
+ * selectPage / insert / update 等），不再需要逐条手写 SQL。
+ * 这里只保留 Plus 无法表达的原子 upsert。
+ */
 @Repository
 public interface AdminUserShoppingCartMapper extends BaseMapper<OrderList> {
-    /**
-     * 用户结算购物车中的商品的时候用来显示对应商品的照片的
-     * @param userName
-     * @return
-     */
-     List<OrderList> findimg(@Param("userName")String userName);
-
-    /**
-     * 用户第一次点击加入购物车时向数据库中加入的数据
-     * @param consumer 用户名
-     * @param productName 商品名称
-     * @param price 商品价格
-     * @param quantity 商品数量
-     * @return
-     */
-    int addToShoppingCart(@Param("consumer")String consumer,
-                                @Param("productName")String productName,
-                                @Param("price")String price,
-                                @Param("quantity")Integer quantity
-                                );
-
-    /**
-     * 查询此用户是否存在
-     *
-     * @param userName 用户名
-     * @return
-     */
-    Boolean ShoppingRecords(@Param("userName")String userName,@Param("productName")String productName);
-
-    /**
-     * 如果用户多次点击添加购物车向数据库中
-        添加的商品数量
-     * @param quantity2 向数据库中添加的商品数量
-     * @param consumer 用户名
-     * @return
-     */
-    int addQuantity(@Param("quantity2")Integer quantity2,@Param("consumer")String consumer,@Param("productName")String productName);
-
-    /**
-     * 查询该用户对应的商品数量
-     * @param consumer 用户名
-     * @return
-     */
-    String checkProductQuantity(@Param("consumer")String consumer,@Param("productName")String productName);
-
-    List<OrderList> queryProductInformation(@Param("consumer")String consumer);
-
-    /**
-     *计算商品的总金额
-     * @param userName
-     * @return
-     */
-    List<OrderList> totalAmount(@Param("userName") String userName);
-
-    /**
-     * 更新用户购物车中的商品数量
-     * @param userName
-     * @param productName1
-     * @param quantity
-     * @return
-     */
-    int updateQuantity(@Param("quantity")String quantity,
-                            @Param("userName")String userName,
-                          @Param("productName1")String productName1
-                         );
 
     /**
      * 加入购物车（原子 upsert）：已存在则数量累加，不存在则插入。
-     * 依赖 adminusershoppingcart(user_name, product_name) 唯一索引，
-     * 用于替代原“先查后写”导致的并发丢更新。
+     * <p>
+     * 用一条 SQL 完成“有则累加、无则插入”，替代原 Controller 里
+     * “先查数量 → 再计算 → 再写回”的读-改-写（并发下会丢更新）。
+     * 依赖 adminusershoppingcart(user_name, product_name) 唯一索引。
      */
     int upsertShoppingCart(@Param("consumer") String consumer,
                            @Param("productName") String productName,
                            @Param("price") String price,
                            @Param("quantity") Integer quantity);
-
-    /**
-     * 购物车条目总数（真分页用）
-     */
-    int countCart(@Param("userName") String userName);
-
-    /**
-     * 分页查询购物车
-     */
-    List<OrderList> queryProductInformationPage(@Param("userName") String userName,
-                                                @Param("offset") int offset,
-                                                @Param("pageSize") int pageSize);
 }
